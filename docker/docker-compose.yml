@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j
+    container_name: neo4j-container
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - /Users/dominikpichler/neo4j/data:/data
+      - /Users/dominikpichler/neo4j/logs:/logs
+      - /Users/dominikpichler/neo4j/import:/var/lib/neo4j/import
+      - /Users/dominikpichler/neo4j/plugins:/plugins
+    environment:
+      NEO4J_AUTH: neo4j/Wombart123#
+    restart: always

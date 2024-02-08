@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1376a6d7-dfb7-460e-b979-d2a88096ae85" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/The_critique_of_pure_reason_full.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/text_processor.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/text_processor.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

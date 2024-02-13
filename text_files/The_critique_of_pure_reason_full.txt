@@ -5837,4 +5837,4 @@ equals be added to equals, the wholes are equal”; “If equals be taken
 from equals, the remainders are equal”; are analytical, because I am
 immediately conscious of the identity of the production of the one
 quantity with the production of the other; whereas axioms must be à
-priori synthetical propositions. On the other hand, the self-ev
+priori synthetical propositions. 

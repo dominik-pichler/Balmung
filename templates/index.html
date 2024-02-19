@@ -267,11 +267,19 @@ function highlightFilter(filter) {
                             >
                                 <option selected>Select a Node by ID</option>
                                 
-                                    <option value="node_3">node_3</option>
+                                    <option value="Business & Data understanding">Business & Data understanding</option>
                                 
-                                    <option value="node_5">node_5</option>
+                                    <option value="Data Preperation">Data Preperation</option>
                                 
-                                    <option value="test_s">test_s</option>
+                                    <option value="Modelling">Modelling</option>
+                                
+                                    <option value="Evaluation">Evaluation</option>
+                                
+                                    <option value="Deployment">Deployment</option>
+                                
+                                    <option value="Monitoring & Maintenance">Monitoring & Maintenance</option>
+                                
+                                    <option value="test">test</option>
                                 
                             </select>
                         </div>
@@ -327,8 +335,8 @@ function highlightFilter(filter) {
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "node_3", "label": "node_3", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "node_5", "label": "node_5", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "test_s", "label": "test_s", "shape": "dot", "size": 10}]);
-                  edges = new vis.DataSet([{"from": "node_3", "title": "edge", "to": "node_5", "width": 5}]);
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "Business \u0026 Data understanding", "label": "Business \u0026 Data understanding", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Data Preperation", "label": "Data Preperation", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Modelling", "label": "Modelling", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Evaluation", "label": "Evaluation", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Deployment", "label": "Deployment", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "Monitoring \u0026 Maintenance", "label": "Monitoring \u0026 Maintenance", "shape": "dot", "size": 10}, {"color": "#97c2fc", "id": "test", "label": "test", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "Business \u0026 Data understanding", "title": "Phase 1", "to": "Data Preperation", "width": 3}, {"arrows": "to", "from": "Data Preperation", "title": "edge", "to": "Modelling", "width": 3}, {"arrows": "to", "from": "Modelling", "title": "edge", "to": "Evaluation", "width": 3}, {"arrows": "to", "from": "Evaluation", "title": "edge", "to": "Deployment", "width": 3}, {"arrows": "to", "from": "Deployment", "title": "edge", "to": "Monitoring \u0026 Maintenance", "width": 3}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -361,6 +369,14 @@ function highlightFilter(filter) {
         "hideNodesOnDrag": false
     },
     "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 5.05,
+            "damping": 0.09,
+            "gravitationalConstant": -18100,
+            "springConstant": 0.001,
+            "springLength": 380
+        },
         "enabled": true,
         "forceAtlas2Based": {
             "avoidOverlap": 0,

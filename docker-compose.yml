@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  sqlite:
+    image: python:alpine
+    volumes:
+      - ./:/app  # Mount the current project directory as /app in the container
+      - sqlite_data:/data
+    command: sh -c "python /app/sqlite.py && tail -f /dev/null"
+    stdin_open: true
+    tty: true
+    restart: on-failure  # Restart the service only on failure
+
+volumes:
+  sqlite_data:

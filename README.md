@@ -1,6 +1,7 @@
 # Tool for Semantic Document Analysis
 
-In the current version, it aims to extract knowledge from a a given text corpus (large sets of scientific books and papers) to turn them into knowledgegraphs, in order to help humans to understand. 
+In the current version, it aims to extract knowledge from a a given (static as well as dynamic) text corpus (large sets of scientific books and papers) to turn them into knowledge graphs, and enventually, in a tool that helps users to answer questions in a precise, deterministic and correct way.
 
-It is currently still in progress. Readme will be updated in the future.
-Feel free to contact me if you're interesed
+
+
+Feel free to contact me if you're interested

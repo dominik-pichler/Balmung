@@ -48,7 +48,7 @@ More (theoretical) thoughts can be found in the following notebook: [Ramble 1](k
 
 
 ## 2. Ishmaels Guide to Fishing
-Fishing for understanding in a personally new field of understand can easily become an orientationless wandering through a dark forest of (pseudo) knowledge. 
+Fishing for understanding in a personally new field of understanding can easily become an orientationless wandering through a dark forest of (pseudo) knowledge. 
 One might need a navigation system find the central intellectual building blocks of this new field of interest.
 The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifes central ideas in a given field.
 

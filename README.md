@@ -1,6 +1,6 @@
 # Information 
 - What is it ?
-- what is it made of ?
+- What is it made of ?
 - What can be done with it?
 - How can it be used optimally to answer questions?
   

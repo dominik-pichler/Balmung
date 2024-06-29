@@ -1,6 +1,6 @@
 import sys
 from yachalk import chalk
-sys.path.append("..")
+sys.path.append("../..")
 
 import json
 import os

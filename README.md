@@ -40,7 +40,7 @@ Thereby two different approaches have been used to identify entities and relatio
 1. Using Rule based Parsing Systems
 2. Using an LLM (Ollama) to extract entities and relationships
 
-Eventually, the results have been visualised using pyvis. As the input size increased, this approach of simply 
+Eventually, the results have been visualised using `pyvis`. As the input size increased, this approach of simply 
 visualising all entities and their relationships became unfeasible.
 Hence, this project is on hold until I've implemented better solutions.
 

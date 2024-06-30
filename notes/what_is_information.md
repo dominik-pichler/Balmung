@@ -82,7 +82,16 @@ TDB
 <br>With Standard ASCII, every Letter corresponds to 7 Bit. Trough removal of redundancy, for example via the [Shannon-Fano compression](../utils/shannon_fano_coding.py), this number can be reduced slightly further, but nonetheless still more or less stupidly stores every letter explicitly
 and defines Information as a concatenation of symbols (letters).
 
-### Subsymbolic Encodings>
-Contrary 
+### Sub-Symbolic Encodings
+#### Word Embeddings
+* 1-Word-1Vector:
+  * Word2Vec (Skip-Gram & CBOW)
+  * Glove
+  * A lot of specialized variants of the two
+* 1-Word-1-Vector+Char-n-grams 
+  * FastText(based on Word2Vec)
+* Contextualized / context dependent / complex structure (char or word piece based) 
+  *   ELMo
+  * Transformers a la [BERT](../Embeddings/Bert.md) and its variants
 
 

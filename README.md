@@ -24,8 +24,8 @@
 
 # Information 
 - [What is it ?](notes/what_is_information.md) 
-- What is it made of ?
-- How can it be used optimally to answer questions?
+- [What is it made of ?](notes/what_is_information.md) 
+-  How can it be used optimally to answer questions?
   
 This is a repo tries to gradually find more sophisticated answers to those questions, either through code or rambling style posts.
 Feel free to contact me if you're interested
@@ -37,7 +37,8 @@ ____
 Was a novice investigation transforming philosophical ideas into knowledge graphs.
 Thereby two different approaches have been used to identify entities and relationships.
 1. Using Rule based Parsing Systems
-2. Using an LLM (Ollama) to extract entities and relationships
+2. Using an LLM (Ollama) to extract entities and relationships via prompting
+3. Using [BERT](Embeddings/ER_BERT.py) to extract entities and relationships directly
 
 Eventually, the results have been visualised using `pyvis`. As the input size increased, this approach of simply 
 visualising all entities and their relationships became unfeasible.

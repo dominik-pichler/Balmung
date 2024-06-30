@@ -27,8 +27,6 @@ intentionality −“aboutness”−, it is directed to other things
 * **Scientific Perspective**: <br>
 Problems are expressed in terms of a notion of information amenable to
 quantification
-
-
 * **Mathematical Persepective**:
 <br/><br/>
     * **Fisher Information:**<br>
@@ -69,12 +67,22 @@ receiver.
 # Representation of Information
 ## How can Information be represented? 
 Many different forms, in this project, I limit the forms of information representations to:
-- Sound, encoded as Symbols $\Rightarrow$ 
-- Images
+- Set of Symbols (or corresponding sounds) $\Rightarrow$ will be abstracted as representations of Symbols (Letters), Words and Sentences.
+- Images $\Rightarrow$ will be abstracted as a collection of pixels
 
-Those two different representin our case, via bits and bytes, as they form the fundament of modern computers. 
+Those two different representing our case, via bits and bytes, as they form the fundament of modern computers. 
+
+
+### Neuro-scientific representation
+TDB
 
 ## What is it's minimal structure? 
-* [Shannon-Fano compression](../utils/shannon_fano_coding.py)
+### Symbolic Encoding
+**Assumption**: Every letter, and hence every text  can be encoded as a number (Example: ASCII).
+<br>With Standard ASCII, every Letter corresponds to 7 Bit. Trough removal of redundancy, for example via the [Shannon-Fano compression](../utils/shannon_fano_coding.py), this number can be reduced slightly further, but nonetheless still more or less stupidly stores every letter explicitly
+and defines Information as a concatenation of symbols (letters).
+
+### Subsymbolic Encodings>
+Contrary 
 
 

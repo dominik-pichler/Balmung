@@ -76,7 +76,7 @@ Those two different representing our case, via bits and bytes, as they form the 
 ### Neuro-scientific representation
 TDB
 
-## What is it's minimal structure? 
+## What is it's minimal/essential structure? 
 ### Symbolic Encoding
 **Assumption**: Every letter, and hence every text  can be encoded as a number (Example: ASCII).
 <br>With Standard ASCII, every Letter corresponds to 7 Bit. Trough removal of redundancy, for example via the [Shannon-Fano compression](../utils/shannon_fano_coding.py), this number can be reduced slightly further, but nonetheless still more or less stupidly stores every letter explicitly

@@ -53,7 +53,8 @@ One might need a navigation system find the central intellectual building blocks
 The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifes central ideas in a given field.
 
 
-
+## 3. Information Retrieval System
+To be added
 
 
 

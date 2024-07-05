@@ -54,7 +54,7 @@ The aim of this project is, to build exactly this navigation system by developin
 
 
 ## 3. Neural (Re-) Rankers
-Manually implemented, trained and evaluated the performance of two prominent neural re-ranking algorithms ([K-NRM](https://arxiv.org/pdf/1706.06613) and [TK](https://www.researchgate.net/publication/339065967_Interpretable_Time-Budget-Constrained_Contextualization_for_Re-Ranking)
+Manually implemented, trained and evaluated the performance of two prominent neural re-ranking algorithms ([K-NRM](https://arxiv.org/pdf/1706.06613) and [TK](https://www.researchgate.net/publication/339065967_Interpretable_Time-Budget-Constrained_Contextualization_for_Re-Ranking) )
 
 Code and results can be found here: 
 [TBD](TBD)
@@ -64,6 +64,11 @@ After implementing the neural re-rankers, I wanted to setup an actual QA System 
 
 Code and results can be found here: 
 [TBD](TBD)
+
+
+## 5. Compress me if you can
+During the projects listed above, I worked with compression-algorithms and implemented the following algorithms from scratch: 
+* [Shannon -  Fano encoding](https://github.com/dominik-pichler/Balmung/blob/main/utils/shannon_fano_coding.py)
 
 
 

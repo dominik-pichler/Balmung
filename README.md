@@ -67,8 +67,12 @@ Code and results can be found here:
 
 
 ## 5. Compress me if you can
-During the projects listed above, I worked with compression-algorithms and implemented the following algorithms from scratch: 
+During the projects listed above, I worked with lossless compression-algorithms and implemented the following algorithms from scratch: 
 * [Shannon -  Fano encoding](https://github.com/dominik-pichler/Balmung/blob/main/utils/shannon_fano_coding.py)
+   * Turned out as a pretty good start by compressing Kants *Critique of pure reason* by 55%
+ 
+* Neural Compressors:
+   * TBD
 
 
 

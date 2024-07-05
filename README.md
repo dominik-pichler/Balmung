@@ -53,10 +53,18 @@ One might need a navigation system find the central intellectual building blocks
 The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifes central ideas in a given field.
 
 
-## 3. Information Retrieval System
-To be added
+## 3. Neural (Re-) Rankers
+Manually implemented, trained and evaluated the performance of two prominent neural re-ranking algorithms ([K-NRM](https://arxiv.org/pdf/1706.06613) and [TK](https://www.researchgate.net/publication/339065967_Interpretable_Time-Budget-Constrained_Contextualization_for_Re-Ranking)
+
+Code and results can be found here: 
+[TBD](TBD)
+
+## 4. Ask me anything - QA System
+After implementing the neural re-rankers, I wanted to setup an actual QA System utilizing the top performing neural re-ranker.
+
+Code and results can be found here: 
+[TBD](TBD)
 
 
 
-## 4. Q&A Style
 

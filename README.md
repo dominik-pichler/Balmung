@@ -33,8 +33,9 @@ Feel free to contact me if you're interested
 ____
 
  ## 1. Kants Knowledge Graph
+**Question:** How can I visualize ideas and how can I determine connections between different ideas?  
+For this approach I tried to turn philosophical ideas into knowledge graphs.
 
-Was a novice investigation transforming philosophical ideas into knowledge graphs.
 Thereby two different approaches have been used to identify entities and relationships.
 1. Using Rule based Parsing Systems
 2. Using an LLM (Ollama) to extract entities and relationships via prompting

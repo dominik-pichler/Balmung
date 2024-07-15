@@ -46,7 +46,7 @@ theory is a basic ingredient of the communication engineers training.
 
 
 
-### 3. Shannon's Communication Theory
+### 3. Shannon's Communication/Information Theory
 According to Shannon (1948; see also Shannon and Weaver 1949), a general
 communication system consists of five parts:
 
@@ -63,6 +63,34 @@ receiver.
  ![img.png](img.png)
 
 
+
+#### Central Definitions: 
+**Information as a Decrease in Uncertainty**
+Information is defined as a decrease in uncertainty. For example, if Bob is trying to guess which shape Alice is holding, and Alice tells him it is blue, this reduces the set of possible shapes, thereby decreasing Bob's uncertainty.
+
+**Entropy**
+Entropy quantifies the amount of uncertainty involved in the value of a random variable or the outcome of a random process. It is measured by the formula
+
+$$\[H(X) := -\sum_{x \in X} p(x) \log p(x)\]$$
+
+<br>
+where $\( X \)$ is the set of possible values of $\( X \)$ and $\( p(x) \)$ is the probability of $\( x \)$.
+
+To quote from [Maxwell and his deamon](https://www.ias.ac.in/public/Volumes/reso/015/06/0548-0560.pdf):
+
+> Moral. The 2nd law of thermodynamics has the same degree of truth as the statement taht if you trhow a tumberflu of water into the sea, you cannot ge tthe same tumblerful of water out again
+
+which led to physicists speaking about micro- and macrostates where entropy became a physical equivalent of probabilty: The entropy of a given macro state is the logarithm of the number of possbiel micro-states
+**Binary Digits (Bits)**
+Shannon introduced the concept of binary digits, or bits, as the fundamental unit of information. A bit is a binary digit that can take on one of two values, typically 0 or 1. This concept revolutionized the way information was quantified and transmitted.
+
+Leading to:
+
+### 4. Norbert Wiener - Cybernetics
+Wiener coined the term "cybernetics" to refer to the study of self-regulating mechanisms, whether in machines or living organisms.
+- The book explored the mathematical principles underlying feedback, communication, and control in both technological and biological systems. It drew connections between concepts like information, communication, and thermodynamics.
+- Cybernetics discussed the parallels between information processing in computers and the human brain, and speculated about the possibility of building chess-playing computers, hence building thoses black boxes that behaviorists at that time could not demistify.
+  
 
 # Representation of Information
 ## How can Information be represented? 

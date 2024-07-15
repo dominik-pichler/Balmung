@@ -73,9 +73,12 @@ Entropy quantifies the amount of uncertainty involved in the value of a random v
 
 $$\[H(X) := -\sum_{x \in X} p(x) \log p(x)\]$$
 
-<br>
-where $\( X \)$ is the set of possible values of $\( X \)$ and $\( p(x) \)$ is the probability of $\( x \)$.
 
+where $\[H(X)]$ can be seen as a degree of suprise, or spoken very causually, might be seen as the number of yes/no question one needs to ask (and get answered) to obtain a certain message)
+
+
+
+**Link from Physics to Informationtheory & Entropy**
 To quote from [Maxwell and his deamon](https://www.ias.ac.in/public/Volumes/reso/015/06/0548-0560.pdf):
 
 > Moral. The 2nd law of thermodynamics has the same degree of truth as the statement that if you throw a tumberflu of water into the sea, you cannot ge tthe same tumblerflu of water out again
@@ -87,6 +90,10 @@ More on that can be found here: [Maxwells Daemon](https://www.spektrum.de/lexiko
 
 ![image](https://github.com/user-attachments/assets/5599af96-48a8-4bb3-aa01-f51bac960a77)
 
+This daemon led Szilárd to close the loop leading to shannons conception of entropy by establishing that every time, maxwells daemon had to make a (particel) decsion, it costs the daemon a certain "something", which can be defined as *Information*.
+
+So eventually, it is all one problem. 
+To reduce entropy in a box of gas, to perfom useful work, one pays the price of information.
 
 **Binary Digits (Bits)**
 Shannon introduced the concept of binary digits, or bits, as the fundamental unit of information. A bit is a binary digit that can take on one of two values, typically 0 or 1. This concept revolutionized the way information was quantified and transmitted.

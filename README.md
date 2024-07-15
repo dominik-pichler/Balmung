@@ -25,7 +25,7 @@
 # Information 
 - [What is it ?](notes/what_is_information.md) 
 - [What is it made of ?](notes/what_is_information.md)
-- How can it be found (and turned into knowledge?)
+- [How can it be found (and turned into knowledge?)](notes/quest_for_knowledge.md)
 - How can it be used optimally to answer questions?
   
 This is a repo tries to gradually find more sophisticated answers to those questions, either through code or rambling style posts.

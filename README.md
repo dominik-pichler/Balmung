@@ -26,7 +26,8 @@
 - [What is it ?](notes/what_is_information.md) 
 - [What is it made of ?](notes/what_is_information.md)
 - [How can it be found (and turned into knowledge?)](notes/quest_for_knowledge.md)
-- How can it be used optimally to answer questions?
+- [How can it be used optimally to answer questions?](https://github.com/dominik-pichler/Balmung?tab=readme-ov-file#4-ask-me-anything---qa-system)
+- [What can't be known? - Is there unatainable Information ?]()
   
 This is a repo tries to gradually find more sophisticated answers to those questions, either through code or rambling style posts.
 Feel free to contact me if you're interested

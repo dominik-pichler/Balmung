@@ -10,16 +10,6 @@ What is information? For this question, many different concepts and theories exi
 According to the Oxford dictionary, Information can be defined as "*facts or details about somebody/something*", with leads to the need of defining what a "Fact" or "Detail" as well as what "something" entails.
 In order to get  going, some working definitions have to be made here.
 
-* **Facts**<br>
-Objectively, physically perceivable, constitutions of the senseable surroundings that let humans for theories about the 
-characteristics of there surroundings (in order to give them orientation and guide their actions), that have not (yet) been falsified.
-
-* **Approx. in Scientific Context**:<br>
-Theory that has been design by following well established scientific principles and not falsified, despite being theoretically falsifiable.
-
-* **Something** <br>
-Objectively physically perceivable entity to which facts can be attributed to.
-
 ### 2. Different perspectives:
 Information is a classic polysemantic word, where it's semantic meaning is largely dependent the given perspective. 
 Hence I want to list the, to my understanding, most common perspectives on Information:
@@ -109,6 +99,9 @@ Wiener coined the term "cybernetics" to refer to the study of self-regulating me
 - The book explored the mathematical principles underlying feedback, communication, and control in both technological and biological systems. It drew connections between concepts like information, communication, and thermodynamics.
 - Cybernetics discussed the parallels between information processing in computers and the human brain, and speculated about the possibility of building chess-playing computers, hence building thoses black boxes that behaviorists at that time could not demistify.
   
+### 5. 
+
+
 
 # Representation of Information
 ## How can Information be represented? 
@@ -140,4 +133,10 @@ and defines Information as a concatenation of symbols (letters).
   *   ELMo
   * Transformers a la [BERT](../Embeddings/Bert.md) and its variants
 
+
+
+
+
+## How can the amount of information be measured ?
+## Kolmogorov
 

@@ -1,6 +1,5 @@
-> In the nights when I cannot sleep, thoughts crowd into my mind ...
-> Whence and how do they come? I do not know and I have nothing to do with it. Those which please me, I keep in my head an hum them.
-> - Mozart
+> "In the nights when I cannot sleep, thoughts crowd into my mind ...
+> Whence and how do they come? I do not know and I have nothing to do with it. Those which please me, I keep in my head an hum them."
 
 
 

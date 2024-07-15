@@ -38,8 +38,8 @@ ____
 For this approach I tried to turn philosophical ideas into knowledge graphs.
 
 Thereby two different approaches have been used to identify entities and relationships.
-1. Using Rule based Parsing Systems
-2. Using an LLM (Ollama) to extract entities and relationships via prompting
+1. Using [Rule based Parsing Systems](https://www.geeksforgeeks.org/rule-based-approach-in-nlp/)
+2. Using an [LLM (Llama3)](https://ollama.com/) to extract entities and relationships via prompting
 3. Using [BERT](Embeddings/ER_BERT.py) to extract entities and relationships directly
 
 Eventually, the results have been visualised using `pyvis`. As the input size increased, this approach of simply 

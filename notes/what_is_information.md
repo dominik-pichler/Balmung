@@ -78,9 +78,16 @@ where $\( X \)$ is the set of possible values of $\( X \)$ and $\( p(x) \)$ is t
 
 To quote from [Maxwell and his deamon](https://www.ias.ac.in/public/Volumes/reso/015/06/0548-0560.pdf):
 
-> Moral. The 2nd law of thermodynamics has the same degree of truth as the statement taht if you trhow a tumberflu of water into the sea, you cannot ge tthe same tumblerful of water out again
+> Moral. The 2nd law of thermodynamics has the same degree of truth as the statement that if you throw a tumberflu of water into the sea, you cannot ge tthe same tumblerflu of water out again
 
-which led to physicists speaking about micro- and macrostates where entropy became a physical equivalent of probabilty: The entropy of a given macro state is the logarithm of the number of possbiel micro-states
+
+which led to physicists speaking about micro- and macrostates where entropy became a physical equivalent of probabilty: The entropy of a given macro state is the logarithm of the number of possbiel micro-states.
+
+More on that can be found here: [Maxwells Daemon](https://www.spektrum.de/lexikon/physik/maxwellscher-daemon/9530)
+
+![image](https://github.com/user-attachments/assets/5599af96-48a8-4bb3-aa01-f51bac960a77)
+
+
 **Binary Digits (Bits)**
 Shannon introduced the concept of binary digits, or bits, as the fundamental unit of information. A bit is a binary digit that can take on one of two values, typically 0 or 1. This concept revolutionized the way information was quantified and transmitted.
 

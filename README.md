@@ -31,7 +31,11 @@
   
 This is a repo tries to gradually find more sophisticated answers to those questions, either through code or rambling style posts.
 Feel free to contact me if you're interested
- 
+
+
+
+# Chaos
+- Introduction to chaos theory
 ____
 
  ## 1. Kants Knowledge Graph

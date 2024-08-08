@@ -1,0 +1,35 @@
+# Topic Modelling: 
+Quest: Identifing which topics are present in a text corpus/set of documents.
+
+
+## **State-of-the-Art Topic Modeling Algorithms**
+
+### **Traditional Algorithms**
+
+- **Latent Dirichlet Allocation (LDA):**
+  - LDA is a probabilistic model that assumes each document is a mixture of topics, and each topic is a mixture of words. It remains one of the most widely used topic modeling techniques due to its effectiveness and simplicity.
+
+- **Latent Semantic Analysis (LSA):**
+  - LSA uses singular value decomposition to reduce the dimensionality of the document-term matrix, capturing patterns in word usage and relationships between documents.
+
+- **Non-negative Matrix Factorization (NMF):**
+  - NMF is a matrix factorization technique that decomposes the document-term matrix into non-negative factors, which can be interpreted as topics.
+
+### **Advanced and Emerging Algorithms**
+
+- **BERTopic:**
+  - BERTopic leverages transformer models to generate dense embeddings of documents, followed by clustering techniques like UMAP and HDBSCAN to identify topics. It uses a modified version of TF-IDF, called c-TF-IDF, for topic extraction. This approach is known for producing interpretable topics and handling unstructured text effectively.
+
+- **Top2Vec:**
+  - Top2Vec uses word embeddings to find dense clusters of documents and words, allowing it to identify topics dynamically. It is particularly useful for capturing semantic relationships and evolving topics over time.
+
+- **Probabilistic Latent Semantic Analysis (pLSA):**
+  - pLSA is similar to LDA but does not assume a Dirichlet prior. It models the probability distribution of topics in documents, making it useful for certain types of data.
+
+### **Future Directions**
+
+- **Integration with Deep Learning:**
+  - There is a growing trend towards integrating deep learning techniques with traditional topic modeling methods. This integration aims to leverage the strengths of both approaches, such as the interpretability of topic models and the representation learning capabilities of neural networks.
+
+- **Dynamic and Multi-modal Topic Models:**
+  - Researchers are developing models that can handle dynamic and evolving topics, as well as those that incorporate multi-modal data (e.g., text, images, audio). These models aim to provide a comprehensive understanding of topics across different data types.

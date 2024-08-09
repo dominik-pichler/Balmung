@@ -22,6 +22,9 @@
                                                 
                                                 ```
 
+Inspired by Bacon's  "Scientia potentia est", repo tool aims to investigate knowledge, information and chaos.
+
+
 # Information 
 - [What is it ?](notes/what_is_information.md) 
 - [What is it made of ?](notes/what_is_information.md)

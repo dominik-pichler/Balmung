@@ -44,7 +44,7 @@ This section tries to focus on two fundamental questions:
 ____
 # Tools
 
- ## 1. Kants Knowledge Graph
+ ## 1. Do you know? - Kants Knowledge Graph
 **Question:** <br>How can I visualise ideas and how can I determine connections between different ideas?  
 For this approach I tried to turn philosophical ideas into knowledge graphs.
 
@@ -57,7 +57,7 @@ Eventually, the results have been visualised using `pyvis`. As the input size in
 visualising all entities and their relationships became unfeasible.
 Hence, this project is on hold until I've solved the question of "*What is the most essential information?*".
 
-## 2. Ishmaels Guide to Fishing
+## 2. Ishmaels Guide to (Topic) Fishing
 **Question:** <br> How can I understand what (sub)topics are central in a given (research) area? 
 <br>
 Fishing for understanding in a personally new field of understanding can easily become an orientation-less wandering through a dark forest of (pseudo) knowledge. 
@@ -65,7 +65,7 @@ One might need a navigation system find the central intellectual building blocks
 The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifies central ideas and topics in a given field.
 
 
-## 3. Neural (Re-) Rankers
+## 3.  Rank me if you can - Neural (Re-) Rankers
 **Question:** <br> How can i find the most relevant documents for a given endeavour, in a large pool of documents? 
 <br>
 
@@ -81,7 +81,7 @@ Code and results can be found here:
 [TBD](TBD)
 
 
-## 5. Compress me if you can
+## 5. Compress me  - (Neural) Data-Compressors
 During the projects listed above, I worked with lossless compression-algorithms to reduce data sizes (and to identify symbolic Morphemes) and thereby implemented the following algorithms: 
 * [Shannon -  Fano encoding](https://github.com/dominik-pichler/Balmung/blob/main/utils/shannon_fano_coding.py)
    * Turned out as a pretty good start by losslessly compressing Kants *Critique of pure reason* by 55%

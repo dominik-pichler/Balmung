@@ -45,7 +45,7 @@ ____
 # Tools
 
  ## 1. Kants Knowledge Graph
-**Question:** <br>How can I visualize ideas and how can I determine connections between different ideas?  
+**Question:** <br>How can I visualise ideas and how can I determine connections between different ideas?  
 For this approach I tried to turn philosophical ideas into knowledge graphs.
 
 Thereby two different approaches have been used to identify entities and relationships.
@@ -55,10 +55,7 @@ Thereby two different approaches have been used to identify entities and relatio
 
 Eventually, the results have been visualised using `pyvis`. As the input size increased, this approach of simply 
 visualising all entities and their relationships became unfeasible.
-Hence, this project is on hold until I've solved the question of "*What is the most esstiential information?*".
-
-More (theoretical) thoughts can be found in the following notebook: [Ramble 1](kants_knowledge_graph/ramble.md)
-
+Hence, this project is on hold until I've solved the question of "*What is the most essential information?*".
 
 ## 2. Ishmaels Guide to Fishing
 **Question:** <br> How can I understand what (sub)topics are central in a given (research) area? 

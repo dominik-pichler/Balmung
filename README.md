@@ -1,31 +1,31 @@
-                                                ```
-                                                            ,-----.
-                                                           #,-. ,-.#
-                                                          () a   e ()
-                                                          (   (_)   )
-                                                          #\_  -  _/#
-                                                        ,'   `"""`    `.
-                                                      ,'      \X/      `.
-                                                     /         X     ____\
-                                                    /          v   ,`  v  `,
-                                                   /    /         ( <==+==> )
-                                                   `-._/|__________\   ^   /
-                                                  (\\)  |______@____\  ^  /
-                                                    \\  |     ( )    \ ^ /
-                                                     )  |             \^/
-                                                    (   |             |v
-                                                   <(^)>|             |
-                                                     v  |             |
-                                                        |             |
-                                                        |_.--.__ .--._|
-                                                          `==='  `==='
-                                                
-                                                ```
+    ```
+                ,-----.
+               #,-. ,-.#
+              () a   e ()
+              (   (_)   )
+              #\_  -  _/#
+            ,'   `"""`    `.
+          ,'      \X/      `.
+         /         X     ____\
+        /          v   ,`  v  `,
+       /    /         ( <==+==> )
+       `-._/|__________\   ^   /
+      (\\)  |______@____\  ^  /
+        \\  |     ( )    \ ^ /
+         )  |             \^/
+        (   |             |v
+       <(^)>|             |
+         v  |             |
+            |             |
+            |_.--.__ .--._|
+              `==='  `==='
+    
+        ```
 
 Inspired by Bacon's  "Scientia potentia est", repo tool aims to investigate knowledge, information and chaos.
 
-
-# Information 
+# Thoughts
+## Information 
 - [What is it ?](notes/what_is_information.md) 
 - [What is it made of ?](notes/what_is_information.md)
 - [How can it be found (and turned into knowledge?)](notes/quest_for_knowledge.md)
@@ -37,9 +37,12 @@ Feel free to contact me if you're interested
 
 
 
-# Chaos
-- Introduction to chaos theory
+## Chaos
+This section tries to focus on two fundamental questions: 
+- [What happens when we lack information?]
+- [How should we deal, when faced with chaotic lack of information?]
 ____
+# Tools
 
  ## 1. Kants Knowledge Graph
 **Question:** How can I visualize ideas and how can I determine connections between different ideas?  

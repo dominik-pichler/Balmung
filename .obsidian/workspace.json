@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/quest_for_knowledge.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/quest_for_knowledge.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/quest_for_knowledge.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/quest_for_knowledge.md"
+                "file": "README.md"
               }
             }
           }
@@ -148,6 +148,8 @@
   },
   "active": "f4988acbd9c4480c",
   "lastOpenFiles": [
+    "notes/the_unkown.md",
+    "notes/quest_for_knowledge.md",
     "notes/what_is_information.md",
     "notes/what_is_information.md.md"
   ]

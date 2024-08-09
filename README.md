@@ -39,8 +39,8 @@ Feel free to contact me if you're interested
 
 ## Chaos
 This section tries to focus on two fundamental questions: 
-- [What happens when we lack information?]()
-- [How should we deal, when faced with chaotic lack of information?]()
+- [What happens when we lack information?](notes/Chaos.md)
+- [How should we deal, when faced with chaotic lack of information?](notes/Chaos.md)
 ____
 # Tools
 

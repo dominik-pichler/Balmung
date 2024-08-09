@@ -39,13 +39,13 @@ Feel free to contact me if you're interested
 
 ## Chaos
 This section tries to focus on two fundamental questions: 
-- [What happens when we lack information?]
-- [How should we deal, when faced with chaotic lack of information?]
+- [What happens when we lack information?]()
+- [How should we deal, when faced with chaotic lack of information?]()
 ____
 # Tools
 
  ## 1. Kants Knowledge Graph
-**Question:** How can I visualize ideas and how can I determine connections between different ideas?  
+**Question:** <br>How can I visualize ideas and how can I determine connections between different ideas?  
 For this approach I tried to turn philosophical ideas into knowledge graphs.
 
 Thereby two different approaches have been used to identify entities and relationships.
@@ -61,26 +61,31 @@ More (theoretical) thoughts can be found in the following notebook: [Ramble 1](k
 
 
 ## 2. Ishmaels Guide to Fishing
-Fishing for understanding in a personally new field of understanding can easily become an orientationless wandering through a dark forest of (pseudo) knowledge. 
+**Question:** <br> How can I understand what (sub)topics are central in a given (research) area? 
+<br>
+Fishing for understanding in a personally new field of understanding can easily become an orientation-less wandering through a dark forest of (pseudo) knowledge. 
 One might need a navigation system find the central intellectual building blocks of this new field of interest.
-The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifes central ideas in a given field.
+The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifies central ideas and topics in a given field.
 
 
 ## 3. Neural (Re-) Rankers
-Manually implemented, trained and evaluated the performance of two prominent neural re-ranking algorithms ([K-NRM](https://arxiv.org/pdf/1706.06613) and [TK](https://www.researchgate.net/publication/339065967_Interpretable_Time-Budget-Constrained_Contextualization_for_Re-Ranking) )
+**Question:** <br> How can i find the most relevant documents for a given endeavour, in a large pool of documents? 
+<br>
+
+For this quest, I have manually implemented, trained and evaluated the performance of two prominent neural re-ranking algorithms ([K-NRM](https://arxiv.org/pdf/1706.06613) and [TK](https://www.researchgate.net/publication/339065967_Interpretable_Time-Budget-Constrained_Contextualization_for_Re-Ranking) )
 
 Code and results can be found here: 
 [TBD](TBD)
 
 ## 4. Ask me anything - QA System
-After implementing the neural re-rankers, I wanted to setup an actual QA System utilizing the top performing neural re-ranker.
-
+**Question**: <br> How can I extend 3. with arbitrary OOV queries? 
+<br>
 Code and results can be found here: 
 [TBD](TBD)
 
 
 ## 5. Compress me if you can
-During the projects listed above, I worked with lossless compression-algorithms and implemented the following algorithms from scratch: 
+During the projects listed above, I worked with lossless compression-algorithms to reduce data sizes (and to identify symbolic Morphemes) and thereby implemented the following algorithms: 
 * [Shannon -  Fano encoding](https://github.com/dominik-pichler/Balmung/blob/main/utils/shannon_fano_coding.py)
    * Turned out as a pretty good start by losslessly compressing Kants *Critique of pure reason* by 55%
  

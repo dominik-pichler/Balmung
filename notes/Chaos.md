@@ -1,6 +1,10 @@
 
 # Mathematical Systems: 
-In Mathematics, Systems can be roughly grouped in the following kinds. 
+In the following, I am working with this definition of systems:
+
+ > A system is a group of interacting or interrelated elements that act according to a set of rules to form a unified whole. It is characterized by its boundaries, structure, and purpose, and is influenced by its environment
+
+To my understanding, in mathematics, systems can be roughly grouped in the following clusters: 
 ####  **Linear vs. Nonlinear Systems**:
 - **Linear Systems**: Systems described by linear equations, where the principle of superposition applies. Solutions can be easily combined and scaled. 
 - **Nonlinear Systems**: Systems described by nonlinear equations, where the principle of superposition does not apply. These systems can exhibit complex behaviors such as chaos and bifurcations.
@@ -55,29 +59,32 @@ The Lorenz system is defined by the following set of differential equations: $$ 
 Following approaches can be used to identify the chaotic extent of a dynamic systems: 
 ### 1. Lyapunov Exponents: 
 **Description**:
-The most widely used method involves calculating the largest Lyapunov exponent. A positive largest Lyapunov exponent indicates that the system is chaotic, as it signifies exponential divergence of nearby trajectories.
+The most widely used method involves calculating the largest Lyapunov exponent. A positive largest Lyapunov exponent indicates that the system is chaotic, as it signifies exponential divergence of nearby trajectories.<br>
 **Application**: 
 This method is applicable to systems where the equations are known, and it can be estimated for experimental data using embedding techniques. 
 
 
 ### 2. 0-1 Test for Chaos: 
 **Description**: 
-This test provides a binary output (0 for non-chaotic, 1 for chaotic) based on time series data. It does not require phase space reconstruction and is applicable to a wide range of deterministic systems. 
+This test provides a binary output (0 for non-chaotic, 1 for chaotic) based on time series data. It does not require phase space reconstruction and is applicable to a wide range of deterministic systems. <br>
 **Advantages**: 
 It is straightforward to apply and does not depend on the dimensionality of the system. 
-
  
 ### 3. Permutation Entropy: 
-**Description**: Used in the Chaos Decision Tree Algorithm, permutation entropy is a measure that correlates with the largest Lyapunov exponent and can track the degree of chaos in a system.  
+**Description**: Used in the Chaos Decision Tree Algorithm, permutation entropy is a measure that correlates with the largest Lyapunov exponent and can track the degree of chaos in a system.  <br>
 **Use Case**: Effective for systems where direct calculation of Lyapunov exponents is challenging due to noise or finite data. 
 ### 4. Poincaré Surface of Section and Phase Space Analysis: 
- **Description**: Visualizing the system's trajectory in phase space can help identify chaotic behavior. Chaotic systems often exhibit complex, fractal-like structures known as strange attractors. 
+ **Description**: Visualizing the system's trajectory in phase space can help identify chaotic behavior. Chaotic systems often exhibit complex, fractal-like structures known as strange attractors. <br>
  **Tools**: Techniques like the Poincaré Surface of Section and phase space slicing are used to visualize these dynamics. 
 
 
 ### 5.  Frequency Map Analysis and Recurrence Plots: 
-**Description**: These methods analyze the frequency components and recurrence of states in the system to detect chaos. 
+**Description**: These methods analyze the frequency components and recurrence of states in the system to detect chaos. <br>
 **Application**: Useful for both theoretical and experimental data, providing insights into the system's regularity or chaotic nature.
+
+
+
+
 # What to do under chaos? 
 
 

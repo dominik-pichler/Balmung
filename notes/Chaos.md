@@ -58,8 +58,7 @@ The Lorenz system is defined by the following set of differential equations: $$ 
 ### Example II - Double Pendelum
 
 **Chaotic Phase Space of a double Pendelum**
-![The phase diagrams of the double pendulum with axial forcing θ = 0 with...  | Download Scientific Diagram](https://www.researchgate.net/publication/342617647/figure/fig5/AS:908661056606220@1593653086713/The-phase-diagrams-of-the-double-pendulum-with-axial-forcing-th-0-with-a-different-set.ppm)
-![Double Pendelum](double_pendel.gif)
+![Double Pendelum](double_pendel.gif) <br>
 **Simulation Code**
 A Python Implementation can be found in this script: 
 [Double Pendelum](../utils/chaos_code/double_pendelum.py)

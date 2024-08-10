@@ -77,7 +77,7 @@ Code and results can be found here:
 [TBD](TBD)
 
 ## 4. Ask me anything - QA System
-**Question**: <br> How can I extend 3. with arbitrary OOV queries? 
+**Question**: <br> How can I extend 3. with arbitrary (OOV) queries? 
 <br>
 Code and results can be found here: 
 [TBD](TBD)

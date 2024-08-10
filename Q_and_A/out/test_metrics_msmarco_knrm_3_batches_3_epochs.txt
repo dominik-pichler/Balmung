@@ -1,0 +1,32 @@
+#####################
+Dataset: msmarco
+Model used: knrm
+Number of batches used: 3
+Epochs trained: 3
+#####################
+MRR@10: 0.04332063492063492
+Recall@10: 0.16525
+QueriesWithNoRelevant@10: 1659
+QueriesWithRelevant@10: 341
+AverageRankGoldLabel@10: 5.964809384164223
+MedianRankGoldLabel@10: 6.0
+MRR@20: 0.05433131925693845
+Recall@20: 0.3227083333333333
+QueriesWithNoRelevant@20: 1337
+QueriesWithRelevant@20: 663
+AverageRankGoldLabel@20: 10.452488687782806
+MedianRankGoldLabel@20: 10.0
+MRR@1000: 0.06355459039342853
+Recall@1000: 0.6002916666666668
+QueriesWithNoRelevant@1000: 788
+QueriesWithRelevant@1000: 1212
+AverageRankGoldLabel@1000: 19.716996699669966
+MedianRankGoldLabel@1000: 19.0
+nDCG@3: 0.027083016550000408
+nDCG@5: 0.03880170716096997
+nDCG@10: 0.07054238201082029
+nDCG@20: 0.1104331612652718
+nDCG@1000: 0.16693898041580513
+QueriesRanked: 2000
+MAP@1000: 0.0625110436425182
+#####################

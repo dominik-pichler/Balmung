@@ -1,0 +1,33 @@
+#####################
+Dataset: FiRA
+Model used: knrm
+Number of batches used: 3
+Epochs trained: 1
+#####################
+FiRA Test Metrics with Baseline Qrels:
+MRR@10: 0.9022721674876848
+Recall@10: 0.9392734584791236
+QueriesWithNoRelevant@10: 115
+QueriesWithRelevant@10: 4060
+AverageRankGoldLabel@10: 1.2344827586206897
+MedianRankGoldLabel@10: 1.0
+MRR@20: 0.9022721674876848
+Recall@20: 1.0
+QueriesWithNoRelevant@20: 115
+QueriesWithRelevant@20: 4060
+AverageRankGoldLabel@20: 1.2344827586206897
+MedianRankGoldLabel@20: 1.0
+MRR@1000: 0.9022721674876848
+Recall@1000: 1.0
+QueriesWithNoRelevant@1000: 115
+QueriesWithRelevant@1000: 4060
+AverageRankGoldLabel@1000: 1.2344827586206897
+MedianRankGoldLabel@1000: 1.0
+nDCG@3: 0.8105247354296031
+nDCG@5: 0.8167799798067337
+nDCG@10: 0.8436702545880691
+nDCG@20: 0.8657909352359375
+nDCG@1000: 0.8657909352359375
+QueriesRanked: 4060
+MAP@1000: 0.8928072450413251
+#####################

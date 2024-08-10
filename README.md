@@ -35,12 +35,13 @@ Inspired by Bacon's  "Scientia potentia est", repo tool aims to investigate know
 This is a repo tries to gradually find more sophisticated answers to those questions, either through code or rambling style posts.
 Feel free to contact me if you're interested
 
-
-
 ## Chaos
 This section tries to focus on two fundamental questions: 
 - [What happens when we lack information?](notes/Chaos.md)
 - [How should we deal, when faced with chaotic lack of information?](notes/Chaos.md)
+
+## Implications for Machine Leaning
+
 ____
 # Tools
 

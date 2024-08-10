@@ -67,6 +67,13 @@ The Lorenz system is defined by the following set of differential equations: $$ 
 A Python Implementation can be found in this script: 
 [Double Pendelum](../utils/chaos_code/double_pendelum.py)
 
+#### Equations of Motion The equations of motion for the angles 
+$\theta_1$ and $\theta_2$ are derived using the Lagrangian approach: $$ \begin{align*} \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta}_1} \right) - \frac{\partial L}{\partial \theta_1} &= 0, \\ \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta}_2} \right) - \frac{\partial L}{\partial \theta_2} &= 0. \end{align*} $$ These equations are complex and typically require numerical methods for solutions, such as the Runge-Kutta method. 
+#### Cartesian Coordinates 
+Given the angles $\theta_1(t)$ and $\theta_2(t$, the Cartesian coordinates of the masses are: 
+- **First Mass ($m_1$):** $$ \begin{align*} x_1(t) &= L_1 \sin(\theta_1(t)), \\ y_1(t) &= -L_1 \cos(\theta_1(t)). \end{align*} $$ - **Second Mass ($m_2$):** $$ \begin{align*} x_2(t) &= x_1(t) + L_2 \sin(\theta_2(t)) = L_1 \sin(\theta_1(t)) + L_2 \sin(\theta_2(t)), \\ y_2(t) &= y_1(t) - L_2 \cos(\theta_2(t)) = -L_1 \cos(\theta_1(t)) - L_2 \cos(\theta_2(t)). \end{align*} $$
+#### Initial Conditions 
+The initial conditions for the pendulum are specified by the initial angles and angular velocities: $$ \begin{align*} \theta_1(0) &= \theta_{1,0}, \\ \theta_2(0) &= \theta_{2,0}, \\ \dot{\theta}_1(0) &= \omega_{1,0}, \\ \dot{\theta}_2(0) &= \omega_{2,0}. \end{align*} $$ 
 ## Am I chaotic? 
 Following approaches can be used to identify the chaotic extent of a dynamic systems: 
 ### 1. Lyapunov Exponents: 

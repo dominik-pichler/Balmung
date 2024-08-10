@@ -31,7 +31,7 @@ quantification
 the probability of X depends
   <br/><br/>
     * **Algorithmic information**:<br> 
-      Measures the length of the shortest program that produces a string on a universal [Turing machine](../turing_machines/notes_turing). 
+      Measures the length of the shortest program that produces a string on a universal [Turing machine](../utils/turing_machines/notes_turing). 
   <br/><br/>
     * **von Neumann Entropy**<br>
       Gives a measure of the quantum resources necessary to faithfully encode the state of the source-system;

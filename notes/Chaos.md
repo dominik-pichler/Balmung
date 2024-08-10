@@ -43,7 +43,7 @@ But where does predictability end and chaos begin? How little information is too
    
 5. **Measurement Limitations**: <br>The inability to measure initial conditions with perfect accuracy further contributes to unpredictability. Even minute measurement errors can lead to significant deviations in predictions over time. In summary, predictable systems become unpredictable when they exhibit chaotic behavior, sensitive dependence on initial conditions, and when complexity or measurement limitations prevent accurate long-term forecasting.
 
-### Example - Lorenz Attractor
+### Example I - Lorenz Attractor
 The **Lorenz attractor** is a concept in chaos theory, originating from the Lorenz system, a set of three ordinary differential equations. These equations were first introduced by Edward Lorenz in the 1960s as a simplified mathematical model for atmospheric convection. The Lorenz attractor is a specific solution to these equations that exhibits chaotic behavior, which is highly sensitive to initial conditions—a phenomenon often referred to as the "butterfly effect."
 ##### Lorenz System 
 The Lorenz system is defined by the following set of differential equations: $$ \begin{align*} \frac{dx}{dt} &= \sigma (y - x), \\ \frac{dy}{dt} &= x(\rho - z) - y, \\ \frac{dz}{dt} &= xy - \beta z, \end{align*} $$ where $\sigma$, $\rho$, and $\beta$ are parameters that can be adjusted to change the system's behavior. The system is typically studied with the parameters $\sigma = 10$, $\rho = 28$, and $\beta = 8/3$. 
@@ -54,6 +54,15 @@ The Lorenz system is defined by the following set of differential equations: $$ 
 ##### Lorenz Attractor in Phase Space: 
 
 ![Animating the Lorenz Attractor with Python – Geoff Boeing](https://i0.wp.com/geoffboeing.com/wp-content/uploads/2016/12/lorenz-attractor-phase-plane.png?resize=580%2C222&ssl=1)
+
+### Example II - Double Pendelum
+
+**Chaotic Phase Space of a double Pendelum**
+![The phase diagrams of the double pendulum with axial forcing θ = 0 with...  | Download Scientific Diagram](https://www.researchgate.net/publication/342617647/figure/fig5/AS:908661056606220@1593653086713/The-phase-diagrams-of-the-double-pendulum-with-axial-forcing-th-0-with-a-different-set.ppm)
+![Double Pendelum](double_pendel.gif)
+**Simulation Code**
+A Python Implementation can be found in this script: 
+[Double Pendelum](../utils/chaos_code/double_pendelum.py)
 
 ## Am I chaotic? 
 Following approaches can be used to identify the chaotic extent of a dynamic systems: 
@@ -86,6 +95,4 @@ It is straightforward to apply and does not depend on the dimensionality of the 
 
 
 # What to do under chaos? 
-
-
-
+Run

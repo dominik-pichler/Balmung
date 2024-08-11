@@ -46,7 +46,7 @@ This section tries to focus on two fundamental questions:
 ____
 # Tools
 
- ## 1. Do you know? - Kants Knowledge Graph
+ ## 1. What do you know? - Kants Knowledge Graph
 **Question:** <br>How can I visualise ideas and how can I determine connections between different ideas?  
 For this approach I tried to turn philosophical ideas into knowledge graphs.
 
@@ -60,12 +60,15 @@ visualising all entities and their relationships became unfeasible.
 Hence, this project is on hold until I've solved the question of "*What is the most essential information?*".
 
 ## 2. Ishmaels Guide to (Topic) Fishing
-**Question:** <br> How can I understand what (sub)topics are central in a given (research) area? 
+**Question:** <br> How can I understand what (sub)topics are central in a given document corpus or more specifically (research) area? 
 <br>
 Fishing for understanding in a personally new field of understanding can easily become an orientation-less wandering through a dark forest of (pseudo) knowledge. 
 One might need a navigation system find the central intellectual building blocks of this new field of interest.
 The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifies central ideas and topics in a given field.
 
+**Theoretical Overview:** <br>
+For a general understanding, a comprehensive list of modern topic modelling techniques can be found here: <br>
+[Modern Topic Modelling Approaches](ismails_guide_to_fishing/fish_me.md)
 
 ## 3.  Rank me if you can - Neural (Re-) Rankers
 **Question:** <br> How can i find the most relevant documents for a given endeavour, in a large pool of documents? 

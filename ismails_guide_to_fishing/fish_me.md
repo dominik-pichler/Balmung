@@ -29,14 +29,11 @@ Despite the availability of quantitative metrics, human judgment remains an esse
 #### 8. Probability of Held-out Documents 
 This metric evaluates the generalization capability of a topic model by estimating the probability of unseen documents given the trained model. It provides insights into how well the model can predict new data.
 
-
-
 ### Pratical Application: 
 [Wu et. al. (2024)]([10.21203/rs.3.rs-3049182/v1](http://dx.doi.org/10.21203/rs.3.rs-3049182/v1)) proposed a pratical set of metrics to evaluate model performance, consisting of the following metrics that can be calculated via [Palmetto](https://github.com/dice-group/Palmetto): 
 
 #### 1. Perplexity:
 It is measured as the normalized log-likelihood of held-out test documents. Perplexity has been used for years to evaluate topic models. However, previous studies have shown that perplexity inaccurately reflects the quality of discovered topics as it often contradicts human judgment (Chang et al, 2009). Besides, computing loglikelihood is inconsistent for different topic models because they apply various sampling or approximation techniques (Wallach et al, 2009; Buntine, 2009). This makes fair comparisons intractable. Due to these reasons, perplexity has become less popular for topic model evaluation.
-
 
 #### 2. Topic Coherence:
 Topic coherence measures the coherence between the most related words of topics, i.e., top words (determined by topic-word probabilities).
@@ -44,24 +41,22 @@ Experiments show that topic coherence can agree with the human evaluation on top
 
  For example, one widely-used coherence metric is Normalized Point-wise Mutual Information (NPMI, Bouma, 2009; Newman et al, 2010; Lau et al, 2014).
 
-![[Pasted image 20240814094327.png]]
-
-
+![[NPMI.png]]
 
 #### 3. Topic Diversity:
 
 - **Topic Uniqueness**  
   Nan et al (2019) ) propose Topic Uniqueness (TU) which computes the average reciprocal of top word occurrences in topic.
   Given K topics and the top T word of each topic, TU is computed as
-  ![[Pasted image 20240814094452.png]]
+  ![[TU.png]]
 
 - **Topic Redundance** 
    Burkhardt and Kramer (2019) propose Topic Redundancy (TR) that calculates the average occurrences of a top word in other topics. Its computation is
-![[Pasted image 20240814094550.png]]
+![[TR.png]]
 - **Topic Diversity:** 
   Dieng et al (2020) propose Topic Diversity (TD) which computes the proportion of unique top words of topics: 
   
-  ![[Pasted image 20240814094718.png]]
+  ![[TD.png]]
   
    where I(·) is a indicator function that equals 1 if #(xi) = 1 and equals 0 otherwise. A higher TD score indicates more diverse topics
 

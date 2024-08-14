@@ -41,22 +41,23 @@ Experiments show that topic coherence can agree with the human evaluation on top
 
  For example, one widely-used coherence metric is Normalized Point-wise Mutual Information (NPMI, Bouma, 2009; Newman et al, 2010; Lau et al, 2014).
 
-![[NPMI.png]]
+  ![](NPMI.png)
 
 #### 3. Topic Diversity:
 
 - **Topic Uniqueness**  
   Nan et al (2019) ) propose Topic Uniqueness (TU) which computes the average reciprocal of top word occurrences in topic.
   Given K topics and the top T word of each topic, TU is computed as
-  ![[TU.png]]
+- 
+  ![](TU.png)
 
 - **Topic Redundance** 
-   Burkhardt and Kramer (2019) propose Topic Redundancy (TR) that calculates the average occurrences of a top word in other topics. Its computation is
-![](TR.png)
+   Burkhardt and Kramer (2019) propose Topic Redundancy (TR) that calculates the average occurrences of a top word in other topics. Its computation is: <br>
+  ![](TR.png)
 - **Topic Diversity:** 
   Dieng et al (2020) propose Topic Diversity (TD) which computes the proportion of unique top words of topics: 
   
-  [TD.png]()
+  ![](TD.png)
   
    where I(·) is a indicator function that equals 1 if #(xi) = 1 and equals 0 otherwise. A higher TD score indicates more diverse topics
 

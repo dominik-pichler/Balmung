@@ -11,6 +11,9 @@ jupyter = "^1.0.0"
 transformers = "^4.42.3"
 torch = "^2.3.1"
 wikipedia-api = "^0.6.0"
+gensim = "^4.3.3"
+bertopic = "^0.16.3"
+nltk = "^3.8.2"
 
 
 [build-system]

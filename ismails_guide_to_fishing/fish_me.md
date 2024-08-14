@@ -3,7 +3,7 @@
 For a general overview of the history of Topic modelling: <br>
 
 ## Metrics for Topic Modelling
-### General Collection
+
 #### 1. Topic Coherence
 Topic coherence measures how semantically similar the words within a topic are. It is a crucial metric because it reflects how interpretable the topics are to humans. Common coherence metrics include: 
 - **Adjusted Rank Index**:
@@ -52,7 +52,7 @@ Experiments show that topic coherence can agree with the human evaluation on top
 
 - **Topic Redundance** 
    Burkhardt and Kramer (2019) propose Topic Redundancy (TR) that calculates the average occurrences of a top word in other topics. Its computation is
-![[TR.png]]
+![](TR.png)
 - **Topic Diversity:** 
   Dieng et al (2020) propose Topic Diversity (TD) which computes the proportion of unique top words of topics: 
   
@@ -64,14 +64,13 @@ Experiments show that topic coherence can agree with the human evaluation on top
 --- 
 ## Modern  approaches in Topic Modelling: 
 
-### General Overview: 
-### 1.Non-negativ Matrix-Factorization 
-### 2. Graph-based Models
+### Overview by Churchill et. al. (2022): 
+#### 1.Non-negativ Matrix-Factorization 
+#### 2. Graph-based Models
 - Graph Neural Topic Model
 - Graph Topic Model
 - Graph2Topic
-### 3. Traditional TM + Modern NLP (2023)
-
+#### 3. Combinations of TM + Modern NLP (2023)
 -  Biterm Topic Models
 - Self-aggregating Topic Models
 - Latent Feature LDA and Latent Feature DMM
@@ -90,14 +89,13 @@ Experiments show that topic coherence can agree with the human evaluation on top
 - Topic Modeling with BERT 
 - Topic Noise Models
 
-### 4. Meta-data augmented, Supervised, and Reinforcement-Learning based Models
+#### 4. Meta-data augmented, Supervised, and Reinforcement-Learning based Models
 -  Topic Tracking Model
 - Adversarial-neural Topic Model
 - Bidirectional Adversarial Topic Model
 
 
-
-### High-Level historic Overview
+#### High-Level historic Overview
 
 
 ![](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/5-Figure2-1.png)
@@ -105,8 +103,27 @@ Experiments show that topic coherence can agree with the human evaluation on top
 ![]()[](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/5-Figure3-1.png)
 
 
+
+
+### An alternativ categorization  (Kherwa et. al. (2020)) 
+![[categorization.png]]
+
+
+
+
+### Selection Criterions: 
+
+
 According to [Churchill et. al. (2022)](https://www.researchgate.net/publication/357792535_The_Evolution_of_Topic_Modeling) model selection should take the following dimensions into consideration: 
 ![figure 6](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/30-Figure6-1.png)
+
+
+
+
+
+
+
+
 
 #### General Learnings
 Models that work well with short texts: 
@@ -119,6 +136,23 @@ Models that work well with noisy data:
 - PTM 
 - CSTM
 - WELDA
+
+
+
+### Code:
+Due to the limited scope, only a handful of models/algorithms have been tested and benchmarked.
+Namely: 
+- BERTopic
+- OpenAI's text-embedding-ada-002
+- Biterm Topic Model (BTM=)
+- PLSA
+- LDA
+- LSA
+- NNMF
+
+
+The corresponding code can be found here: 
+[Python Benchmarking Code](code/traditional_TM.py)
 
 
 

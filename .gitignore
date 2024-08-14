@@ -1,7 +1,7 @@
 
 .DS_Store
 .obsidian/
-
+.idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

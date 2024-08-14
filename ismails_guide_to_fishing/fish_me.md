@@ -58,14 +58,14 @@ For a general overview of the history of Topic modelling: <br>
 
 
 ### An alternativ categorization  (Kherwa et. al. (2020)) 
-![](images/seperation_criterions.png)
 
 
-
+![](images/kherwa_classification.png)
 
 ### Selection Criterions:
 According to [Churchill et. al. (2022)](https://www.researchgate.net/publication/357792535_The_Evolution_of_Topic_Modeling) model selection should take the following dimensions into consideration: 
-![](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/30-Figure6-1.png)
+![](images/seperation_criterions.png)
+
 
 #### General Learnings
 Models that work well with short texts: 

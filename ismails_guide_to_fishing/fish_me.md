@@ -5,12 +5,9 @@ For a general, high-level overview of the history of Topic modelling: <br>
 
 
 <div style="width: 600px">
-<img src="images/pre_W2V.png" style="width: 60%">
+<img src="images/pre_W2V.png" style="width: 75%">
 <img src="images/post_W2V.png" style="width: 75%">
 </div>
-![](images/pre_W2V.png)
-
-![](images/post_W2V.png)
 
 
 ## **Traditional Algorithms**

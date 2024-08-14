@@ -5,7 +5,7 @@ For a general, high-level overview of the history of Topic modelling: <br>
 
 
 <div style="width: 200px">
-<img src="images/pre_W2V.png">
+<img src="images/pre_W2V.png" style="width: 200px">
 <img src="images/post_W2V.png">
 </div>
 ![](images/pre_W2V.png)

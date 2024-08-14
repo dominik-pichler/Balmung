@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b664e41-10c8-44c8-8514-8a40e01a859c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/seperation_criterions.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/post_W2V.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/pre_W2V.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/NPMI.png" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/NPMI.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/TD.png" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/TD.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/TR.png" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/TR.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/TU.png" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/TU.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/categorization.png" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/categorization.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/fish_me.md" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/fish_me.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/seperation_criterions.png" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/images/seperation_criterions.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/Ismails_Guide_to_fishing" beforeDir="false" afterPath="$PROJECT_DIR$/notes/Ismails_Guide_to_fishing" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +66,7 @@
       <recent name="$PROJECT_DIR$/Q_and_A" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ismails_guide_to_fishing/images" />
       <recent name="$PROJECT_DIR$/ismails_guide_to_fishing" />
       <recent name="$PROJECT_DIR$/utils" />
     </key>
@@ -156,7 +166,7 @@
       <option name="presentableId" value="Default" />
       <updated>1723271029754</updated>
       <workItem from="1723271030903" duration="4217000" />
-      <workItem from="1723621125460" duration="8452000" />
+      <workItem from="1723621125460" duration="8877000" />
     </task>
     <servers />
   </component>

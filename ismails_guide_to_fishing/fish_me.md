@@ -41,7 +41,7 @@ Experiments show that topic coherence can agree with the human evaluation on top
 
  For example, one widely-used coherence metric is Normalized Point-wise Mutual Information (NPMI, Bouma, 2009; Newman et al, 2010; Lau et al, 2014).
 
-  ![](NPMI.png)
+  ![](images/NPMI.png)
 
 #### 3. Topic Diversity:
 
@@ -49,65 +49,77 @@ Experiments show that topic coherence can agree with the human evaluation on top
   Nan et al (2019) ) propose Topic Uniqueness (TU) which computes the average reciprocal of top word occurrences in topic.
   Given K topics and the top T word of each topic, TU is computed as
 - 
-  ![](TU.png)
+  ![](images/TU.png)
 
 - **Topic Redundance** 
    Burkhardt and Kramer (2019) propose Topic Redundancy (TR) that calculates the average occurrences of a top word in other topics. Its computation is: <br>
-  ![](TR.png)
+  ![](images/TR.png)
 - **Topic Diversity:** 
   Dieng et al (2020) propose Topic Diversity (TD) which computes the proportion of unique top words of topics: 
   
-  ![](TD.png)
+  ![](images/TD.png)
   
    where I(·) is a indicator function that equals 1 if #(xi) = 1 and equals 0 otherwise. A higher TD score indicates more diverse topics
 
 
 --- 
-## Modern  approaches in Topic Modelling: 
+## **Traditional Algorithms**
 
-### Overview by Churchill et. al. (2022): 
-#### 1.Non-negativ Matrix-Factorization 
-#### 2. Graph-based Models
-- Graph Neural Topic Model
-- Graph Topic Model
-- Graph2Topic
-#### 3. Combinations of TM + Modern NLP (2023)
--  Biterm Topic Models
-- Self-aggregating Topic Models
-- Latent Feature LDA and Latent Feature DMM
-- Neural Variational Document Model
-- Ida2Vec
-- Pseudo-document-based Topic Model (PMT)
-- Embedding-based Topic Models
-- Gibbs Sampling DMM 
-- GPUDMM and DPUPDMM
- - Distributed Representation-based Expansion (DREx)
-- Common Semantics Topic Models (CSTM)
-- Word Embedding LDA
-- Laplacian DMM 
-- CluWords & CluHTM
-- Embedded Topic Model and Dynamic embedded Topic Model
-- Topic Modeling with BERT 
-- Topic Noise Models
+- **Latent Dirichlet Allocation (LDA):**
+  - LDA is a probabilistic model that assumes each document is a mixture of topics, and each topic is a mixture of words. It remains one of the most widely used topic modeling techniques due to its effectiveness and simplicity.
 
-#### 4. Meta-data augmented, Supervised, and Reinforcement-Learning based Models
--  Topic Tracking Model
-- Adversarial-neural Topic Model
-- Bidirectional Adversarial Topic Model
+- **Latent Semantic Analysis (LSA):**
+  - LSA uses singular value decomposition to reduce the dimensionality of the document-term matrix, capturing patterns in word usage and relationships between documents.
+
+- **Non-negative Matrix Factorization (NMF):**
+  - NMF is a matrix factorization technique that decomposes the document-term matrix into non-negative factors, which can be interpreted as topics.
+
+
+## Modern  approaches in Topic Modelling:
+
+#### Overview by Churchill et. al. (2022): 
+-  **1.Non-negativ Matrix-Factorization** 
+-  **2. Graph-based Models**
+    - Graph Neural Topic Model
+    - Graph Topic Model
+    - Graph2Topic
+- **3. Combinations of TM + Modern NLP (2023)**
+    - Biterm Topic Models
+    - Self-aggregating Topic Models
+    - Latent Feature LDA and Latent Feature DMM
+    - Neural Variational Document Model
+    - Ida2Vec
+    - Pseudo-document-based Topic Model (PMT)
+    - Embedding-based Topic Models
+    - Gibbs Sampling DMM 
+    - GPUDMM and DPUPDMM
+    - Distributed Representation-based Expansion (DREx)
+    - Common Semantics Topic Models (CSTM)
+    - Word Embedding LDA
+    - Laplacian DMM 
+    - CluWords & CluHTM
+    - Embedded Topic Model and Dynamic embedded Topic Model
+    - Topic Modeling with BERT 
+    - Topic Noise Models
+
+- **4. Meta-data augmented, Supervised, and Reinforcement-Learning based Models**
+    - Topic Tracking Model
+    - Adversarial-neural Topic Model
+    - Bidirectional Adversarial Topic Model
 
 
 #### High-Level historic Overview
 
 
-![](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/5-Figure2-1.png)
+![](images/pre_W2V.png)
 
-![](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/5-Figure3-1.png)
+![](images/post_W2V.png)
 
 
 
 
 ### An alternativ categorization  (Kherwa et. al. (2020)) 
-![](seperation_criterions.png)
+![](images/seperation_criterions.png)
 
 
 

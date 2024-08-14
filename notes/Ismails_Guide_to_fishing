@@ -4,16 +4,7 @@ Quest: Identifing which topics are present in a text corpus/set of documents.
 
 ## **State-of-the-Art Topic Modeling Algorithms**
 
-### **Traditional Algorithms**
 
-- **Latent Dirichlet Allocation (LDA):**
-  - LDA is a probabilistic model that assumes each document is a mixture of topics, and each topic is a mixture of words. It remains one of the most widely used topic modeling techniques due to its effectiveness and simplicity.
-
-- **Latent Semantic Analysis (LSA):**
-  - LSA uses singular value decomposition to reduce the dimensionality of the document-term matrix, capturing patterns in word usage and relationships between documents.
-
-- **Non-negative Matrix Factorization (NMF):**
-  - NMF is a matrix factorization technique that decomposes the document-term matrix into non-negative factors, which can be interpreted as topics.
 
 ### **Advanced and Emerging Algorithms**
 

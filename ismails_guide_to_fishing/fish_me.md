@@ -1,6 +1,14 @@
 
 ## Overview
-For a general overview of the history of Topic modelling: <br>
+For a general, high-level overview of the history of Topic modelling: <br>
+
+
+
+
+![](images/pre_W2V.png)
+
+![](images/post_W2V.png)
+
 
 ## **Traditional Algorithms**
 
@@ -47,15 +55,6 @@ For a general overview of the history of Topic modelling: <br>
     - Bidirectional Adversarial Topic Model
 
 
-#### High-Level historic Overview
-
-
-![](images/pre_W2V.png)
-
-![](images/post_W2V.png)
-
-
-
 
 ### An alternativ categorization  (Kherwa et. al. (2020)) 
 
@@ -63,7 +62,7 @@ For a general overview of the history of Topic modelling: <br>
 ![](images/kherwa_classification.png)
 
 ### Selection Criterions:
-According to [Churchill et. al. (2022)](https://www.researchgate.net/publication/357792535_The_Evolution_of_Topic_Modeling) model selection should take the following dimensions into consideration: 
+According to [Churchill et. al. (2022)](https://www.researchgate.net/publication/357792535_The_Evolution_of_Topic_Modeling) model selection should take the following dimensions into consideration: <br><br>
 ![](images/seperation_criterions.png)
 
 
@@ -85,9 +84,9 @@ Models that work well with noisy data:
 Topic coherence measures how semantically similar the words within a topic are. It is a crucial metric because it reflects how interpretable the topics are to humans. Common coherence metrics include: 
 - **Adjusted Rank Index**:
 - **Signal to noise Ratio:**
-- **CV Coherence**: Uses normalized pointwise mutual information (NPMI) and cosine similarity to evaluate coherence. However, it has been criticized and is not always recommended for use. 
-- **UMass Coherence**: Measures the co-occurrence of words within a topic based on a reference corpus. It is often preferred over CV coherence for its reliability. 
-- **UCI Coherence**: Similar to UMass but uses a sliding window approach over the corpus to calculate coherence.
+- **CV Coherence**: <br> Uses normalized pointwise mutual information (NPMI) and cosine similarity to evaluate coherence. However, it has been criticized and is not always recommended for use. 
+- **UMass Coherence**: <br> Measures the co-occurrence of words within a topic based on a reference corpus. It is often preferred over CV coherence for its reliability. 
+- **UCI Coherence**: <br> Similar to UMass but uses a sliding window approach over the corpus to calculate coherence.
 
 #### 2. Perplexity
 Perplexity is a statistical measure that evaluates how well a probability model predicts a sample. In topic modeling, it assesses how well the model predicts unseen documents. Lower perplexity indicates a better fit of the model to the data, but it does not necessarily correlate with human interpretability. 
@@ -145,14 +144,14 @@ Experiments show that topic coherence can agree with the human evaluation on top
 Due to the limited scope, only a handful of models/algorithms have been tested and benchmarked.
 Namely: 
 - BERTopic
-- PLSA
+- PLSA (TDB)
 - LDA
 - LSA
 - NNMF
 
 
 The corresponding code can be found here: 
-[Python Benchmarking Code for Traditional TM Approaches](code/traditional_TM.py)
+[Python Benchmarking Code for Traditional TM Approaches](code/traditional_TM.py) <br>
 [Python Benchmarking Code for Neural TM Approaches](code/neural_TM.py)
 
 

@@ -63,8 +63,10 @@ For a general, high-level overview of the history of Topic modelling: <br>
 
 ### Selection Criterions:
 According to [Churchill et. al. (2022)](https://www.researchgate.net/publication/357792535_The_Evolution_of_Topic_Modeling) model selection should take the following dimensions into consideration: <br><br>
-![](images/seperation_criterions.png)
 
+<div style="width: 600px">
+<img src="images/seperation_criterions.png" style="width: 75%">
+´</div>
 
 #### General Learnings
 Models that work well with short texts: 

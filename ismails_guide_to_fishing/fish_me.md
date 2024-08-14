@@ -101,13 +101,13 @@ Experiments show that topic coherence can agree with the human evaluation on top
 
 ![](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/5-Figure2-1.png)
 
-![]()[](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/5-Figure3-1.png)
+![](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/5-Figure3-1.png)
 
 
 
 
 ### An alternativ categorization  (Kherwa et. al. (2020)) 
-![[categorization.png]]
+![](seperation_criterions.png)
 
 
 
@@ -116,9 +116,9 @@ Experiments show that topic coherence can agree with the human evaluation on top
 
 
 According to [Churchill et. al. (2022)](https://www.researchgate.net/publication/357792535_The_Evolution_of_Topic_Modeling) model selection should take the following dimensions into consideration: 
-![figure 6](https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/30-Figure6-1.png)
+![(https://d3i71xaburhd42.cloudfront.net/92bc23b7dfdac488c524bebbaedd9343d34b92e6/30-Figure6-1.png)
 
-
+[traditional_TM.py](code%2Ftraditional_TM.py)
 
 
 

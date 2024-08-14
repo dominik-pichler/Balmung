@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b664e41-10c8-44c8-8514-8a40e01a859c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/seperation_criterions.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/fish_me.md" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/fish_me.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +41,7 @@
     "Python.traditional_TM.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/dominikpichler/Documents/Git/Balmung/reranking",
+    "last_opened_file_path": "/Users/dominikpichler/Documents/Git/Balmung/ismails_guide_to_fishing",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -52,6 +52,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ismails_guide_to_fishing" />
       <recent name="$PROJECT_DIR$/reranking" />
       <recent name="$PROJECT_DIR$/Q_and_A" />
     </key>
@@ -155,7 +156,7 @@
       <option name="presentableId" value="Default" />
       <updated>1723271029754</updated>
       <workItem from="1723271030903" duration="4217000" />
-      <workItem from="1723621125460" duration="8254000" />
+      <workItem from="1723621125460" duration="8452000" />
     </task>
     <servers />
   </component>

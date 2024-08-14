@@ -56,7 +56,7 @@ Experiments show that topic coherence can agree with the human evaluation on top
 - **Topic Diversity:** 
   Dieng et al (2020) propose Topic Diversity (TD) which computes the proportion of unique top words of topics: 
   
-  ![[TD.png]]
+  [TD.png]()
   
    where I(·) is a indicator function that equals 1 if #(xi) = 1 and equals 0 otherwise. A higher TD score indicates more diverse topics
 

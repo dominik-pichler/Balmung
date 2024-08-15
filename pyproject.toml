@@ -14,6 +14,8 @@ wikipedia-api = "^0.6.0"
 gensim = "^4.3.3"
 bertopic = "^0.16.3"
 nltk = "^3.8.2"
+pymed = "^0.8.9"
+pyvis = "^0.3.2"
 
 
 [build-system]

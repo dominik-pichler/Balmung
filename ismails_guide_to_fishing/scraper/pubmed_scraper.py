@@ -2,6 +2,7 @@ import pandas as pd
 from pymed import PubMed
 import sqlite3
 pubmed = PubMed(tool="PubMedSearcher", email="myemail@ccc.com")
+from datetime import datetime, timedelta
 
 def convert_authors(authors):
     if isinstance(authors, list):
@@ -41,7 +42,6 @@ def fetch_latest_publications(search_term,start_date, end_date):
     #Sometimes article['pubmed_id'] contains list separated with comma - take first pubmedId in that list - thats article pubmedId
         pubmedId = article['pubmed_id'].partition('\n')[0]
         # Append article info to dictionary
-        print(article)
         articleInfo.append({
                 u'pubmed_id': pubmedId,
                 u'title': article.get('title', None),
@@ -57,12 +57,12 @@ def fetch_latest_publications(search_term,start_date, end_date):
         })
 
 
-    conn = sqlite3.connect('../databases/articles.db')
+    conn = sqlite3.connect(f'../databases/articles_{search_term}.db')
     cursor = conn.cursor()
 
     # Create a table for article info
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS article_info (
+    CREATE TABLE IF NOT EXISTS article_info_long (
         id INTEGER PRIMARY KEY,
         pubmed_id TEXT,
         title TEXT,
@@ -84,7 +84,7 @@ def fetch_latest_publications(search_term,start_date, end_date):
         authors_str = convert_authors(article.get('authors', []))
 
         cursor.execute('''
-        INSERT INTO article_info (pubmed_id, title, publication_date, journal, abstract, conclusions, methods, results, copyrights, doi, authors)
+        INSERT INTO article_info_long (pubmed_id, title, publication_date, journal, abstract, conclusions, methods, results, copyrights, doi, authors)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
                        (article.get('pubmed_id'), article.get('title'), article.get('publication_date'),
                         article.get('journal'),
@@ -93,7 +93,7 @@ def fetch_latest_publications(search_term,start_date, end_date):
 
     # Commit the transaction
     conn.commit()
-
+    print(f"Finished fetching {len(articleInfo)} articles")
     # Close the connection
     conn.close()
 
@@ -104,4 +104,20 @@ if __name__ == '__main__':
     start_date = "2018/05/01"
     end_date = "2018/05/02"
 
-    fetch_latest_publications(search_term, start_date, end_date)
+    #fetch_latest_publications(search_term, start_date, end_date)
+
+    # Define the start and end dates
+    start_date = datetime(2020, 1, 1)  # Two years ago from today
+    end_date = datetime(2024, 8, 15)  # Today's date
+
+    # Initialize the current date to the start date
+    current_date = start_date
+
+    # Loop over each day in the date range
+    while current_date <= end_date:
+        # Calculate the previous day
+        previous_date = current_date - timedelta(days=1)
+        fetch_latest_publications("Asthma", previous_date, current_date)
+        current_date += timedelta(days=1)
+        print(current_date)
+

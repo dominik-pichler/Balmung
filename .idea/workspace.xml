@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b664e41-10c8-44c8-8514-8a40e01a859c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/code/graph_visualizer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/scraper/citation_count_scraper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/scraper/pubmed_scraper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/code/BERTopic.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/code/ismails_topic_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kants_knowledge_graph/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/code/co_authorship_analyser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/wikipedia_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/scraper/wikipedia_scraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/code/edges_asthma.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/databases/articles.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ismails_guide_to_fishing/scraper/pubmed_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/ismails_guide_to_fishing/scraper/pubmed_scraper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -45,8 +44,9 @@
     "Python.co_authorship_analyser.executor": "Run",
     "Python.double_pendelum.executor": "Run",
     "Python.graph_visualizer.executor": "Run",
+    "Python.ismails_topic_model.executor": "Debug",
     "Python.neural_TM.executor": "Run",
-    "Python.pubmed_scraper (1).executor": "Run",
+    "Python.pubmed_scraper (1).executor": "Debug",
     "Python.pubmed_scraper.executor": "Run",
     "Python.testing_suite.executor": "Run",
     "Python.traditional_TM.executor": "Run",
@@ -73,7 +73,7 @@
       <recent name="$PROJECT_DIR$/utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pubmed_scraper (1)">
+  <component name="RunManager" selected="Python.ismails_topic_model">
     <configuration name="citation_count_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Balmung" />
       <option name="ENV_FILES" value="" />
@@ -143,6 +143,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="ismails_topic_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Balmung" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ismails_guide_to_fishing/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ismails_guide_to_fishing/code/ismails_topic_model.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="pubmed_scraper (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Balmung" />
       <option name="ENV_FILES" value="" />
@@ -166,36 +189,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pubmed_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Balmung" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scraper" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scraper/pubmed_scraper.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ismails_topic_model" />
         <item itemvalue="Python.pubmed_scraper (1)" />
         <item itemvalue="Python.citation_count_scraper" />
         <item itemvalue="Python.co_authorship_analyser" />
         <item itemvalue="Python.graph_visualizer" />
-        <item itemvalue="Python.pubmed_scraper" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +217,7 @@
       <updated>1723271029754</updated>
       <workItem from="1723271030903" duration="4217000" />
       <workItem from="1723621125460" duration="9361000" />
-      <workItem from="1723648415183" duration="8767000" />
+      <workItem from="1723648415183" duration="19824000" />
     </task>
     <servers />
   </component>
@@ -247,6 +247,16 @@
           <line>59</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ismails_guide_to_fishing/scraper/pubmed_scraper.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ismails_guide_to_fishing/code/ismails_topic_model.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -260,11 +270,12 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Balmung$pubmed_scraper.coverage" NAME="pubmed_scraper Coverage Results" MODIFIED="1723711907400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scraper" />
     <SUITE FILE_PATH="coverage/Balmung$citation_count_scraper.coverage" NAME="citation_count_scraper Coverage Results" MODIFIED="1723715634078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/scraper" />
+    <SUITE FILE_PATH="coverage/Balmung$ismails_topic_model.coverage" NAME="ismails_topic_model Coverage Results" MODIFIED="1723738004334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/code" />
     <SUITE FILE_PATH="coverage/Balmung$double_pendelum.coverage" NAME="double_pendelum Coverage Results" MODIFIED="1723271325487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chaos" />
     <SUITE FILE_PATH="coverage/Balmung$testing_suite.coverage" NAME="traditional_TM Coverage Results" MODIFIED="1723645530994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/code" />
     <SUITE FILE_PATH="coverage/Balmung$co_authorship_analyser.coverage" NAME="co_authorship_analyser Coverage Results" MODIFIED="1723715123138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/code" />
     <SUITE FILE_PATH="coverage/Balmung$BERT.coverage" NAME="neural_TM Coverage Results" MODIFIED="1723645228161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/code" />
     <SUITE FILE_PATH="coverage/Balmung$graph_visualizer.coverage" NAME="graph_visualizer Coverage Results" MODIFIED="1723712953243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/code" />
-    <SUITE FILE_PATH="coverage/Balmung$pubmed_scraper__1_.coverage" NAME="pubmed_scraper (1) Coverage Results" MODIFIED="1723716230382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/scraper" />
+    <SUITE FILE_PATH="coverage/Balmung$pubmed_scraper__1_.coverage" NAME="pubmed_scraper (1) Coverage Results" MODIFIED="1723736467348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ismails_guide_to_fishing/scraper" />
   </component>
 </project>

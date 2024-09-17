@@ -128,5 +128,24 @@ Out of which the non seem relevant for NLP/ER Tasks.
 
 #### Summary: 
 This leads two potentially interesting columns: 
-- `company.name`
-- `officer.flag`
+- `company.name` that contains the full company name
+- `officer.flag` that contains controlling rules of individuals.
+
+
+## Company.name
+After consideration, following information might be relevant to extract: 
+
+###### Company Type and Status
+Identify the type of company based on suffixes like "GmbH," "e.K.," or "Union," which indicate the legal structure (e.g., GmbH for a limited liability company in Germany)
+
+###### Geographical Information
+Extract potential geographical indicators from the company name, such as "Algeria" in "Shell Algeria Zerafa GmbH," which might suggest a regional focus or origin.
+
+###### Industry or Sector
+Analyze keywords within the names that might indicate the industry, such as "Reederei" (shipping) or "Entertainment."
+
+###### Branding or Product Focus
+Identify specific branding elements or product focus from names like "Lime Juice Entertainment," which could hint at the company's market segment.
+
+###### Owner or Founder Names
+Extract personal names if present, such as "Markus Blum" in "Markus Blum Montagearbeiten e.K.," which might indicate the founder or owner.

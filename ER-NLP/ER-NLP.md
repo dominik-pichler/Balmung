@@ -149,3 +149,10 @@ Identify specific branding elements or product focus from names like "Lime Juice
 
 ###### Owner or Founder Names
 Extract personal names if present, such as "Markus Blum" in "Markus Blum Montagearbeiten e.K.," which might indicate the founder or owner.
+
+
+
+## Entity Recognition: 
+ER has been tested/performed on the two columns mentioned above. 
+More can be found in the `playground_ER-NLP.ipynb` notebook.
+

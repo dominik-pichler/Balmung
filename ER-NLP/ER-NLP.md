@@ -137,9 +137,11 @@ After consideration, following information might be relevant to extract:
 
 ###### Company Type and Status
 Identify the type of company based on suffixes like "GmbH," "e.K.," or "Union," which indicate the legal structure (e.g., GmbH for a limited liability company in Germany)
+In my estimation, this can extracted by an rule-based approach. A corresponding investigation can be found in the  `playground_ER-NLP.ipynb` notebook.
 
 ###### Geographical Information
 Extract potential geographical indicators from the company name, such as "Algeria" in "Shell Algeria Zerafa GmbH," which might suggest a regional focus or origin.
+
 
 ###### Industry or Sector
 Analyze keywords within the names that might indicate the industry, such as "Reederei" (shipping) or "Entertainment."
@@ -151,8 +153,56 @@ Identify specific branding elements or product focus from names like "Lime Juice
 Extract personal names if present, such as "Markus Blum" in "Markus Blum Montagearbeiten e.K.," which might indicate the founder or owner.
 
 
-
 ## Entity Recognition: 
 ER has been tested/performed on the two columns mentioned above. 
 More can be found in the `playground_ER-NLP.ipynb` notebook.
 
+
+Above all, a save fallback solution would be to use [spaCy](https://spacy.io/) and it's (per default) available detection of the following entity types: 
+```
+"CARDINAL", 
+        "DATE", 
+        "EVENT", 
+        "FAC", 
+        "GPE", 
+        "LANGUAGE", 
+        "LAW", 
+        "LOC", 
+        "MONEY", 
+        "NORP", 
+        "ORDINAL", 
+        "ORG", 
+        "PERCENT", 
+        "PERSON", 
+        "PRODUCT", 
+        "QUANTITY", 
+        "TIME", 
+        "WORK_OF_ART",
+        "LOC", 
+        "MISC", 
+        "ORG", 
+        "PER"
+```
+
+
+Some examples: 
+```
+PERSON:      People, including fictional.
+NORP:        Nationalities or religious or political groups.
+FAC:         Buildings, airports, highways, bridges, etc.
+ORG:         Companies, agencies, institutions, etc.
+GPE:         Countries, cities, states.
+LOC:         Non-GPE locations, mountain ranges, bodies of water.
+PRODUCT:     Objects, vehicles, foods, etc. (Not services.)
+EVENT:       Named hurricanes, battles, wars, sports events, etc.
+WORK_OF_ART: Titles of books, songs, etc.
+LAW:         Named documents made into laws.
+LANGUAGE:    Any named language.
+DATE:        Absolute or relative dates or periods.
+TIME:        Times smaller than a day.
+PERCENT:     Percentage, including ”%“.
+MONEY:       Monetary values, including unit.
+QUANTITY:    Measurements, as of weight or distance.
+ORDINAL:     “first”, “second”, etc.
+CARDINAL:    Numerals that do not fall under another type.
+```

@@ -166,6 +166,7 @@ I have tried the following approaches:
 #### Resources: 
 - [Survey on DL for NER (2019)](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9039685)
   Yielding a list of modern NER Tools:
+
 | **NER System**     | **URL**                                                           | **Description**                       |
 |--------------------|-------------------------------------------------------------------|----------------------------------- |
 | StanfordCoreNLP    | [https://stanfordnlp.github.io/CoreNLP/](https://stanfordnlp.github.io/CoreNLP/) | A comprehensive NLP toolkit in Java. |
@@ -334,18 +335,13 @@ Fine-tuned BERT utilizing a german dataset with the following annotated tokens:
 |18. RS Court decision        |12,58 |23.46  |
 |19. LIT Legal literature     |3,006 |5.60   |
 | **Total**                   |53,632|100    |
-## 
+#
 
 
 #### Benchmark Test with 100k Company Names: 
 
 
-
-
 ![output.png](img%2Foutput.png)
-
-
-
 
 
 The model detected 880 Tokens as "Person". Examples look like: 
@@ -364,6 +360,9 @@ The model detected 880 Tokens as "Person". Examples look like:
 | I-PER  | 0.29476708  | 6     | o      | 22    | 23  |
 | I-PER  | 0.33195055  | 8     | H      | 25    | 26  |
 | I-PER  | 0.6844228   | 12    | Wa     | 47    | 49  |
+
+
+To me, the effectiveness of this model seems limited ... 
 
 
 

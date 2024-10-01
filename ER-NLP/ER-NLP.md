@@ -162,12 +162,12 @@ I have investigated the following approaches:
 - 
 
 
-| Approaches                                          | Result       | Comment                      |
-|-----------------------------------------------------|--------------|------------------------------|
-| 1. Raw german SpaCy using `de_core_news_lg`         | did not help |                              |
-| 2. Translate names to english + `en_core_news_lg`   | TBD          | not sure if this makes sense |
-| 3. `elenanereiss/bert-german-ler`                   | 111          | 0.21                         |
-| 4. `google-bert/bert-base-german-cased`             |              |                              |
+| Approaches                                          | Result            | Comment |
+|-----------------------------------------------------|-------------------|---------|
+| 1. Raw german SpaCy using `de_core_news_lg`         | did not help much |         |
+| 2. Translate names to english + `en_core_news_lg`   | TBD               |         |
+| 3. `elenanereiss/bert-german-ler`                   | did not help much |     |
+| 4. `google-bert/bert-base-german-cased`             | did not help much |         |
 
 
 

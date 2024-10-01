@@ -142,7 +142,6 @@ In my estimation, this can extracted by an rule-based approach. A corresponding 
 ###### Geographical Information
 Extract potential geographical indicators from the company name, such as "Algeria" in "Shell Algeria Zerafa GmbH," which might suggest a regional focus or origin.
 
-
 ###### Industry or Sector
 Analyze keywords within the names that might indicate the industry, such as "Reederei" (shipping) or "Entertainment."
 
@@ -153,50 +152,26 @@ Identify specific branding elements or product focus from names like "Lime Juice
 Extract personal names if present, such as "Markus Blum" in "Markus Blum Montagearbeiten e.K.," which might indicate the founder or owner.
 
 
-# Entity Recognition: 
+# General Entity Recognition: 
 ER has been tested/performed on the two columns mentioned above. 
-More can be found in the `playground_ER-NLP.ipynb` notebook.
+More can be found in the `playground_ER-NLP.ipynb`,`company_name_spaCy_ER_NLP.ipynb` and `company_name_HuggingFace.ipynb` notebook.
 
-I have tried the following approaches: 
-- Raw german SpaCy using de_core_news_lg
-- Translate names to english + en_core_news_lg
+I have investigated the following approaches: 
+- Raw german SpaCy using `de_core_news_lg`
+- Translate names to english + `en_core_news_lg`
 - 
 
 
-#### Resources: 
-- [Survey on DL for NER (2019)](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9039685)
-  Yielding a list of modern NER Tools:
-
-| **NER System**     | **URL**                                                           | **Description**                       |
-|--------------------|-------------------------------------------------------------------|----------------------------------- |
-| StanfordCoreNLP    | [https://stanfordnlp.github.io/CoreNLP/](https://stanfordnlp.github.io/CoreNLP/) | A comprehensive NLP toolkit in Java. |
-| OSU Twitter NLP    | [https://github.com/aritter/twitter_nlp](https://github.com/aritter/twitter_nlp) | Tools for NLP on Twitter data.    |
-| Illinois NLP       | [http://cogcomp.org/page/software/](http://cogcomp.org/page/software/) | NLP tools from the University of Illinois. |
-| NeuroNER           | [http://neuroner.com/](http://neuroner.com/)                      | Neural network-based NER system.         |
-| NERsuite           | [http://nersuite.nlplab.org/](http://nersuite.nlplab.org/)        | A suite for named entity recognition. |
-| Polyglot           | [https://polyglot.readthedocs.io](https://polyglot.readthedocs.io) | Multilingual NLP library.         |
-| Gimli              | [http://bioinformatics.ua.pt/gimli](http://bioinformatics.ua.pt/gimli) | Biomedical NER tool.              |
-| spaCy              | [https://spacy.io/api/entityrecognizer](https://spacy.io/api/entityrecognizer) | Industrial-strength NLP library.  |
-| NLTK               | [https://www.nltk.org](https://www.nltk.org)                      | A leading platform for building Python programs to work with human language data. |
-| OpenNLP            | [https://opennlp.apache.org/](https://opennlp.apache.org/)        | Machine learning based toolkit for processing natural language text. |
-| LingPipe           | [http://alias-i.com/lingpipe-3.9.3/](http://alias-i.com/lingpipe-3.9.3/) | Toolkit for text analytics and linguistic processing. |
-| AllenNLP           | [https://demo.allennlp.org/](https://demo.allennlp.org/)          | An open-source NLP research library built on PyTorch. |
-| IBM Watson         | [https://natural-language-understanding-demo.ng.bluemix.net/](https://natural-language-understanding-demo.ng.bluemix.net/) | AI-powered natural language understanding service by IBM. |
-| FG-NER             | [https://fgner.alt.ai/extractor/](https://fgner.alt.ai/extractor/) | Fine-grained named entity recognition tool. |
-| Intellexer         | [http://demo.intellexer.com/](http://demo.intellexer.com/)        | Semantic analysis and natural language processing tool. |
-| Repustate          | [https://repustate.com/named-entity-recognitionapi-demo/](https://repustate.com/named-entity-recognitionapi-demo/) | Sentiment analysis and text analytics API with NER capabilities. |
-| AYLIEN             | [https://developer.aylien.com/text-api-demo](https://developer.aylien.com/text-api-demo) | Text analysis API with NER features. |
-| Dandelion API      | [https://dandelion.eu/semantic-text/entityextraction-demo/](https://dandelion.eu/semantic-text/entityextraction-demo/) | Semantic text analysis API with entity extraction features. |
-| displaCy           | [https://explosion.ai/demos/displacy-ent](https://explosion.ai/demos/displacy-ent) | Visualizer for spaCy's named entity recognition model. |
-| ParallelDots       | [https://www.paralleldots.com/named-entityrecognition](https://www.paralleldots.com/named-entityrecognition) | AI-powered text analysis API with NER functionality. |
-| TextRazor          | [https://www.textrazor.com/named_entity_recognition](https://www.textrazor.com/named_entity_recognition)  | Text analysis API with powerful NER capabilities.|
+| Approaches                                          | Result       | Comment                      |
+|-----------------------------------------------------|--------------|------------------------------|
+| 1. Raw german SpaCy using `de_core_news_lg`         | did not help |                              |
+| 2. Translate names to english + `en_core_news_lg`   | TBD          | not sure if this makes sense |
+| 3. `elenanereiss/bert-german-ler`                   | 111          | 0.21                         |
+| 4. `google-bert/bert-base-german-cased`             |              |                              |
 
 
 
-- The paper [A Dataset for German Legal Documents for NER](https://arxiv.org/pdf/2003.13016) might also be helpful: 
-- 
-
-### (N)ER using default spaCy models:
+## 1. (N)ER using default spaCy models:
 Above all, a save fallback solution seems to be [spaCy](https://spacy.io/) and it's available NER of the following entity types.
 For example the following entities are avaiable in the general english sca vocabulary: 
 ```
@@ -254,7 +229,7 @@ In order to handle foreign (non-german/english) company names, the [langdetect](
 For translations to german/english, the [Googletrans](https://pypi.org/project/googletrans/) package has shown strong performance.
 
 
-#### German
+### German
 For the german language, the following models offer NER recoginition: 
 - de_core_news_sm
 - de_core_news_md
@@ -310,7 +285,11 @@ Unfortunately, this approach did not work so well with the given german company 
 | AWS Personalmarketing GmbH                                  | Personalmarketing        | ORG        |
 | AWS Personalmarketing GmbH                                  | GmbH                     | ORG        |
 
-### NER using bert-german-ler
+
+
+
+
+## 3. NER using bert-german-ler
 Fine-tuned BERT utilizing a german dataset with the following annotated tokens: 
 
 | Fine-grained classes        | #    | %     |
@@ -335,8 +314,6 @@ Fine-tuned BERT utilizing a german dataset with the following annotated tokens:
 |18. RS Court decision        |12,58 |23.46  |
 |19. LIT Legal literature     |3,006 |5.60   |
 | **Total**                   |53,632|100    |
-#
-
 
 #### Benchmark Test with 100k Company Names: 
 
@@ -369,4 +346,43 @@ To me, the effectiveness of this model seems limited ...
 
 
 
+## 4.
 
+
+
+
+
+
+
+
+# Resources: 
+- [Survey on DL for NER (2019)](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9039685)
+  Yielding a list of modern NER Tools:
+
+| **NER System**     | **URL**                                                           | **Description**                       |
+|--------------------|-------------------------------------------------------------------|----------------------------------- |
+| StanfordCoreNLP    | [https://stanfordnlp.github.io/CoreNLP/](https://stanfordnlp.github.io/CoreNLP/) | A comprehensive NLP toolkit in Java. |
+| OSU Twitter NLP    | [https://github.com/aritter/twitter_nlp](https://github.com/aritter/twitter_nlp) | Tools for NLP on Twitter data.    |
+| Illinois NLP       | [http://cogcomp.org/page/software/](http://cogcomp.org/page/software/) | NLP tools from the University of Illinois. |
+| NeuroNER           | [http://neuroner.com/](http://neuroner.com/)                      | Neural network-based NER system.         |
+| NERsuite           | [http://nersuite.nlplab.org/](http://nersuite.nlplab.org/)        | A suite for named entity recognition. |
+| Polyglot           | [https://polyglot.readthedocs.io](https://polyglot.readthedocs.io) | Multilingual NLP library.         |
+| Gimli              | [http://bioinformatics.ua.pt/gimli](http://bioinformatics.ua.pt/gimli) | Biomedical NER tool.              |
+| spaCy              | [https://spacy.io/api/entityrecognizer](https://spacy.io/api/entityrecognizer) | Industrial-strength NLP library.  |
+| NLTK               | [https://www.nltk.org](https://www.nltk.org)                      | A leading platform for building Python programs to work with human language data. |
+| OpenNLP            | [https://opennlp.apache.org/](https://opennlp.apache.org/)        | Machine learning based toolkit for processing natural language text. |
+| LingPipe           | [http://alias-i.com/lingpipe-3.9.3/](http://alias-i.com/lingpipe-3.9.3/) | Toolkit for text analytics and linguistic processing. |
+| AllenNLP           | [https://demo.allennlp.org/](https://demo.allennlp.org/)          | An open-source NLP research library built on PyTorch. |
+| IBM Watson         | [https://natural-language-understanding-demo.ng.bluemix.net/](https://natural-language-understanding-demo.ng.bluemix.net/) | AI-powered natural language understanding service by IBM. |
+| FG-NER             | [https://fgner.alt.ai/extractor/](https://fgner.alt.ai/extractor/) | Fine-grained named entity recognition tool. |
+| Intellexer         | [http://demo.intellexer.com/](http://demo.intellexer.com/)        | Semantic analysis and natural language processing tool. |
+| Repustate          | [https://repustate.com/named-entity-recognitionapi-demo/](https://repustate.com/named-entity-recognitionapi-demo/) | Sentiment analysis and text analytics API with NER capabilities. |
+| AYLIEN             | [https://developer.aylien.com/text-api-demo](https://developer.aylien.com/text-api-demo) | Text analysis API with NER features. |
+| Dandelion API      | [https://dandelion.eu/semantic-text/entityextraction-demo/](https://dandelion.eu/semantic-text/entityextraction-demo/) | Semantic text analysis API with entity extraction features. |
+| displaCy           | [https://explosion.ai/demos/displacy-ent](https://explosion.ai/demos/displacy-ent) | Visualizer for spaCy's named entity recognition model. |
+| ParallelDots       | [https://www.paralleldots.com/named-entityrecognition](https://www.paralleldots.com/named-entityrecognition) | AI-powered text analysis API with NER functionality. |
+| TextRazor          | [https://www.textrazor.com/named_entity_recognition](https://www.textrazor.com/named_entity_recognition)  | Text analysis API with powerful NER capabilities.|
+
+
+
+- The paper [A Dataset for German Legal Documents for NER](https://arxiv.org/pdf/2003.13016) might also be helpful: 

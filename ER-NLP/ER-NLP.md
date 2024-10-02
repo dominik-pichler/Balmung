@@ -1,5 +1,7 @@
 ### Dataset: 
 https://offeneregister.de/
+<div style="page-break-after: always;"></div>
+\newpage
 
 
 ### Data- Tables: 
@@ -135,22 +137,21 @@ This leads two potentially interesting columns:
 ## Company.name
 After consideration, following information might be relevant to extract: 
 
-###### Company Type and Status
+### Company Type and Status
 Identify the type of company based on suffixes like "GmbH," "e.K.," or "Union," which indicate the legal structure (e.g., GmbH for a limited liability company in Germany)
 In my estimation, this can extracted by an rule-based approach. A corresponding investigation can be found in the  `playground_ER-NLP.ipynb` notebook.
 
-###### Geographical Information
+### Geographical Information
 Extract potential geographical indicators from the company name, such as "Algeria" in "Shell Algeria Zerafa GmbH," which might suggest a regional focus or origin.
 
-###### Industry or Sector
+### Industry or Sector
 Analyze keywords within the names that might indicate the industry, such as "Reederei" (shipping) or "Entertainment."
 
-###### Branding or Product Focus
+### Branding or Product Focus
 Identify specific branding elements or product focus from names like "Lime Juice Entertainment," which could hint at the company's market segment.
 
-###### Owner or Founder Names
+### Owner or Founder Names
 Extract personal names if present, such as "Markus Blum" in "Markus Blum Montagearbeiten e.K.," which might indicate the founder or owner.
-
 
 # General Entity Recognition: 
 ER has been tested/performed on the two columns mentioned above. 

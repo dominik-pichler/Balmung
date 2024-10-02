@@ -1,7 +1,31 @@
-### Dataset: 
-https://offeneregister.de/
-<div style="page-break-after: always;"></div>
+\vspace*{\fill}
+\begin{center}
+    % Title
+    {\Huge \textbf{{NLP + Offeneregister.de}} \par}
+    \vspace{1.5cm} % Increased space for better separation
+    
+    % Subtitle or additional information
+    {\Large \textit{From: Dominik Pichler} \par} % Italicized for style
+    \vspace{2cm}
+
+    % Additional content or a tagline
+    {\large 
+    Exploring and assessing different approaches for NLP-based NER extraction \\ 
+    in the official german Company register extract from Offeneregister.de \par}
+    \vspace{2cm} % Consistent spacing
+
+    % Date
+    {\large Date: \today \par} % Automatically inserts the current date
+\end{center}
+\vspace*{\fill}
+
 \newpage
+
+
+
+# Dataset: 
+The following dataset is publicly available and has been used as the foundation of this project:
+https://offeneregister.de/
 
 
 ### Data- Tables: 

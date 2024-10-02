@@ -288,7 +288,6 @@ Unfortunately, this approach did not work so well with the given german company 
 
 
 
-
 ## 3. NER using bert-german-ler
 Fine-tuned BERT utilizing a german dataset with the following annotated tokens: 
 
@@ -347,6 +346,53 @@ To me, the effectiveness of this model seems limited ...
 
 
 ## 4.
+
+
+# Specific ER
+## Company Type and Status
+
+## Geographical Information
+### Raw spaCy - 
+Does not work that well (in 100 Test cases it didnt catch one location (eventhough Bundesländer were present)) on all of the following models: 
+- `de_core_news_sm`
+- `de_core_news_md`
+- `de_core_news_lg`
+- `de_dep_news_trf`
+
+
+
+### GeoSpaCy
+[Paper](https://www.researchgate.net/publication/379221267_GeospaCy_A_tool_for_extraction_and_geographical_referencing_of_spatial_expressions_in_textual_data)
+Githup Repo outdated - Core Streamlit application does not work anymore
+Centrally it looks to me like the also only use standard spaCy models with small regex extensions that dont help much
+So this approach is also not very helpful
+### Geoparsing
+### Gazetters
+
+
+# Vocabulary based Entity Recognition ?
+
+## For Company Type 
+Identify the type of company based on suffixes like "GmbH," "e.K.," or "Union," which indicate the legal structure (e.g., GmbH for a limited liability company in Germany)
+Rule-based approach / Fixed Vocab should do the trick here.
+
+###### For Geographical Information
+Same here, I think, if at all, a Rule-based / Fixed Vocab approach, utilizing the data from [Deutschlandatlas](https://www.deutschlandatlas.bund.de/DE/Service/Downloads/downloads_node.html) will probably do the trick.
+
+###### Industry or Sector
+Same here, RB & fV utilizing lists of industries/sectors from: 
+- [Statista](https://de.statista.com/statistik/kategorien/)
+- [Gewerbelisten](https://www-genesis.destatis.de/genesis/online?sequenz=statistikTabellen&selectionname=52311#abreadcrumb) -> could be utilized to get a comprehensive list of available *Gewerbearten*
+
+
+###### Branding or Product Focus
+Same here, RB & fV utilizing lists of registered trade marks(?) like: 
+- DPMAregister (Limited to Germany)
+- EUIPO Database (EU wide)
+- 
+###### Owner or Founder Names
+Extract personal names if present, such as "Markus Blum" in "Markus Blum Montagearbeiten e.K.," which might indicate the founder or owner.
+
 
 
 

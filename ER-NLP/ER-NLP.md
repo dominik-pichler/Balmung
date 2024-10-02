@@ -28,14 +28,15 @@ The following dataset is publicly available and has been used as the foundation 
 https://offeneregister.de/
 
 
-### Data- Tables: 
+## Data- Tables: 
 Available tables: 
 - company
 - name
 - officer
 - registrations
 
-I retrieved the included tables and columns via: 
+I retrieved the included tables and columns via:
+\vspace{1cm}
 ```sql
 SELECT m.name as tableName, 
        p.name as columnName, 
@@ -47,10 +48,11 @@ LEFT OUTER JOIN
        AND m.name NOT LIKE 'sqlite_%' 
        ORDER BY tableName, columnName;
 ```
+\vspace{1cm}
 
+As we are interested in NER/NLP I filtered this list for non-structural, TEXT/CLOB columns only via:
 
-As we are interested in ER/NLP I filtered this list for non-structural, TEXT/CLOB columns only via:
-
+\vspace{1cm}
 ```sql
 SELECT * FROM (SELECT  
     m.name as tableName,  
@@ -70,11 +72,12 @@ ORDER BY
     tableName,  
     columnName) WHERE columnType IN ('TEXT','CLOB');
 ```
+\vspace{1cm}
+leading to **53** potentially interesting and relevant columns. After manually inspecting those columns, the following few seemed relevant for NLP/ER Tasks for me
 
-leading to 53 potentially interesting and relevant columns. After manually inspecting those columns, the following few seemed relevant for NLP/ER Tasks for me
 
-
-**Company Table**:
+### Company Table:
+\vspace{1cm}
 ```sql
 SELECT _registerNummerSuffix
 	    ,company_number
@@ -95,11 +98,13 @@ SELECT _registerNummerSuffix
 		retrieved_at
 FROM company;
 ```
+\vspace{1cm}
 
 Out of which the following are relevant for NLP/ER Tasks: 
-- Name
+- **Name**
 
-**Officer Table**
+### Officer Table
+\vspace{1cm}
 ```sql
 SELECT city
 		,company_id
@@ -115,14 +120,16 @@ SELECT city
 		,start_date
 		,title
 		type
-FROM officer; 
+FROM officer;
 ```
+\vspace{1cm}
 
 Out of which the following are relevant for NLP/ER Tasks: 
-- flag
+- **flag**
 
 
-**Registrations Table**
+### Registrations Table
+\vspace{1cm}
 ```sql
 SELECT  alternate_company_number
 		,alternate_entity_type
@@ -145,18 +152,21 @@ SELECT  alternate_company_number
 		,subsequent_jurisdiction_code
 		,subsequent_registration_start_date
 FROM registrations;
-
 ```
-
-Out of which the non seem relevant for NLP/ER Tasks.
-
+\vspace{1cm}
 
 
-#### Summary: 
+Out of which the **non** seem relevant for NLP/ER Tasks.
+
+
+
+## Summary: 
 This leads two potentially interesting columns: 
 - `company.name` that contains the full company name
 - `officer.flag` that contains controlling rules of individuals.
 
+
+# NER Investigations:
 
 ## Company.name
 After consideration, following information might be relevant to extract: 
@@ -198,7 +208,7 @@ I have investigated the following approaches:
 
 ## 1. (N)ER using default spaCy models:
 Above all, a save fallback solution seems to be [spaCy](https://spacy.io/) and it's available NER of the following entity types.
-For example the following entities are avaiable in the general english sca vocabulary: 
+For example the following entities are available in the general english sca vocabulary: 
 ```
 "CARDINAL", 
         "DATE", 

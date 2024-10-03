@@ -25,6 +25,7 @@
 Thoughts and code about Information, Chaos and everything in between.
 
 
+
 # Thoughts
 ## Information 
 - [What is it ?](notes/what_is_information.md) 

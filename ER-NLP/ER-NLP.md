@@ -30,6 +30,7 @@ https://offeneregister.de/
 
 ## Data-Tables: 
 Available tables: 
+
 - company
 - name
 - officer
@@ -124,7 +125,8 @@ FROM officer;
 ```
 \vspace{1cm}
 
-Out of which the following are relevant for NLP/ER Tasks: 
+Out of which the following are relevant for NLP/ER Tasks:
+
 - **flag**
 
 
@@ -162,6 +164,7 @@ Out of which the **non** seem relevant for NLP/ER Tasks.
 
 ## Summary: 
 This leads two potentially interesting columns: 
+
 - `company.name` that contains the full company name
 - `officer.flag` that contains controlling rules of individuals.
 
@@ -192,14 +195,14 @@ ER has been tested/performed on the two columns mentioned above.
 More can be found in the `playground_ER-NLP.ipynb`,`company_name_spaCy_ER_NLP.ipynb` and `company_name_HuggingFace.ipynb` notebook.
 
 
-| Approaches                                          | Result             | Comment                                              |
-|-----------------------------------------------------|--------------------|------------------------------------------------------|
-| 1. Raw german SpaCy using `de_core_news_lg`         | good first results | Should be tested on larger scales                    |
-| 2. Translate names to english + `en_core_news_lg`   | TBD                | Left out for now due to the good first results of 1. |
-| 3. `elenanereiss/bert-german-ler`                   | did not help much  |                                                      |
-| 4. `google-bert/bert-base-german-cased`             | did not help much  |                                                      |
-
-
+| Approaches                                         | Result             | Comment                           |
+|----------------------------------------------------|--------------------|-----------------------------------|
+| 1. Raw german SpaCy using `de_core_news_lg`        | good first results | Should be tested on larger scales |
+| 2. Translate names to english + `en_core_news_lg`  | TBD                | Left out for now                  |
+| 3. `elenanereiss/bert-german-ler`                  | did not help much  |                                   |
+| 4. `google-bert/bert-base-german-cased`            | did not help much  |                                   |
+| 5. `dslim/bert-base-NER`                           | problematic        | Probably needs translation first  |
+| 5. `spaCy-llm`                                     | TBD                |                                   |
 
 ## 1. (N)ER using default spaCy models:
 Above all, a save fallback solution seems to be [spaCy](https://spacy.io/) and it's available NER of the following entity types.
@@ -316,7 +319,8 @@ This approach has then been tested with the `de_core_news_lg` model on a small s
 | AWS Personalmarketing GmbH                                  | GmbH                     | ORG        |
 
 
-
+## 2. Translate names to english + `en_core_news_lg`
+TBD
 
 ## 3. NER using bert-german-ler
 Fine-tuned BERT utilizing a german dataset with the following annotated tokens: 
@@ -371,13 +375,18 @@ The model detected 880 Tokens as "Person". Examples look like:
 To me, the effectiveness of this model seems limited ... 
 
 
+## 5. `bert-base-NER`
+
+
+## 6. `spaCy-llm`
 
 
 # Specific ER
 ## Company Type and Status
+Due to the limited number of different available company types, a manually curated dict will probably be best.
 
 ## Geographical Information
-### Raw spaCy - 
+### Raw spaCy (German)
 Did work at least ok on all of the following models: 
 - `de_core_news_sm`
 - `de_core_news_md`
@@ -385,23 +394,24 @@ Did work at least ok on all of the following models:
 - `de_dep_news_trf`
 
 Snipped from the best results:
-| ID  | Company Name                                                      | Category             | Type |
-|-----|-------------------------------------------------------------------|----------------------|------|
-| 471 | CAMTEC24 - Sicherheitstechnik e. K.                               | Sicherheitstechnik   | LOC  |
-| 546 | Gebäude Technologie Center GmbH                                   | Technologie          | LOC  |
-| 547 | Gebäude Technologie Center GmbH                                  | Center                | LOC  |
-| 25  | Verwaltung IFÖ Zweite Immobilienfonds für Österreich GmbH        | Österreich            | LOC  |
-| 472 | CAMTEC24 - Sicherheitstechnik e. K.                              | e.                    | LOC  |
-| 473 | CAMTEC24 - Sicherheitstechnik e. K.                              | K.                    | LOC   |
-| 316 | "Verwaltungsgesellschaft MS ""Barmbek"" mbH"                          | Barmbek          | LOC  |
-| 753 | Abel & Dr. Schuhmann Rechtsanwaltsgesellschaft mbH Zweigniederlassung Hamburg | Hamburg  | LOC  |
-| 1055| Geis SDV GmbH Zweigniederlassung Hamburg                         | Hamburg               | LOC  |
-| 10  | Mittelständische Beteiligungsgesellschaft Bremen mbH             | Bremen                | LOC  |
-| 545 | Gebäude Technologie Center GmbH                                  | Gebäude               | LOC  |
-| 984 | SPC Ardmona (Germany) GmbH                                       | Germany               | LOC  |
-| 641 | HCI Treuhand Holland XXII UG (haftungsbeschränkt)                | Holland               | LOC  |
-| 469 | CAMTEC24 - Sicherheitstechnik e. K.                              | CAMTEC24              | LOC  |
-| 432 | Hartungstraße 12 Verwaltungsgesellschaft mbH                     | Hartungstraße         | LOC  |
+
+| ID  | Company Name                                                                  | Category              | Type |
+|-----|-------------------------------------------------------------------------------|-----------------------|------|
+| 471 | CAMTEC24 - Sicherheitstechnik e. K.                                           | Sicherheitstechnik    | LOC  |
+| 546 | Gebäude Technologie Center GmbH                                               | Technologie           | LOC  |
+| 547 | Gebäude Technologie Center GmbH                                               | Center                | LOC  |
+| 25  | Verwaltung IFÖ Zweite Immobilienfonds für Österreich GmbH                     | Österreich            | LOC  |
+| 472 | CAMTEC24 - Sicherheitstechnik e. K.                                           | e.                    | LOC  |
+| 473 | CAMTEC24 - Sicherheitstechnik e. K.                                           | K.                    | LOC  |
+| 316 | "Verwaltungsgesellschaft MS ""Barmbek"" mbH"                                  | Barmbek               | LOC  |
+| 753 | Abel & Dr. Schuhmann Rechtsanwaltsgesellschaft mbH Zweigniederlassung Hamburg | Hamburg               | LOC  |
+| 1055| Geis SDV GmbH Zweigniederlassung Hamburg                                      | Hamburg               | LOC  |
+| 10  | Mittelständische Beteiligungsgesellschaft Bremen mbH                          | Bremen                | LOC  |
+| 545 | Gebäude Technologie Center GmbH                                               | Gebäude               | LOC  |
+| 984 | SPC Ardmona (Germany) GmbH                                                    | Germany               | LOC  |
+| 641 | HCI Treuhand Holland XXII UG (haftungsbeschränkt)                             | Holland               | LOC  |
+| 469 | CAMTEC24 - Sicherheitstechnik e. K.                                           | CAMTEC24              | LOC  |
+| 432 | Hartungstraße 12 Verwaltungsgesellschaft mbH                                  | Hartungstraße         | LOC  |
 
 
 
@@ -411,8 +421,9 @@ Githup Repo outdated - Core Streamlit application does not work anymore
 Centrally it looks to me like the also only use standard spaCy models with small regex extensions that dont help much
 So this approach is also not very helpful
 ### Geoparsing
+TBD
 ### Gazetters
-
+TBD
 
 # Vocabulary based Entity Recognition ?
 
@@ -445,7 +456,7 @@ Extract personal names if present, such as "Markus Blum" in "Markus Blum Montage
 
 
 
-# Resources: 
+# Other Resources: 
 - [Survey on DL for NER (2019)](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9039685)
   Yielding a list of modern NER Tools:
 
@@ -475,4 +486,8 @@ Extract personal names if present, such as "Markus Blum" in "Markus Blum Montage
 
 
 
-- The paper [A Dataset for German Legal Documents for NER](https://arxiv.org/pdf/2003.13016) might also be helpful: 
+- The paper [A Dataset for German Legal Documents for NER](https://arxiv.org/pdf/2003.13016) might also be helpful
+- [Distilling Large Language Models into Tiny Models for NER](https://arxiv.org/html/2402.09282v3)
+- [GPT-NER: Named Entity Recognition via LLMs](https://arxiv.org/abs/2304.10428)
+- https://github.com/explosion/spacy-llm
+- https://medium.com/@lokaregns/named-entity-recognition-with-hugging-face-transformers-a-beginners-guide-e1ac6085fb3c

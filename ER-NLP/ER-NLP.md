@@ -28,7 +28,7 @@ The following dataset is publicly available and has been used as the foundation 
 https://offeneregister.de/
 
 
-## Data- Tables: 
+## Data-Tables: 
 Available tables: 
 - company
 - name
@@ -168,12 +168,12 @@ This leads two potentially interesting columns:
 
 # NER Investigations:
 
-## Company.name
+## Company.name Column:
 After consideration, following information might be relevant to extract: 
 
 ### Company Type and Status
 Identify the type of company based on suffixes like "GmbH," "e.K.," or "Union," which indicate the legal structure (e.g., GmbH for a limited liability company in Germany)
-In my estimation, this can extracted by an rule-based approach. A corresponding investigation can be found in the  `playground_ER-NLP.ipynb` notebook.
+In my estimation, this can extracted by an rule-based approach. 
 
 ### Geographical Information
 Extract potential geographical indicators from the company name, such as "Algeria" in "Shell Algeria Zerafa GmbH," which might suggest a regional focus or origin.
@@ -191,18 +191,13 @@ Extract personal names if present, such as "Markus Blum" in "Markus Blum Montage
 ER has been tested/performed on the two columns mentioned above. 
 More can be found in the `playground_ER-NLP.ipynb`,`company_name_spaCy_ER_NLP.ipynb` and `company_name_HuggingFace.ipynb` notebook.
 
-I have investigated the following approaches: 
-- Raw german SpaCy using `de_core_news_lg`
-- Translate names to english + `en_core_news_lg`
-- 
 
-
-| Approaches                                          | Result            | Comment |
-|-----------------------------------------------------|-------------------|---------|
-| 1. Raw german SpaCy using `de_core_news_lg`         | did not help much |         |
-| 2. Translate names to english + `en_core_news_lg`   | TBD               |         |
-| 3. `elenanereiss/bert-german-ler`                   | did not help much |     |
-| 4. `google-bert/bert-base-german-cased`             | did not help much |         |
+| Approaches                                          | Result             | Comment                                              |
+|-----------------------------------------------------|--------------------|------------------------------------------------------|
+| 1. Raw german SpaCy using `de_core_news_lg`         | good first results | Should be tested on larger scales                    |
+| 2. Translate names to english + `en_core_news_lg`   | TBD                | Left out for now due to the good first results of 1. |
+| 3. `elenanereiss/bert-german-ler`                   | did not help much  |                                                      |
+| 4. `google-bert/bert-base-german-cased`             | did not help much  |                                                      |
 
 
 
@@ -270,7 +265,7 @@ For the german language, the following models offer NER recoginition:
 - de_core_news_md
 - de_core_news_lg
 
-For German models like de_core_news_sm, common entity labels include:
+For those models include the following common entity labels:
 ```
 PERSON (PER): People, including fictional characters.
 NORP: Nationalities or religious or political groups.
@@ -285,7 +280,7 @@ LAW: Named documents made into laws.
 LANGUAGE: Any named language.
 ```
 
-Unfortunately, this approach did not work so well with the given german company names as the model was only able to detect other Entits then "ORG"...
+This approach has then been tested with the `de_core_news_lg` model on a small scale and seemed to work well. 
 
 | Company Name                                                | Token                    | Entity     |
 |-------------------------------------------------------------|--------------------------|------------|
@@ -378,21 +373,35 @@ To me, the effectiveness of this model seems limited ...
 
 
 
-
-
-## 4.
-
-
 # Specific ER
 ## Company Type and Status
 
 ## Geographical Information
 ### Raw spaCy - 
-Does not work that well (in 100 Test cases it didnt catch one location (eventhough Bundesländer were present)) on all of the following models: 
+Did work at least ok on all of the following models: 
 - `de_core_news_sm`
 - `de_core_news_md`
 - `de_core_news_lg`
 - `de_dep_news_trf`
+
+Snipped from the best results:
+| ID  | Company Name                                                      | Category             | Type |
+|-----|-------------------------------------------------------------------|----------------------|------|
+| 471 | CAMTEC24 - Sicherheitstechnik e. K.                               | Sicherheitstechnik   | LOC  |
+| 546 | Gebäude Technologie Center GmbH                                   | Technologie          | LOC  |
+| 547 | Gebäude Technologie Center GmbH                                  | Center                | LOC  |
+| 25  | Verwaltung IFÖ Zweite Immobilienfonds für Österreich GmbH        | Österreich            | LOC  |
+| 472 | CAMTEC24 - Sicherheitstechnik e. K.                              | e.                    | LOC  |
+| 473 | CAMTEC24 - Sicherheitstechnik e. K.                              | K.                    | LOC   |
+| 316 | "Verwaltungsgesellschaft MS ""Barmbek"" mbH"                          | Barmbek          | LOC  |
+| 753 | Abel & Dr. Schuhmann Rechtsanwaltsgesellschaft mbH Zweigniederlassung Hamburg | Hamburg  | LOC  |
+| 1055| Geis SDV GmbH Zweigniederlassung Hamburg                         | Hamburg               | LOC  |
+| 10  | Mittelständische Beteiligungsgesellschaft Bremen mbH             | Bremen                | LOC  |
+| 545 | Gebäude Technologie Center GmbH                                  | Gebäude               | LOC  |
+| 984 | SPC Ardmona (Germany) GmbH                                       | Germany               | LOC  |
+| 641 | HCI Treuhand Holland XXII UG (haftungsbeschränkt)                | Holland               | LOC  |
+| 469 | CAMTEC24 - Sicherheitstechnik e. K.                              | CAMTEC24              | LOC  |
+| 432 | Hartungstraße 12 Verwaltungsgesellschaft mbH                     | Hartungstraße         | LOC  |
 
 
 

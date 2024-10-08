@@ -376,9 +376,11 @@ To me, the effectiveness of this model seems limited ...
 
 
 ## 5. `bert-base-NER`
-
+...
 
 ## 6. `spaCy-llm`
+....
+
 
 
 # Specific ER
@@ -420,8 +422,10 @@ Snipped from the best results:
 Githup Repo outdated - Core Streamlit application does not work anymore
 Centrally it looks to me like the also only use standard spaCy models with small regex extensions that dont help much
 So this approach is also not very helpful
+
 ### Geoparsing
 TBD
+
 ### Gazetters
 TBD
 

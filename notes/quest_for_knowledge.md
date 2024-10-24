@@ -95,6 +95,10 @@ After the influential works of Thomas Kuhn and Paul Feyerabend, the philosophy o
 - The contemporary philosophy of science faces the challenge of avoiding naive abstraction while achieving a level of generality that transcends specific sciences. This involves balancing methodological rigor with the recognition of the diverse and context-dependent nature of scientific inquiry. Overall, the post-Kuhn and post-Feyerabend era in the philosophy of science has seen a shift towards integrating insights from cognitive science, embracing scientific realism, and exploring new theoretical frameworks like systematicity theory to account for the complexity and diversity of scientific practices.
 
 
+## Modelling
+What are models and what happens when we try to build them? 
+I tried to answer this question in [this page](models_and_other_mysteries.md)
+
 
 ## Information turning into Ideas
 ### Dawkins Memes:

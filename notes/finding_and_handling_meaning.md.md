@@ -27,7 +27,7 @@ What can we do with ontologies?
 ### How to create ontologies: 
 According to Noy & McGuiness: 
 
-![[Pasted image 20241025131134.png]]
+![[def_1.png]]
 
 
 
@@ -52,7 +52,7 @@ A single RDF Building block consists of
 - **Predicate**: a URI-identified specification of the relationship between subject and object
 - **Object**: a resource or literal to which the subject is related. 
 
-![[Pasted image 20241025134751.png]]
+![[images/def_2.png]]
 
 **Structure**
 - <subject> <predicate> <object>
@@ -61,12 +61,11 @@ A single RDF Building block consists of
 - “;” introduce another predicate of the same subject
 -  “,” introduce another object with the same predicate and subject
 
-![](images/def_3.png)
+![Test](images/def_3.png)
 
 - Prefixes for namespaces can be set with an '@'
 
-![Test](Pasted image 20241025140948.png)
-- 
+![Test](images/def_4.png)
 
 
 

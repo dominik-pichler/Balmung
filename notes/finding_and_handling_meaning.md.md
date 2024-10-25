@@ -61,12 +61,11 @@ A single RDF Building block consists of
 - “;” introduce another predicate of the same subject
 -  “,” introduce another object with the same predicate and subject
 
-![[Pasted image 20241025140507.png]]
+![](images/def_3.png)
 
 - Prefixes for namespaces can be set with an '@'
 
-![[Pasted image 20241025140948.png]]
-
+![Test](Pasted image 20241025140948.png)
 - 
 
 

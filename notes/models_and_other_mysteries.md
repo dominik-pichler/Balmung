@@ -94,5 +94,12 @@ Concepts can be related to each other. Typical concept relationships are the “
 Generalization, and Intension, each of them having an inverse: Dis-assembly (into components), Specialization (by additional concept attributes), Extension (denominating the elements characterized by their intension concept).
 Other concept relationships are, e.g., synonymy, homonymy, troponymy, hyponymy; however, these only concern the level of assigning linguistic denoters to concepts. 
 
+## Summary
+### Different approaches:
+#### Constructivism
+
 
 ---
+
+
+

@@ -80,7 +80,7 @@ For this quest, I have manually implemented, trained and evaluated the performan
 Code and results can be found here: 
 [Re-Rankers](reranking)
 
-## 4. Ask me anything - QA System
+## 4. Ask me anything - RAG-based QA System
 **Question**: <br> How can I extend 3. with arbitrary (OOV) queries? 
 <br>
 Code and results can be found here: 

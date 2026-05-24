@@ -22,6 +22,9 @@ So in my perception, tameing information comes down to:
 
 - Perceptive Issues to attach to (meaing concious questions arising during the play)
 
+
+![alt text](imgs/pipeline.png)
+
 **Knowledge Extraction**
 - A dervivative procedure to derive knowledge from destilled information
     - Methodologically grounded

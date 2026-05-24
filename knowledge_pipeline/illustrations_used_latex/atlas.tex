@@ -1,0 +1,171 @@
+% The Knowledge Pipeline — Atlas
+% Five-stage tour, top-down (high-level first).
+% Compile with: pdflatex atlas.tex
+\documentclass[11pt]{article}
+
+\usepackage[a4paper, margin=1.6cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+
+\definecolor{ink}   {HTML}{1F2433}
+\definecolor{accent}{HTML}{3A6E5B}
+\definecolor{soft}  {HTML}{6B7280}
+\definecolor{soft2} {HTML}{B0B6BF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.3}
+
+\newcommand{\stage}[3]{%
+    {\Large\color{accent}\textbf{Stage #1\,/\,#2}}\\[2pt]
+    {\color{soft}\itshape #3}\par\vspace{8pt}%
+}
+
+\begin{document}
+
+%% ============================================================
+%% Title page
+%% ============================================================
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{center}
+{\Huge\bfseries\color{ink} The Knowledge Pipeline}\\[14pt]
+{\Large\itshape\color{soft} An atlas — from raw sources to acted-upon knowledge}
+\end{center}
+
+\vspace{1.5cm}
+\begin{center}{\color{soft2}\rule{0.7\textwidth}{0.4pt}}\end{center}
+\vspace{1.5cm}
+
+\begin{center}
+\begin{tabular}{r@{\quad}l}
+\textcolor{accent}{\large\textbf{1.}} & \textbf{Aggregation} \emph{— the big picture}\\[-2pt]
+& {\small\color{soft}\itshape distillates flow upward through an hourglass: \emph{aggregation $\to$ thinking $\to$ action}}\\[10pt]
+
+\textcolor{accent}{\large\textbf{2.}} & \textbf{Distillation} \emph{— zoom into one source}\\[-2pt]
+& {\small\color{soft}\itshape one source $\to$ structured distillate $\to$ knowledge graph}\\[10pt]
+
+\textcolor{accent}{\large\textbf{3.}} & \textbf{Knowledge Graph — Source schema}\\[-2pt]
+& {\small\color{soft}\itshape per-source ontology: entities + relationships}\\[10pt]
+
+\textcolor{accent}{\large\textbf{4.}} & \textbf{Knowledge Graph — Complete ontology}\\[-2pt]
+& {\small\color{soft}\itshape three tiers, end-to-end}\\[10pt]
+
+\textcolor{accent}{\large\textbf{5.}} & \textbf{Execution Framework}\\[-2pt]
+& {\small\color{soft}\itshape not a plan — a framework that distillates attach to}\\
+\end{tabular}
+\end{center}
+
+\vfill
+\begin{center}
+{\footnotesize\color{soft}\itshape Sources $\longrightarrow$ Distillates $\longrightarrow$ Graph $\longrightarrow$ Concentrate $\longrightarrow$ Strategy $\longrightarrow$ Action}
+\end{center}
+\vspace{2cm}
+\newpage
+
+%% ============================================================
+%% Stage 1 — Aggregation (HIGH-LEVEL OVERVIEW, first)
+%% ============================================================
+\stage{1}{Aggregation}{the big-picture hourglass — bottom-up: aggregation $\longrightarrow$ thinking $\longrightarrow$ action}
+
+The pipeline as a whole is an hourglass, with data flowing \emph{upward}. At
+the bottom, a fan of agents \textbf{aggregates} distillates from the
+knowledge tree (\,$D_{12}, D_{23}, \ldots \to D_{1\ldots n}$\,) — many sources
+are pulled together by topic. The narrow waist is where \textbf{thinking}
+happens: the aggregated input is compressed and synthesised. The top funnel
+is \textbf{action}: the synthesised thinking emerges and is applied to the
+world.
+
+\vspace{10pt}
+\begin{center}
+\includegraphics[width=\textwidth, height=22cm, keepaspectratio]%
+    {knowledge-pipeline.pdf}
+\end{center}
+
+\newpage
+
+%% ============================================================
+%% Stage 2 — Distillation (zoom into one source)
+%% ============================================================
+\stage{2}{Distillation}{one source $\longrightarrow$ structured distillate $\longrightarrow$ knowledge graph}
+
+Zooming into a single source. Each item is processed through six parallel
+\emph{distillation lenses} — Topic, Author, Implicit Assumptions, Theories,
+Conclusions, and Methodology. The lens outputs are synthesised into a
+multi-dimensional distillate $D_i$, which is then \textbf{pushed into the
+knowledge graph} for downstream use.
+
+\vspace{10pt}
+\begin{center}
+\includegraphics[width=\textwidth, height=22cm, keepaspectratio]%
+    {distillation-pipeline.pdf}
+\end{center}
+
+\newpage
+
+%% ============================================================
+%% Stage 3 — Knowledge Graph (Source schema)
+%% ============================================================
+\stage{3}{Knowledge Graph}{per-source schema — where one distillate lands}
+
+Each distillate populates a typed graph with one central
+\texttt{Source/Distillate} node and six entity types: \texttt{Author},
+\texttt{Topic}, \texttt{Theory}, \texttt{Conclusion}, \texttt{Assumption},
+\texttt{Methodology}. Higher-level entities (\texttt{Affiliation},
+\texttt{Theme}) emerge as natural groupings. As distillates accumulate, shared
+entities — e.g.\ the same Author or Topic across many sources — become hubs
+that surface non-trivial cross-source connections.
+
+\vspace{10pt}
+\begin{center}
+\includegraphics[width=\textwidth, height=21cm, keepaspectratio]%
+    {knowledge-graph-ontology.pdf}
+\end{center}
+
+\newpage
+
+%% ============================================================
+%% Stage 4 — Complete ontology (cross-tier)
+%% ============================================================
+\stage{4}{Complete Ontology}{three tiers — Source $\longrightarrow$ Concentrate $\longrightarrow$ Strategy \& Action}
+
+The full system schema spanning all three tiers. \textbf{Tier 1} is the
+per-source extraction (one Source $\to$ one Distillate with six dimensions).
+\textbf{Tier 2} is the cross-source aggregation into a Concentrate
+($D_{1\ldots n}$), grouped by Theme. \textbf{Tier 3} is the Strategy and
+Execution Framework, which the Concentrate informs. The dashed orange arc on
+the right is the key cross-tier link: \emph{every phase in the Execution
+Framework attaches many Distillates back from Tier~1} (many-to-many).
+
+\vspace{10pt}
+\begin{center}
+\includegraphics[width=\textwidth, height=22cm, keepaspectratio]%
+    {complete-ontology.pdf}
+\end{center}
+
+\newpage
+
+%% ============================================================
+%% Stage 5 — Execution Framework
+%% ============================================================
+\stage{5}{Execution Framework}{not a plan — a framework that distillates \textbf{attach} to}
+
+Execution is \emph{not} a linear plan from Strategy through the four phases.
+It is a \textbf{framework}: each phase — \emph{Concept}, \emph{Coaching},
+\emph{Implementation}, \emph{Integration} — is a slot that distilled
+information can attach to. Deriving the Concept, for example, rests on a
+collection of Topics, each containing many Distillates. The internal
+arrows show how phases relate to each other; the deeper relationship —
+that every Distillate relevant to a phase is attached to it — is what
+makes the framework actionable.
+
+\vspace{10pt}
+\begin{center}
+\includegraphics[width=\textwidth, height=22cm, keepaspectratio]%
+    {strategy-pipeline.pdf}
+\end{center}
+
+\end{document}

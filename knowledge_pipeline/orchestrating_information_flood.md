@@ -1,6 +1,6 @@
 In my current limited understanding, living  with information comes down the following simple mode: 
 
-![alt text](knowledge_pipeline/imgs/strategy-pipeline.png)
+![alt text](imgs/strategy-pipeline.png)
 which can be managed with the following process: 
 
 ![alt text](imgs/image.png)

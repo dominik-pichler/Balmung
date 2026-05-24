@@ -44,7 +44,7 @@ This section tries to focus on two fundamental questions:
 - [What happens when we lack information?](notes/Chaos.md)
 - [How should we deal, when faced with chaotic lack of information?](notes/Chaos.md)
 
-## How to sense out all of this - A knowledge Pipeline
+## How to make sense out all of this - A knowledge Pipeline
 - [How can we order and orchestrate the flood of information](knowledge_pipeline/orchestrating_information_flood.md)
 
 

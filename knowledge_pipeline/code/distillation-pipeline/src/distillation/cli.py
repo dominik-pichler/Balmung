@@ -58,6 +58,12 @@ def _build_llm(settings: Settings) -> LLMClient:
         return AnthropicLLMClient(
             api_key=settings.anthropic_api_key, model=settings.llm_model
         )
+    if settings.llm_provider == "ollama":
+        from .adapters.llm.ollama import OllamaLLMClient
+
+        return OllamaLLMClient(
+            model=settings.llm_model, base_url=settings.ollama_base_url
+        )
     return FakeLLMClient()
 
 

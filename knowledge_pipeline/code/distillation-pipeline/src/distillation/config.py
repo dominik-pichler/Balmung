@@ -39,9 +39,12 @@ class Settings(BaseSettings):
     chunk_token_overlap: int = 100
 
     # LLM
-    llm_provider: Literal["fake", "anthropic"] = "fake"
+    llm_provider: Literal["fake", "anthropic", "ollama"] = "fake"
     llm_model: str = "claude-sonnet-4-5"
     llm_max_concurrency: int = 4
+
+    # Ollama
+    ollama_base_url: str = "http://localhost:11434/v1"
 
     # Embeddings
     embedder_provider: Literal["fake", "anthropic"] = "fake"

@@ -39,6 +39,15 @@ class LLMClient(ABC):
         """
         raise NotImplementedError
 
+    @abstractmethod
+    async def chat(self, *, system: str, user: str) -> str:
+        """Issue a free-text completion and return the response as a string.
+
+        Raises:
+            LLMError: when the model call fails after retries.
+        """
+        raise NotImplementedError
+
 
 class LLMError(RuntimeError):
     """Raised when an LLM call cannot be completed within retry budget."""

@@ -53,6 +53,7 @@ class OllamaLLMClient(LLMClient):
             base_url=base_url,
             api_key="ollama",  # Ollama doesn't require a real key
         )
+        self._raw_client = openai_client
         self._client = instructor.from_openai(openai_client)
         self._model = model
         self._max_tokens = max_tokens
@@ -89,3 +90,17 @@ class OllamaLLMClient(LLMClient):
                     raise LLMError(f"Ollama call failed: {exc}") from exc
 
         raise LLMError("Exhausted retries without a valid response")
+
+    async def chat(self, *, system: str, user: str) -> str:
+        try:
+            response = await self._raw_client.chat.completions.create(
+                model=self._model,
+                max_tokens=self._max_tokens,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+            )
+            return response.choices[0].message.content or ""
+        except Exception as exc:
+            raise LLMError(f"Ollama chat call failed: {exc}") from exc

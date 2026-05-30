@@ -93,6 +93,22 @@ class AnthropicLLMClient(LLMClient):
 
         raise LLMError("Exhausted retries without a valid response")
 
+    async def chat(self, *, system: str, user: str) -> str:
+        try:
+            response = await self._client.messages.create(
+                model=self._model,
+                max_tokens=self._max_tokens,
+                system=system,
+                messages=[{"role": "user", "content": user}],
+            )
+            return "".join(
+                block.text
+                for block in response.content
+                if getattr(block, "type", None) == "text"
+            )
+        except Exception as exc:
+            raise LLMError(f"Anthropic chat call failed: {exc}") from exc
+
 
 def _extract_tool_input(response: Any) -> dict[str, Any] | None:
     for block in getattr(response, "content", []) or []:

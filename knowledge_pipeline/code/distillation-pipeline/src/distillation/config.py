@@ -47,7 +47,8 @@ class Settings(BaseSettings):
     ollama_base_url: str = "http://localhost:11434/v1"
 
     # Embeddings
-    embedder_provider: Literal["fake", "anthropic"] = "fake"
+    embedder_provider: Literal["fake", "anthropic", "ollama"] = "fake"
+    embedder_model: str = "nomic-embed-text"
 
     # Graph
     graph_backend: Literal["in_memory", "neo4j"] = "in_memory"

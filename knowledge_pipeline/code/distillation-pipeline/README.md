@@ -51,10 +51,44 @@ DISTILL_LLM_PROVIDER=anthropic
 ANTHROPIC_API_KEY=sk-ant-...
 
 DISTILL_GRAPH_BACKEND=neo4j
-NEO4J_URI=bolt://localhost:7687
-NEO4J_USER=neo4j
-NEO4J_PASSWORD=Dominik1#
+DISTILL_NEO4J_URI=bolt://localhost:7687
+DISTILL_NEO4J_USER=neo4j
+DISTILL_NEO4J_PASSWORD=...
 ```
+
+### Ollama (local, recommended for M5)
+
+Install [Ollama](https://ollama.com) and pull the required models:
+
+```bash
+# LLM — general-purpose Q&A and graph reasoning
+ollama pull qwen2.5:14b
+
+# Embeddings — used for semantic retrieval in `distill chat`
+ollama pull nomic-embed-text
+```
+
+Then set in `.env`:
+
+```ini
+DISTILL_LLM_PROVIDER=ollama
+DISTILL_LLM_MODEL=qwen2.5:14b
+
+DISTILL_EMBEDDER_PROVIDER=ollama
+DISTILL_EMBEDDER_MODEL=nomic-embed-text
+
+DISTILL_OLLAMA_BASE_URL=http://localhost:11434/v1
+```
+
+**Model notes for M5:**
+
+| Model | RAM (4-bit) | Best for |
+|---|---|---|
+| `qwen2.5:14b` | ~8 GB | Graph Q&A, structured-data reasoning — recommended |
+| `llama3.1:8b` | ~5 GB | Faster / lighter alternative |
+| `nomic-embed-text` | ~270 MB | Semantic retrieval (embeddings) |
+
+`qwen3-coder` is optimised for code generation and is not well-suited for knowledge-graph Q&A. `qwen2.5:14b` is the general-purpose variant of the same family and performs significantly better on this task.
 
 ## Run
 
@@ -74,6 +108,34 @@ Multiple files in one invocation work too:
 ```bash
 distill ingest doc1.pdf doc2.md doc3.txt
 ```
+
+## Knowledge graph chat
+
+Query the graph in plain English. The retrieval layer embeds your question, finds the top-k most semantically similar nodes, expands one hop to include their direct neighbours, and sends only that subgraph to the LLM as context.
+
+```bash
+# Single question
+distill chat "What assumptions are made about X?"
+
+# Interactive REPL
+distill chat
+
+# Widen retrieval seed (default: 5)
+distill chat --top-k 10 "Who are the authors and what are their interests?"
+```
+
+Requires `DISTILL_EMBEDDER_PROVIDER=ollama` (or another real embedder) — the fake embedder produces random vectors that do not reflect semantic similarity.
+
+## Export / backup
+
+Snapshot every node and edge to a JSON file suitable for version control or backup:
+
+```bash
+distill export                          # → export/graph_snapshot.json
+distill export --output backups/db.json # custom path
+```
+
+Commit `export/` to git to version your graph alongside your code.
 
 ## Tests
 
@@ -107,6 +169,6 @@ The orchestrator test `test_ingest_one_is_idempotent` pins this behavior.
 
 - **PDF OCR**: scanned PDFs produce empty text and fail in preprocess. Add a parser variant that calls an OCR service.
 - **Cross-corpus job**: see "Extension points" above. The graph mapper produces the within-document cross-entity edges (`BELONGS_TO`, `HAS_INTEREST` to topics present in the same doc, `SUPPORTS` between conclusions and theories in the same doc). True cross-document inference is unwritten.
-- **Real embedder**: only the `FakeEmbedder` is implemented. The port is ready for any provider.
+- **Additional embedder backends**: `OllamaEmbedder` is implemented; an `AnthropicEmbedder` (or other hosted provider) would follow the same pattern.
 - **OpenTelemetry**: structured logs are wired; tracing is not. The orchestrator's `bind_contextvars` call is where you'd add span creation.
 - **`AnthropicLLMClient`**: uses tool-use to enforce structured output. Untested end-to-end (the suite uses `FakeLLMClient`); verify against your Anthropic SDK version before relying on it.

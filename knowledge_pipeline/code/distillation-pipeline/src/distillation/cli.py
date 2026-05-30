@@ -20,6 +20,7 @@ import typer
 
 from .adapters.chunkers.sliding_window import SlidingWindowChunker
 from .adapters.dead_letter.filesystem import FilesystemDeadLetterStore
+from .adapters.embedders.fake import FakeEmbedder
 from .adapters.graph.in_memory import InMemoryGraphRepository
 from .adapters.llm.fake import FakeLLMClient
 from .adapters.parsers.markdown import MarkdownParser
@@ -41,8 +42,10 @@ from .pipeline.stages.persist import PersistStage
 from .pipeline.stages.preprocess import PreprocessStage
 from .pipeline.stages.synthesize import SynthesizeStage
 from .ports.document_parser import ParserRegistry
+from .ports.embedder import Embedder
 from .ports.graph_repository import GraphRepository
 from .ports.llm_client import LLMClient
+from .retrieval import GraphRetriever
 
 app = typer.Typer(
     help="Document → Distillate → Knowledge Graph pipeline",
@@ -67,6 +70,17 @@ def _build_llm(settings: Settings) -> LLMClient:
             model=settings.llm_model, base_url=settings.ollama_base_url
         )
     return FakeLLMClient()
+
+
+def _build_embedder(settings: Settings) -> Embedder:
+    if settings.embedder_provider == "ollama":
+        from .adapters.embedders.ollama import OllamaEmbedder
+
+        return OllamaEmbedder(
+            model=settings.embedder_model,
+            base_url=settings.ollama_base_url,
+        )
+    return FakeEmbedder()
 
 
 def _build_graph_repo(settings: Settings) -> GraphRepository:
@@ -152,6 +166,83 @@ def ingest(
             await context.graph_repository.close()
 
     asyncio.run(_run())
+
+
+_GRAPH_SYSTEM_PROMPT = """\
+You are a knowledge-graph assistant. The user has ingested documents into a \
+knowledge graph. The subgraph below was retrieved by semantic similarity to \
+the user's question — it contains the most relevant nodes and their direct \
+neighbours (JSON format).
+
+Node types: Source, Author, Affiliation, Topic, Theme, Assumption, Theory, \
+Conclusion, Methodology.
+
+Edge types (Source → entity): AUTHORED_BY, DISCUSSES, USES, BUILDS, CONCLUDES, \
+ASSUMES. Edge types (cross-entity): IS_AT, HAS_INTEREST, BELONGS_TO, SUPPORTS, \
+CONTRADICTS, UNDERLIES, APPLIES_TO, CITES.
+
+Answer the user's question based solely on the subgraph data. Be concise. If \
+the subgraph does not contain enough information, say so.
+
+--- SUBGRAPH ---
+{graph_json}
+--- END SUBGRAPH ---
+"""
+
+
+@app.command()
+def chat(
+    prompt: str | None = typer.Argument(
+        None, help="Question to ask. Omit for interactive REPL."
+    ),
+    top_k: int = typer.Option(5, "--top-k", "-k", help="Seed nodes for retrieval."),
+) -> None:
+    """Query the knowledge graph in plain English via an LLM."""
+    import json
+
+    settings = get_settings()
+    configure_logging(settings.log_level)
+
+    repo = _build_graph_repo(settings)
+    embedder = _build_embedder(settings)
+    retriever = GraphRetriever(repo, embedder)
+    llm = _build_llm(settings)
+
+    async def _ask(question: str) -> str:
+        nodes, edges = await retriever.retrieve(question, k=top_k)
+        graph_json = json.dumps(
+            {
+                "nodes": [n.model_dump(mode="json") for n in nodes],
+                "edges": [e.model_dump(mode="json") for e in edges],
+            },
+            ensure_ascii=False,
+        )
+        system = _GRAPH_SYSTEM_PROMPT.format(graph_json=graph_json)
+        return await llm.chat(system=system, user=question)
+
+    async def _close() -> None:
+        await repo.close()
+
+    if prompt:
+        answer = asyncio.run(_ask(prompt))
+        asyncio.run(_close())
+        typer.echo(answer)
+        return
+
+    # Interactive REPL
+    typer.echo("Knowledge graph chat (type 'exit' or Ctrl-C to quit)\n")
+    try:
+        while True:
+            try:
+                question = typer.prompt("You")
+            except (KeyboardInterrupt, EOFError):
+                break
+            if question.strip().lower() in {"exit", "quit"}:
+                break
+            answer = asyncio.run(_ask(question))
+            typer.echo(f"\nAssistant: {answer}\n")
+    finally:
+        asyncio.run(_close())
 
 
 @app.command()

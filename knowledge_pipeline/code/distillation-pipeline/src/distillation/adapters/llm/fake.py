@@ -46,6 +46,9 @@ class FakeLLMClient(LLMClient):
             return response_model.model_validate(canned.model_dump())
         return _synthesize(response_model, user)
 
+    async def chat(self, *, system: str, user: str) -> str:
+        return f"[FakeLLMClient] system={system!r:.40} user={user!r:.40}"
+
 
 # --- heuristic synthesis -------------------------------------------------
 

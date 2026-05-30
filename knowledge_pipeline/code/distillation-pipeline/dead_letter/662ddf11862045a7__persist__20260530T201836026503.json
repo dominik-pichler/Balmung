@@ -1,0 +1,12 @@
+{
+  "document_id": "662ddf11862045a7",
+  "tenant_id": "default",
+  "source_id": "sample_document.txt",
+  "uri": "file:///Users/dominikpichler/Documents/Git/Balmung/knowledge_pipeline/code/distillation-pipeline/examples/sample_document.txt",
+  "format": "text",
+  "content_sha256": "6351b58fbfd7815fec2b2f162359db40b769863d1703e242128eddc0c515fc90",
+  "stage": "persist",
+  "error": "{neo4j_code: Neo.ClientError.Security.Unauthorized} {message: Unsupported authentication token, missing key `credentials`} {gql_status: 42NFF} {gql_status_description: error: syntax error or access rule violation - permission/access denied. Access denied, see the security logs for details.}",
+  "context": {},
+  "recorded_at": "2026-05-30T20:18:36.026567+00:00"
+}

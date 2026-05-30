@@ -1,0 +1,30 @@
+# A Distillation Approach to Knowledge Graphs
+
+By Jane Doe, Stanford University
+Research interests: knowledge representation, retrieval-augmented generation, ontology design.
+
+## Introduction
+
+This paper argues that document distillation is a productive lens for
+building production knowledge graphs from heterogeneous corpora. We
+assume that source documents carry latent structure that can be
+recovered without exhaustive manual annotation.
+
+## Theory
+
+We build the Distillation Lens Theory: each document admits a small set
+of orthogonal views — topic, authorship, assumption, theory,
+conclusion, methodology — and each view can be extracted
+independently.
+
+## Methodology
+
+We apply an LLM-driven extraction methodology in which six parallel
+lenses produce typed records, which are then merged via a synthesis
+step.
+
+## Conclusion
+
+We conclude that lens-based distillation supports the Distillation
+Lens Theory and yields graphs whose provenance is recoverable down to
+the chunk level.

@@ -13,6 +13,8 @@ dependencies = [
     # Optional / adapter-specific (kept here for simplicity; in prod split into extras)
     "neo4j>=5.18",
     "pypdf>=4.0",
+    "instructor>=1.15.1",
+    "openai>=2.38.0",
 ]
 
 [project.optional-dependencies]
@@ -22,6 +24,11 @@ dev = [
     "mypy>=1.9",
     "ruff>=0.3",
 ]
+
+[[tool.uv.index]]
+name = "brz"
+url = "https://centralrepo.apps.a3.cp.cna.at/artifactory/api/pypi/brz-pypi-mirror/simple"
+default = true
 
 [project.scripts]
 distill = "distillation.cli:app"

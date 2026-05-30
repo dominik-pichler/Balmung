@@ -11,6 +11,8 @@ Run ``distill ingest path/to/doc.txt`` after installing the package.
 from __future__ import annotations
 
 import asyncio
+import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 import structlog
@@ -148,6 +150,41 @@ def ingest(
                 )
         finally:
             await context.graph_repository.close()
+
+    asyncio.run(_run())
+
+
+@app.command()
+def export(
+    output: Path = typer.Option(
+        Path("export/graph_snapshot.json"),
+        "--output",
+        "-o",
+        help="Destination JSON file",
+    ),
+) -> None:
+    """Export every node and edge to a JSON snapshot for version control."""
+    settings = get_settings()
+    configure_logging(settings.log_level)
+
+    async def _run() -> None:
+        repo = _build_graph_repo(settings)
+        try:
+            nodes = await repo.all_nodes()
+            edges = await repo.all_edges()
+        finally:
+            await repo.close()
+
+        output.parent.mkdir(parents=True, exist_ok=True)
+        snapshot = {
+            "exported_at": datetime.now(timezone.utc).isoformat(),
+            "nodes": [n.model_dump(mode="json") for n in nodes],
+            "edges": [e.model_dump(mode="json") for e in edges],
+        }
+        output.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False))
+        typer.echo(
+            f"Exported {len(nodes)} node(s) and {len(edges)} edge(s) → {output}"
+        )
 
     asyncio.run(_run())
 

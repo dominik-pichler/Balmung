@@ -36,6 +36,16 @@ class GraphRepository(ABC):
         """Total number of stored edges."""
         raise NotImplementedError
 
+    @abstractmethod
+    async def all_nodes(self) -> list[GraphNode]:
+        """Return every node in the repository."""
+        raise NotImplementedError
+
+    @abstractmethod
+    async def all_edges(self) -> list[GraphEdge]:
+        """Return every edge in the repository."""
+        raise NotImplementedError
+
     async def close(self) -> None:
         """Release any underlying connections. Default is a no-op."""
         return None

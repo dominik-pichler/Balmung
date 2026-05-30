@@ -1,0 +1,534 @@
+{
+  "exported_at": "2026-05-30T20:34:29.296043+00:00",
+  "nodes": [
+    {
+      "node_id": "662ddf11862045a7",
+      "type": "Source",
+      "name": "sample_document.txt",
+      "properties": {
+        "tenant_id": "default",
+        "fetched_at": "2026-05-30T20:25:39.304573+00:00",
+        "content_sha256": "6351b58fbfd7815fec2b2f162359db40b769863d1703e242128eddc0c515fc90",
+        "format": "text",
+        "uri": "file:///Users/dominikpichler/Documents/Git/Balmung/knowledge_pipeline/code/distillation-pipeline/examples/sample_document.txt"
+      }
+    },
+    {
+      "node_id": "01cfb1143f1e89ff",
+      "type": "Topic",
+      "name": "Document distillation",
+      "properties": {
+        "canonical_name": "document distillation"
+      }
+    },
+    {
+      "node_id": "5c77b5d6b654f644",
+      "type": "Topic",
+      "name": "Knowledge graphs",
+      "properties": {
+        "canonical_name": "knowledge graphs"
+      }
+    },
+    {
+      "node_id": "49dfca43c7e35cc9",
+      "type": "Topic",
+      "name": "LLM-driven extraction",
+      "properties": {
+        "canonical_name": "llm-driven extraction"
+      }
+    },
+    {
+      "node_id": "b35b634a9564d228",
+      "type": "Topic",
+      "name": "Distillation Lens Theory",
+      "properties": {
+        "canonical_name": "distillation lens theory"
+      }
+    },
+    {
+      "node_id": "ddf23a649fab6667",
+      "type": "Theme",
+      "name": "Knowledge representation",
+      "properties": {
+        "canonical_name": "knowledge representation"
+      }
+    },
+    {
+      "node_id": "e8dfbce650fd9a44",
+      "type": "Author",
+      "name": "Jane Doe",
+      "properties": {
+        "canonical_name": "jane doe",
+        "interests": [
+          "knowledge representation",
+          "retrieval-augmented generation",
+          "ontology design"
+        ]
+      }
+    },
+    {
+      "node_id": "28e9e19700c0118f",
+      "type": "Affiliation",
+      "name": "Stanford University",
+      "properties": {
+        "canonical_name": "stanford university"
+      }
+    },
+    {
+      "node_id": "491a04628ef62aa2",
+      "type": "Assumption",
+      "name": "Document Structure Assumption",
+      "properties": {
+        "canonical_name": "document structure assumption",
+        "statement": "Source documents contain latent structure that can be recovered without exhaustive manual annotation."
+      }
+    },
+    {
+      "node_id": "dc4d2d3a2afd595d",
+      "type": "Assumption",
+      "name": "View Orthogonality Assumption",
+      "properties": {
+        "canonical_name": "view orthogonality assumption",
+        "statement": "Documents can be meaningfully decomposed into independent orthogonal views such as topic, authorship, assumption, theory, conclusion, and methodology."
+      }
+    },
+    {
+      "node_id": "c8be93378e57413d",
+      "type": "Assumption",
+      "name": "LLM Reliability Assumption",
+      "properties": {
+        "canonical_name": "llm reliability assumption",
+        "statement": "LLM-driven extraction methodology can produce accurate typed records for each lens."
+      }
+    },
+    {
+      "node_id": "424ee508c6c975ad",
+      "type": "Assumption",
+      "name": "Synthesis Validity Assumption",
+      "properties": {
+        "canonical_name": "synthesis validity assumption",
+        "statement": "Merging typed records via a synthesis step produces valid knowledge graphs."
+      }
+    },
+    {
+      "node_id": "216c2b8e6ddfa5da",
+      "type": "Assumption",
+      "name": "Provenance Recovery Assumption",
+      "properties": {
+        "canonical_name": "provenance recovery assumption",
+        "statement": "The chunk-level provenance of knowledge graph elements can be meaningfully tracked and recovered through the distillation process."
+      }
+    },
+    {
+      "node_id": "e22a47ae7d11a3af",
+      "type": "Theory",
+      "name": "Distillation Lens Theory",
+      "properties": {
+        "canonical_name": "distillation lens theory",
+        "statement": "Each document admits a small set of orthogonal views—topic, authorship, assumption, theory, conclusion, methodology—and each view can be extracted independently."
+      }
+    },
+    {
+      "node_id": "ec2a760ba36f8925",
+      "type": "Conclusion",
+      "name": "Lens-based distillation supports Distillation Lens Theory",
+      "properties": {
+        "canonical_name": "lens-based distillation supports distillation lens theory",
+        "statement": "Lens-based distillation supports the Distillation Lens Theory and yields graphs whose provenance is recoverable down to the chunk level."
+      }
+    },
+    {
+      "node_id": "b37fa3ca81521e00",
+      "type": "Methodology",
+      "name": "LLM-driven extraction",
+      "properties": {
+        "canonical_name": "llm-driven extraction",
+        "description": "An LLM-driven extraction methodology where six parallel lenses produce typed records that are then merged via a synthesis step."
+      }
+    },
+    {
+      "node_id": "87f165be8ea4389d",
+      "type": "Assumption",
+      "name": "Orthogonality Assumption",
+      "properties": {
+        "canonical_name": "orthogonality assumption",
+        "statement": "Each view of a document (topic, authorship, assumption, theory, conclusion, methodology) can be extracted independently."
+      }
+    },
+    {
+      "node_id": "6d0f3b09050bc1d7",
+      "type": "Conclusion",
+      "name": "Distillation Lens Theory Support",
+      "properties": {
+        "canonical_name": "distillation lens theory support",
+        "statement": "Lens-based distillation supports the Distillation Lens Theory and yields graphs whose provenance is recoverable down to the chunk level."
+      }
+    },
+    {
+      "node_id": "b3e231b88c96df90",
+      "type": "Source",
+      "name": "paper_1.txt",
+      "properties": {
+        "tenant_id": "default",
+        "fetched_at": "2026-05-30T20:26:59.364455+00:00",
+        "content_sha256": "6351b58fbfd7815fec2b2f162359db40b769863d1703e242128eddc0c515fc90",
+        "format": "text",
+        "uri": "file:///Users/dominikpichler/Documents/Git/Balmung/knowledge_pipeline/code/distillation-pipeline/examples/paper_1.txt"
+      }
+    },
+    {
+      "node_id": "ef3b52e6687327ab",
+      "type": "Topic",
+      "name": "Orthogonal views",
+      "properties": {
+        "canonical_name": "orthogonal views"
+      }
+    },
+    {
+      "node_id": "dccae7a497899548",
+      "type": "Assumption",
+      "name": "Independent Views Assumption",
+      "properties": {
+        "canonical_name": "independent views assumption",
+        "statement": "Each document admits a small set of orthogonal views that can be extracted independently."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "01cfb1143f1e89ff",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "5c77b5d6b654f644",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "49dfca43c7e35cc9",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "b35b634a9564d228",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "e8dfbce650fd9a44",
+      "type": "AUTHORED_BY",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "491a04628ef62aa2",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "dc4d2d3a2afd595d",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "c8be93378e57413d",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "424ee508c6c975ad",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "216c2b8e6ddfa5da",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "e22a47ae7d11a3af",
+      "type": "BUILDS",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "ec2a760ba36f8925",
+      "type": "CONCLUDES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "b37fa3ca81521e00",
+      "type": "USES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "e8dfbce650fd9a44",
+      "target_node_id": "28e9e19700c0118f",
+      "type": "IS_AT",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed",
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "01cfb1143f1e89ff",
+      "target_node_id": "ddf23a649fab6667",
+      "type": "BELONGS_TO",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed",
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "5c77b5d6b654f644",
+      "target_node_id": "ddf23a649fab6667",
+      "type": "BELONGS_TO",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed",
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "49dfca43c7e35cc9",
+      "target_node_id": "ddf23a649fab6667",
+      "type": "BELONGS_TO",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed",
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b35b634a9564d228",
+      "target_node_id": "ddf23a649fab6667",
+      "type": "BELONGS_TO",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "ec2a760ba36f8925",
+      "target_node_id": "e22a47ae7d11a3af",
+      "type": "SUPPORTS",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed",
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "87f165be8ea4389d",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "662ddf11862045a7",
+      "target_node_id": "6d0f3b09050bc1d7",
+      "type": "CONCLUDES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "6d0f3b09050bc1d7",
+      "target_node_id": "e22a47ae7d11a3af",
+      "type": "SUPPORTS",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "c3b11379b2b3d5ed"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "01cfb1143f1e89ff",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "5c77b5d6b654f644",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "49dfca43c7e35cc9",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "ef3b52e6687327ab",
+      "type": "DISCUSSES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "e8dfbce650fd9a44",
+      "type": "AUTHORED_BY",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "491a04628ef62aa2",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "dccae7a497899548",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "c8be93378e57413d",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "424ee508c6c975ad",
+      "type": "ASSUMES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "e22a47ae7d11a3af",
+      "type": "BUILDS",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "ec2a760ba36f8925",
+      "type": "CONCLUDES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "b3e231b88c96df90",
+      "target_node_id": "b37fa3ca81521e00",
+      "type": "USES",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    },
+    {
+      "source_node_id": "ef3b52e6687327ab",
+      "target_node_id": "ddf23a649fab6667",
+      "type": "BELONGS_TO",
+      "properties": {},
+      "provenance_chunk_ids": [
+        "afe0cb0e60775f17"
+      ]
+    }
+  ]
+}

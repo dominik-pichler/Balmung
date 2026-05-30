@@ -94,6 +94,55 @@ class Neo4jGraphRepository(GraphRepository):
             record = await result.single()
             return int(record["c"]) if record else 0
 
+    async def all_nodes(self) -> list[GraphNode]:
+        async with self._driver.session(database=self._database) as session:
+            result = await session.run(
+                "MATCH (n) RETURN labels(n)[0] AS label, "
+                "n.node_id AS node_id, n.name AS name, properties(n) AS props"
+            )
+            nodes: list[GraphNode] = []
+            async for record in result:
+                props = {
+                    k: v
+                    for k, v in dict(record["props"]).items()
+                    if k not in ("node_id", "name")
+                }
+                nodes.append(
+                    GraphNode(
+                        node_id=record["node_id"],
+                        type=GraphNodeType(record["label"]),
+                        name=record["name"],
+                        properties=props,
+                    )
+                )
+            return nodes
+
+    async def all_edges(self) -> list[GraphEdge]:
+        async with self._driver.session(database=self._database) as session:
+            result = await session.run(
+                "MATCH (s)-[r]->(t) "
+                "RETURN s.node_id AS src, type(r) AS rel_type, t.node_id AS tgt, "
+                "coalesce(r.provenance_chunk_ids, []) AS provenance, "
+                "properties(r) AS props"
+            )
+            edges: list[GraphEdge] = []
+            async for record in result:
+                props = {
+                    k: v
+                    for k, v in dict(record["props"]).items()
+                    if k != "provenance_chunk_ids"
+                }
+                edges.append(
+                    GraphEdge(
+                        source_node_id=record["src"],
+                        target_node_id=record["tgt"],
+                        type=GraphEdgeType(record["rel_type"]),
+                        provenance_chunk_ids=list(record["provenance"]),
+                        properties=props,
+                    )
+                )
+            return edges
+
     async def close(self) -> None:
         await self._driver.close()
 

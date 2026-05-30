@@ -58,6 +58,12 @@ class InMemoryGraphRepository(GraphRepository):
     async def count_edges(self) -> int:
         return len(self._edges)
 
+    async def all_nodes(self) -> list[GraphNode]:
+        return list(self._nodes.values())
+
+    async def all_edges(self) -> list[GraphEdge]:
+        return list(self._edges.values())
+
     # --- test helpers ---------------------------------------------------
 
     def nodes(self) -> list[GraphNode]:

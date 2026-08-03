@@ -1,4 +1,4 @@
-    ```
+```
                 ,-----.
                #,-. ,-.#
               () a   e ()
@@ -20,93 +20,80 @@
             |_.--.__ .--._|
               `==='  `==='
     
-        ```
+ ```
 
-Thoughts and code about Information, Chaos and everything in between.
+# Balmung — Exploring Information, Structure & Computation
 
-
-
-# Thoughts
-## Information 
-- [What is it ?](notes/what_is_information.md) 
-- [What is it made of ?](notes/what_is_information.md)
-- [How can it be found (and turned into knowledge?)](notes/quest_for_knowledge.md)
-- [How can it be used optimally to answer questions?](https://github.com/dominik-pichler/Balmung?tab=readme-ov-file#4-ask-me-anything---qa-system)
-- [What can't be known? - Is there unatainable Information ?](notes/the_unkown.md)
-- How do the ideas of *Language*, *Perception* and *Information / Knowlege* connect/interplay?
-- How can *Knowledge* be represented and structured? (Text, Images, Ontologies)
-
-This is a repo tries to gradually find more sophisticated answers to those questions, either through code or rambling style posts.
-Feel free to contact me if you're interested
-
-## Chaos
-This section tries to focus on two fundamental questions: 
-- [What happens when we lack information?](notes/Chaos.md)
-- [How should we deal, when faced with chaotic lack of information?](notes/Chaos.md)
-
-## How to make sense out all of this - A knowledge Pipeline
-- [How can we order and orchestrate the flood of information](knowledge_pipeline/orchestrating_information_flood.md)
+> Thoughts, experiments and code about Information, Chaos and everything in between.
 
 
-____
-# Tools
+## Navigation
 
- ## 1. What do you know? - Kants Knowledge Graph
-**Question:** <br>How can I visualise ideas and how can I determine connections between different ideas?  
-For this approach I tried to turn philosophical ideas into knowledge graphs.
-
-Thereby two different approaches have been used to identify entities and relationships.
-1. Using [Rule based Parsing Systems](https://www.geeksforgeeks.org/rule-based-approach-in-nlp/)
-2. Using an [LLM (Llama3)](https://ollama.com/) to extract entities and relationships via prompting
-3. Using [BERT](Embeddings/ER_BERT.py) to extract entities and relationships directly
-
-Eventually, the results have been visualised using `pyvis`. As the input size increased, this approach of simply 
-visualising all entities and their relationships became unfeasible.
-Hence, this project is on hold until I've solved the question of "*What is the most essential information?*".
-
-## 2. Ishmaels Guide to (Topic) Fishing
-**Question:** <br> How can I understand what (sub)topics are central in a given document corpus or more specifically (research) area? 
-<br>
-Fishing for understanding in a personally new field of understanding can easily become an orientation-less wandering through a dark forest of (pseudo) knowledge. 
-One might need a navigation system find the central intellectual building blocks of this new field of interest.
-The aim of this project is, to build exactly this navigation system by developing a tool that automatically identifies central ideas and topics in a given field.
-
-**Theoretical Overview:** <br>
-For a general understanding, a comprehensive list of modern topic modelling techniques can be found here: <br>
-[Modern Topic Modelling Approaches](ismails_guide_to_fishing/fish_me.md)
-
-In addtion, Graph-based Knowledge Representations as in Graph RAG might be helpful for this (in particual the Graph Community summaries) More on that soon. 
+| Area | Description | Link |
+|------|-------------|------|
+| **Documentation** | Theoretical notes, concept studies, philosophical reflections | [`docs/`](docs/README.md) |
+| **Code Projects** | Implementations, notebooks, training scripts | [`code/`](code/) |
+| **Templates** | Working templates for notes & project docs | [`library/`](library/) |
 
 
+## Documentation — The Thread
 
-## 3.  Rank me if you can - Neural (Re-) Rankers
-**Question:** <br> How can i find the most relevant documents for a given endeavour, in a large pool of documents? 
-<br>
+The theoretical works follow a logical chain of inquiry: ** What is information? → How does it become knowledge and how can one manage it effectively? → What remains unknowable? → How do I organize the flow?**
 
-For this quest, I have manually implemented, trained and evaluated the performance of two prominent neural re-ranking algorithms ([K-NRM](https://arxiv.org/pdf/1706.06613) and [TK](https://www.researchgate.net/publication/339065967_Interpretable_Time-Budget-Constrained_Contextualization_for_Re-Ranking) )
+### 1) Foundations & Philosophy
+Fundamental definitions and philosophical reflections on information, knowledge, un decidability, and systems.
 
-Code and results can be found here: 
-[Re-Rankers](reranking)
-
-## 4. Ask me anything - RAG-based QA System
-**Question**: <br> How can I extend 3. with arbitrary (OOV) queries? 
-<br>
-Code and results can be found here: 
-[Q&A](Q_and_A)
-
-## 5. Please make sense - Graph RAG-based QA Systems to the rescue
-TBD
+| Document | Core Question                                                                             |
+|----------|-------------------------------------------------------------------------------------------|
+| [`01_what_is_information.md`](docs/01_foundations/01_what_is_information.md) | What is information — lexical, philosophical, mathematical & epistemological perspectives? |
+| [`02_quest_for_knowledge.md`](docs/01_foundations/02_quest_for_knowledge.md) | How does information become knowledge? — Descartes → Popper → modern epistemology         |
+| [`03_the_unkown.md`](docs/01_foundations/03_the_unkown.md) | What cannot be known? — Turing's undecidability & Gödel's incompleteness                  |
+| [`04_chaos_and_complexity.md`](docs/01_foundations/04_chaos_and_complexity.md) | What happens with missing information? — System theory, chaos theory, complex dynamics    |
+| [`05_semantic_systems.md`](docs/01_foundations/05_semantic_systems.md) | Semantic systems — Machine understanding vs. human meaning                                |
+| [`06_turing_machines.md`](docs/01_foundations/06_turing_machines.md) | Turing machines as fundamental computational model                                        |
 
 
-## 6. Compress me  - (Neural) Data-Compressors
-During the projects listed above, I worked with lossless compression-algorithms to reduce data sizes (and to identify symbolic Morphemes) and thereby implemented the following algorithms: 
-* [Shannon -  Fano encoding](https://github.com/dominik-pichler/Balmung/blob/main/utils/shannon_fano_coding.py)
-   * Turned out as a pretty good start by losslessly compressing Kants *Critique of pure reason* by 55%
- 
-* Neural Compressors:
-   * Variable Rate Semantic Compression in images
-   
+# Unordered Projects
+### 2) NLP & Embeddings
+Practical documentation on entity recognition, embedding strategies, and model definitions.
+
+| Document | Core Question |
+|----------|--------------|
+| [`01_er_nlp_document.md`](docs/02_nlp_embeddings/01_er_nlp_document.md) | NLP + Offeneregister.de — Export pipeline & preparation |
+| [`02_bert_embeddings.md`](docs/02_nlp_embeddings/02_bert_embeddings.md) | BERT architecture & embedding strategies |
+| [`03_models_and_other_mysteries.md`](docs/02_nlp_embeddings/03_models_and_other_mysteries.md) | Model definitions — Business & academic perspectives |
+
+### 3) Knowledge Graphs & Applications
+Conceptual papers and pitch documents on knowledge graphs and graph neural networks.
+
+| Document | Core Question |
+|----------|--------------|
+| [`01_kg_applications.md`](docs/03_knowledge_graphs/01_kg_applications.md) | Fraud Detection, AML, Credit Scoring & Personalization with KGs |
+| [`02_kg_pitch.md`](docs/03_knowledge_graphs/02_kg_pitch.md) | Pitch: Revolutionizing Banking with Knowledge Graphs & GNNs |
+| [`03_kants_ramble.md`](docs/03_knowledge_graphs/03_kants_ramble.md) | Kant's epistemology as graph reference |
+
+### 4) System Design & Pipelines
+Architecture concepts, topic modeling, and descriptive analysis.
+
+| Document | Core Question |
+|----------|--------------|
+| [`01_orchestrating_information.md`](docs/04_systems_pipelines/01_orchestrating_information.md) | Taming information overload — Sources, Distillation & Extraction |
+| [`02_topic_modeling_fishing.md`](docs/04_systems_pipelines/02_topic_modeling_fishing.md) | Traditional TM → Word2Vec → BERTopic — Algorithms & history |
+| [`03_descriptive_analysis_test.md`](docs/04_systems_pipelines/03_descriptive_analysis_test.md) | Descriptive statistics — Booking rates, evaluations, working hours |
+
+**Full documentation index:** [`docs/README.md`](docs/README.md)
 
 
+## Code Projects
+
+| Project | Question | Status       |
+|---------|----------|--------------|
+| **[Kants Knowledge Graph](code/kants_knowledge_graph/)** | Philosophical ideas → Knowledge graphs (Rule-based + LLM + BERT) | Just a demo  |
+| **[Ishmaels Guide to (Topic) Fishing](code/ismails_guide_to_fishing/)** | Automated identification of central topics in corpora | Ready to use |
+| **[Neural (Re-) Rankers](code/reranking/)** | K-NRM & TK — Implementation, training & evaluation | Ready to use |
+| **[RAG-based QA System](code/Q_and_A/)** | Extending rankers with OOV queries | Ready to use |
+| **[Graph RAG QA](#)** | KG-based question answering systems | In Progress  |
+| **[Data Compressors](code/utils/)** | Shannon-Fano, neural compression, morpheme identification | Just a demo  |
 
 
+*Questioned, researched, implemented. Feel free to reach out if you're interested.*

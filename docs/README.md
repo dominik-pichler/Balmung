@@ -5,7 +5,7 @@ Die Inhalte sind thematisch sortiert und chronologisch durchnummeriert für einf
 
 ---
 
-## 📁 Strukturübersicht
+## Strukturübersicht
 
 ### `01_foundations/` — Grundlagen & Philosophie
 Fundamentale Definitionen und philosophische Reflexionen zu Information, Wissen und Systemen.

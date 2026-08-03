@@ -19,81 +19,82 @@
             |             |
             |_.--.__ .--._|
               `==='  `==='
-    
- ```
+```
 
-# Balmung — Exploring Information, Structure & Computation
+# Balmung
 
-> Thoughts, experiments and code about Information, Chaos and everything in between.
+> Thoughts, experiments, and code about information, chaos, and everything in between.
 
+A personal workspace for one long question: **where does information come from, how does it become knowledge, and where does it break down?** It collects theoretical notes, small experiments, and working implementations — from spectral graph theory to neural rerankers.
 
-## Navigation
+---
 
-| Area | Description | Link |
-|------|-------------|------|
-| **Documentation** | Theoretical notes, concept studies, philosophical reflections | [`docs/`](docs/README.md) |
-| **Code Projects** | Implementations, notebooks, training scripts | [`code/`](code/) |
-| **Templates** | Working templates for notes & project docs | [`library/`](library/) |
+## The Thread
 
+The documentation follows a single line of inquiry:
 
-## Documentation — The Thread
+**What is information? → How does it become knowledge? → What stays unknowable? → How do I organize the flow?**
 
-The theoretical works follow a logical chain of inquiry: ** What is information? → How does it become knowledge and how can one manage it effectively? → What remains unknowable? → How do I organize the flow?**
+Everything under `docs/` is a station along that path.
 
-### 1) Foundations & Philosophy
-Fundamental definitions and philosophical reflections on information, knowledge, un decidability, and systems.
+---
 
-| Document | Core Question                                                                             |
-|----------|-------------------------------------------------------------------------------------------|
-| [`01_what_is_information.md`](docs/01_foundations/01_what_is_information.md) | What is information — lexical, philosophical, mathematical & epistemological perspectives? |
-| [`02_quest_for_knowledge.md`](docs/01_foundations/02_quest_for_knowledge.md) | How does information become knowledge? — Descartes → Popper → modern epistemology         |
-| [`03_the_unkown.md`](docs/01_foundations/03_the_unkown.md) | What cannot be known? — Turing's undecidability & Gödel's incompleteness                  |
-| [`04_chaos_and_complexity.md`](docs/01_foundations/04_chaos_and_complexity.md) | What happens with missing information? — System theory, chaos theory, complex dynamics    |
-| [`05_semantic_systems.md`](docs/01_foundations/05_semantic_systems.md) | Semantic systems — Machine understanding vs. human meaning                                |
-| [`06_turing_machines.md`](docs/01_foundations/06_turing_machines.md) | Turing machines as fundamental computational model                                        |
+## Start Here
 
+- **[`docs/`](docs/README.md)** — theoretical notes, concept studies, philosophical reflections
+- **[`code/`](code/)** — implementations, notebooks, training scripts
+- **[`library/`](library/)** — working templates for notes & project docs
 
-# Unordered Projects
-### 2) NLP & Embeddings
-Practical documentation on entity recognition, embedding strategies, and model definitions.
+---
 
-| Document | Core Question |
-|----------|--------------|
-| [`01_er_nlp_document.md`](docs/02_nlp_embeddings/01_er_nlp_document.md) | NLP + Offeneregister.de — Export pipeline & preparation |
-| [`02_bert_embeddings.md`](docs/02_nlp_embeddings/02_bert_embeddings.md) | BERT architecture & embedding strategies |
-| [`03_models_and_other_mysteries.md`](docs/02_nlp_embeddings/03_models_and_other_mysteries.md) | Model definitions — Business & academic perspectives |
+## Documentation
 
-### 3) Knowledge Graphs & Applications
-Conceptual papers and pitch documents on knowledge graphs and graph neural networks.
+### 1 · Foundations & Philosophy
+Definitions and reflections on information, knowledge, undecidability, and systems.
 
-| Document | Core Question |
-|----------|--------------|
-| [`01_kg_applications.md`](docs/03_knowledge_graphs/01_kg_applications.md) | Fraud Detection, AML, Credit Scoring & Personalization with KGs |
-| [`02_kg_pitch.md`](docs/03_knowledge_graphs/02_kg_pitch.md) | Pitch: Revolutionizing Banking with Knowledge Graphs & GNNs |
-| [`03_kants_ramble.md`](docs/03_knowledge_graphs/03_kants_ramble.md) | Kant's epistemology as graph reference |
+- **[What is information?](docs/01_foundations/01_what_is_information.md)** — lexical, philosophical, mathematical & epistemological views
+- **[The quest for knowledge](docs/01_foundations/02_quest_for_knowledge.md)** — how information becomes knowledge: Descartes → Popper → modern epistemology
+- **[The unknown](docs/01_foundations/03_the_unkown.md)** — what cannot be known: Turing's undecidability & Gödel's incompleteness
+- **[Chaos & complexity](docs/01_foundations/04_chaos_and_complexity.md)** — missing information: system theory, chaos, complex dynamics
+- **[Semantic systems](docs/01_foundations/05_semantic_systems.md)** — machine understanding vs. human meaning
+- **[Turing machines](docs/01_foundations/06_turing_machines.md)** — the fundamental model of computation
 
-### 4) System Design & Pipelines
+### 2 · NLP & Embeddings
+Entity recognition, embedding strategies, and model definitions.
+
+- **[ER + Offeneregister.de](docs/02_nlp_embeddings/01_er_nlp_document.md)** — export pipeline & preparation
+- **[BERT embeddings](docs/02_nlp_embeddings/02_bert_embeddings.md)** — architecture & embedding strategies
+- **[Models and other mysteries](docs/02_nlp_embeddings/03_models_and_other_mysteries.md)** — model definitions, business vs. academic perspectives
+
+### 3 · Knowledge Graphs & Applications
+Concept papers and pitches on knowledge graphs and graph neural networks.
+
+- **[KG applications](docs/03_knowledge_graphs/01_kg_applications.md)** — fraud detection, AML, credit scoring & personalization
+- **[KG pitch](docs/03_knowledge_graphs/02_kg_pitch.md)** — revolutionizing banking with knowledge graphs & GNNs
+- **[Kant's ramble](docs/03_knowledge_graphs/03_kants_ramble.md)** — Kant's epistemology as a graph reference
+
+### 4 · Systems & Pipelines
 Architecture concepts, topic modeling, and descriptive analysis.
 
-| Document | Core Question |
-|----------|--------------|
-| [`01_orchestrating_information.md`](docs/04_systems_pipelines/01_orchestrating_information.md) | Taming information overload — Sources, Distillation & Extraction |
-| [`02_topic_modeling_fishing.md`](docs/04_systems_pipelines/02_topic_modeling_fishing.md) | Traditional TM → Word2Vec → BERTopic — Algorithms & history |
-| [`03_descriptive_analysis_test.md`](docs/04_systems_pipelines/03_descriptive_analysis_test.md) | Descriptive statistics — Booking rates, evaluations, working hours |
+- **[Orchestrating information](docs/04_systems_pipelines/01_orchestrating_information.md)** — taming overload: sources, distillation & extraction
+- **[Topic modeling as fishing](docs/04_systems_pipelines/02_topic_modeling_fishing.md)** — traditional TM → Word2Vec → BERTopic
+- **[Descriptive analysis](docs/04_systems_pipelines/03_descriptive_analysis_test.md)** — booking rates, evaluations, working hours
 
-**Full documentation index:** [`docs/README.md`](docs/README.md)
+→ **Full index:** [`docs/README.md`](docs/README.md)
 
+---
 
-## Code Projects
+## Code
 
-| Project | Question | Status       |
-|---------|----------|--------------|
-| **[Kants Knowledge Graph](code/kants_knowledge_graph/)** | Philosophical ideas → Knowledge graphs (Rule-based + LLM + BERT) | Just a demo  |
-| **[Ishmaels Guide to (Topic) Fishing](code/ismails_guide_to_fishing/)** | Automated identification of central topics in corpora | Ready to use |
-| **[Neural (Re-) Rankers](code/reranking/)** | K-NRM & TK — Implementation, training & evaluation | Ready to use |
-| **[RAG-based QA System](code/Q_and_A/)** | Extending rankers with OOV queries | Ready to use |
-| **[Graph RAG QA](#)** | KG-based question answering systems | In Progress  |
-| **[Data Compressors](code/utils/)** | Shannon-Fano, neural compression, morpheme identification | Just a demo  |
+| Project | Question | Status |
+|---------|----------|--------|
+| **[Kant's Knowledge Graph](code/kants_knowledge_graph/)** | Philosophical ideas → knowledge graphs (rule-based + LLM + BERT) | Demo |
+| **[Ishmael's Guide to (Topic) Fishing](code/ismails_guide_to_fishing/)** | Automated identification of central topics in corpora | Ready |
+| **[Neural (Re-)Rankers](code/reranking/)** | K-NRM & TK — implementation, training & evaluation | Ready |
+| **[RAG-based QA System](code/Q_and_A/)** | Extending rankers with OOV queries | Ready |
+| **[Graph RAG QA](#)** | KG-based question answering | In progress |
+| **[Data Compressors](code/utils/)** | Shannon-Fano, neural compression, morpheme identification | Demo |
 
+---
 
-*Questioned, researched, implemented. Feel free to reach out if you're interested.*
+*Questioned, researched, implemented. Feel free to reach out if any of this interests you.*

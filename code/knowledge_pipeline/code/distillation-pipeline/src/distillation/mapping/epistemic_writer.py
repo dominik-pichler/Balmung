@@ -1,15 +1,16 @@
 """EpistemicWriter — writes Level 2 (paper-scoped) nodes and edges.
 
-Writes ``Claim``, ``Evidence``, ``Experiment``, ``Scope`` nodes, plus
-all edges between claims and their domain anchors (Technology, Problem,
-Capability, Dataset, Assumption, Limitation, Scope).
+Writes ``Claim``, ``Evidence``, ``Experiment``, ``Scope`` nodes, plus edges
+between claims and their domain anchors.
 
-Crucial invariant: epistemik nodes are NEVER merged across papers.
-Each paper creates new Claim/Evidence/Experiment/Scope nodes, linked
-to persistent domain anchors via MERGE.
+Crucial invariant: epistemik nodes are NEVER merged across papers. Their
+``node_id`` folds in the anchoring ``paper_id`` (via
+:func:`distillation.domain.ids.node_id`), so two papers that surface an
+identically-named claim/evidence get distinct nodes. Each paper creates fresh
+Claim/Evidence/Experiment/Scope nodes, linked to persistent domain anchors.
 
-The old ``confirmed``/``falsified`` boolean on conclusions is replaced
-by Claim polarity + Evidence.type (supporting/refuting).
+The old ``confirmed``/``falsified`` boolean on conclusions is replaced by
+Claim polarity + Evidence.type (supporting/refuting).
 """
 
 from __future__ import annotations
@@ -29,7 +30,7 @@ from ..domain.graph import (
     GraphNode,
     GraphNodeType,
 )
-from ..domain.ids import canonicalize, deterministic_id
+from ..domain.ids import node_id
 from .domain_writer import DomainWriter
 
 
@@ -45,6 +46,7 @@ class EpistemicWriter:
         self,
         entities: Iterable[ClaimMention],
         paper_id: str,
+        tenant_id: str,
         assumptions: Iterable[AssumptionMention] = (),
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
         nodes: list[GraphNode] = []
@@ -53,9 +55,11 @@ class EpistemicWriter:
         # surfaced assumptions. Extraction does not map individual claims to
         # individual assumptions, so we link each claim to every assumption
         # in the same document.
-        assumption_ids = [self._domain._assumption_id(a) for a in assumptions]
+        assumption_ids = [
+            self._domain.assumption_id(a, tenant_id) for a in assumptions
+        ]
         for claim in entities:
-            n, e = self._write_claim(claim, paper_id)
+            n, e = self._write_claim(claim, paper_id, tenant_id)
             for assumption_id in assumption_ids:
                 e.append(
                     GraphEdge(
@@ -70,52 +74,62 @@ class EpistemicWriter:
         return nodes, edges
 
     def write_evidence(
-        self, entities: Iterable[EvidenceMention],
+        self,
+        entities: Iterable[EvidenceMention],
+        paper_id: str,
+        tenant_id: str,
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
         for ev in entities:
-            n, e = self._write_evidence(ev)
+            n, e = self._write_evidence(ev, paper_id, tenant_id)
             nodes.append(n)
             edges.extend(e)
         return nodes, edges
 
     def write_experiments(
-        self, entities: Iterable[ExperimentMention],
+        self,
+        entities: Iterable[ExperimentMention],
+        paper_id: str,
+        tenant_id: str,
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
         for exp in entities:
-            n, e = self._write_experiment(exp)
+            n, e = self._write_experiment(exp, paper_id, tenant_id)
             nodes.append(n)
             edges.extend(e)
         return nodes, edges
 
     def write_scopes(
-        self, entities: Iterable[ScopeMention],
+        self,
+        entities: Iterable[ScopeMention],
+        paper_id: str,
+        tenant_id: str,
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
         for scope in entities:
-            n, e = self._write_scope(scope)
+            n, e = self._write_scope(scope, paper_id, tenant_id)
             nodes.append(n)
             edges.extend(e)
         return nodes, edges
 
     # --- claim ----------------------------------------------------------
 
-    def _claim_id(self, mention: ClaimMention, paper_id: str) -> str:
-        """Deterministic ID: sha256(paper_id|claim_text[:50])[:16]."""
+    def _claim_id(self, mention: ClaimMention, paper_id: str, tenant_id: str) -> str:
+        """Paper-scoped id: sha256(tenant || Claim || paper_id || text[:50])[:16]."""
         text_slice = mention.text.strip()[:50] if mention.text else ""
-        return deterministic_id(paper_id, canonicalize(text_slice))
+        return node_id(
+            tenant_id, GraphNodeType.CLAIM, text_slice, paper_id=paper_id
+        )
 
     def _write_claim(
-        self, claim: ClaimMention, paper_id: str
+        self, claim: ClaimMention, paper_id: str, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
-        nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
+        cid = self._claim_id(claim, paper_id, tenant_id)
 
-        node_id = self._claim_id(claim, paper_id)
         props: dict = {
             "text": claim.text,
             "extraction_confidence": claim.extraction_confidence,
@@ -131,38 +145,35 @@ class EpistemicWriter:
         props["decay_immune"] = claim.decay_immune
 
         node = GraphNode(
-            node_id=node_id,
+            node_id=cid,
             type=GraphNodeType.CLAIM,
             name=claim.name,
             properties=props,
         )
-        nodes.append(node)
 
         # Paper → Claim: MAKES_CLAIM
         edges.append(
             GraphEdge(
                 source_node_id=paper_id,
-                target_node_id=node_id,
+                target_node_id=cid,
                 type=GraphEdgeType.MAKES_CLAIM,
                 extraction_confidence=claim.extraction_confidence,
             )
         )
-
         return node, edges
 
     # --- evidence -------------------------------------------------------
 
-    def _evidence_id(self, mention: EvidenceMention) -> str:
-        """Evidence is paper-scoped: sha256(text_hash)[:16]."""
-        return deterministic_id(canonicalize(mention.name))
+    def _evidence_id(
+        self, mention: EvidenceMention, paper_id: str, tenant_id: str
+    ) -> str:
+        return node_id(
+            tenant_id, GraphNodeType.EVIDENCE, mention.name, paper_id=paper_id
+        )
 
     def _write_evidence(
-        self, evidence: EvidenceMention
+        self, evidence: EvidenceMention, paper_id: str, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
-        nodes: list[GraphNode] = []
-        edges: list[GraphEdge] = []
-
-        node_id = self._evidence_id(evidence)
         props: dict = {
             "extraction_confidence": evidence.extraction_confidence,
         }
@@ -176,27 +187,25 @@ class EpistemicWriter:
             props["direction"] = evidence.direction.value
 
         node = GraphNode(
-            node_id=node_id,
+            node_id=self._evidence_id(evidence, paper_id, tenant_id),
             type=GraphNodeType.EVIDENCE,
             name=evidence.name,
             properties=props,
         )
-        nodes.append(node)
-
-        return node, edges
+        return node, []
 
     # --- experiment -----------------------------------------------------
 
-    def _experiment_id(self, mention: ExperimentMention) -> str:
-        return deterministic_id(canonicalize(mention.name))
+    def _experiment_id(
+        self, mention: ExperimentMention, paper_id: str, tenant_id: str
+    ) -> str:
+        return node_id(
+            tenant_id, GraphNodeType.EXPERIMENT, mention.name, paper_id=paper_id
+        )
 
     def _write_experiment(
-        self, experiment: ExperimentMention
+        self, experiment: ExperimentMention, paper_id: str, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
-        nodes: list[GraphNode] = []
-        edges: list[GraphEdge] = []
-
-        node_id = self._experiment_id(experiment)
         props: dict = {
             "extraction_confidence": experiment.extraction_confidence,
         }
@@ -213,27 +222,23 @@ class EpistemicWriter:
         props["preregistered"] = experiment.preregistered
 
         node = GraphNode(
-            node_id=node_id,
+            node_id=self._experiment_id(experiment, paper_id, tenant_id),
             type=GraphNodeType.EXPERIMENT,
             name=experiment.name,
             properties=props,
         )
-        nodes.append(node)
-
-        return node, edges
+        return node, []
 
     # --- scope ----------------------------------------------------------
 
-    def _scope_id(self, mention: ScopeMention) -> str:
-        return deterministic_id(canonicalize(mention.name))
+    def _scope_id(self, mention: ScopeMention, paper_id: str, tenant_id: str) -> str:
+        return node_id(
+            tenant_id, GraphNodeType.SCOPE, mention.name, paper_id=paper_id
+        )
 
     def _write_scope(
-        self, scope: ScopeMention
+        self, scope: ScopeMention, paper_id: str, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
-        nodes: list[GraphNode] = []
-        edges: list[GraphEdge] = []
-
-        node_id = self._scope_id(scope)
         props: dict = {
             "extraction_confidence": scope.extraction_confidence,
         }
@@ -251,11 +256,9 @@ class EpistemicWriter:
             props["time_window"] = scope.time_window
 
         node = GraphNode(
-            node_id=node_id,
+            node_id=self._scope_id(scope, paper_id, tenant_id),
             type=GraphNodeType.SCOPE,
             name=scope.name,
             properties=props,
         )
-        nodes.append(node)
-
-        return node, edges
+        return node, []

@@ -3,15 +3,17 @@
 Writes ``Paper``, ``Author``, ``Organization``, ``Venue``, ``FundingSource``
 via MERGE on ``node_id``.
 
-These nodes are persistent across papers: same ORCID or canonical name
-→ same ``node_id`` → MERGE ON MATCH ON CREATE.
+These nodes are persistent across papers: same ORCID or canonical name (for a
+given tenant + node type) → same ``node_id`` → MERGE ON MATCH ON CREATE. Node
+ids follow ``sha256(tenant || type || canonical_name)[:16]`` (see
+:func:`distillation.domain.ids.node_id`) and deliberately omit the paper id.
 
 Author-Matching priority:
   1. ORCID (unique, machine-readable)
   2. Normalized name + affiliation (fallback for older papers without ORCID)
 
-This is critical for Independence-Detection: wrong Author matching
-breaks the entire bias analysis later.
+This is critical for Independence-Detection: wrong Author matching breaks the
+entire bias analysis later.
 """
 
 from __future__ import annotations
@@ -27,25 +29,21 @@ from ..domain.distillate import (
 )
 from ..domain.document import SourceDocument
 from ..domain.graph import GraphEdge, GraphEdgeType, GraphNode, GraphNodeType
-from ..domain.ids import canonicalize, deterministic_id
+from ..domain.ids import node_id
 
 
 class ProvenanceWriter:
     """Produces persistent (MERGE'd) provenance nodes and edges."""
 
-    def __init__(self) -> None:
-        self._author_orcid_map: dict[str, GraphNode] = {}
-        self._author_name_map: dict[str, GraphNode] = {}
-
     # --- public API -----------------------------------------------------
 
     def write_papers(
-        self, entities: Iterable[PaperMention],
+        self, entities: Iterable[PaperMention], tenant_id: str
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
         for paper in entities:
-            n, e = self._write_paper(paper)
+            n, e = self._write_paper(paper, tenant_id)
             nodes.append(n)
             edges.extend(e)
         return nodes, edges
@@ -54,29 +52,30 @@ class ProvenanceWriter:
         self,
         entities: Iterable[AuthorMention],
         paper_id: str,
+        tenant_id: str,
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
         for author in entities:
-            n, e = self._write_author(author, paper_id)
+            n, e = self._write_author(author, paper_id, tenant_id)
             nodes.append(n)
             edges.extend(e)
         return nodes, edges
 
     def write_organizations(
-        self, entities: Iterable[OrganizationMention],
+        self, entities: Iterable[OrganizationMention], tenant_id: str
     ) -> list[GraphNode]:
-        return [self._write_organization(org) for org in entities]
+        return [self._write_organization(org, tenant_id) for org in entities]
 
     def write_venues(
-        self, entities: Iterable[VenueMention],
+        self, entities: Iterable[VenueMention], tenant_id: str
     ) -> list[GraphNode]:
-        return [self._write_venue(v) for v in entities]
+        return [self._write_venue(v, tenant_id) for v in entities]
 
     def write_funding_sources(
-        self, entities: Iterable[FundingSourceMention],
+        self, entities: Iterable[FundingSourceMention], tenant_id: str
     ) -> list[GraphNode]:
-        return [self._write_funding(fs) for fs in entities]
+        return [self._write_funding(fs, tenant_id) for fs in entities]
 
     # --- Paper (from the ingested document) -----------------------------
 
@@ -85,8 +84,8 @@ class ProvenanceWriter:
     ) -> GraphNode:
         """Build the ``Paper`` node representing the ingested document.
 
-        The node id is the ``document_id`` so that per-paper edges
-        (``MAKES_CLAIM``, ``AUTHORED_BY``) anchor to the same node.
+        The node id is the ``document_id`` (already tenant + content scoped)
+        so per-paper edges (``MAKES_CLAIM``, ``AUTHORED_BY``) anchor here.
         """
         meta = document.metadata
         props: dict = {
@@ -106,21 +105,13 @@ class ProvenanceWriter:
 
     # --- Paper (from an explicit PaperMention) --------------------------
 
-    def _paper_id(self, paper: PaperMention) -> str:
-        """Paper ID: prefer DOI from metadata, otherwise sha256(title[:50])."""
-        # The PaperMention may carry a ``name`` that is the DOI, or we
-        # derive from title. The caller is responsible for setting
-        # name=DOI when a DOI is available.
-        return deterministic_id("paper", canonicalize(paper.name))
+    def _paper_id(self, paper: PaperMention, tenant_id: str) -> str:
+        """Paper id from its ``name`` (DOI where the caller set name=DOI)."""
+        return node_id(tenant_id, GraphNodeType.PAPER, paper.name)
 
     def _write_paper(
-        self, paper: PaperMention
+        self, paper: PaperMention, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
-        nodes: list[GraphNode] = []
-        edges: list[GraphEdge] = []
-
-        node_id = self._paper_id(paper)
-
         props: dict = {
             "extraction_confidence": paper.extraction_confidence,
         }
@@ -135,41 +126,34 @@ class ProvenanceWriter:
         props["is_preprint"] = paper.is_preprint
 
         node = GraphNode(
-            node_id=node_id,
+            node_id=self._paper_id(paper, tenant_id),
             type=GraphNodeType.PAPER,
             name=paper.name,
             properties=props,
         )
-        nodes.append(node)
-
-        return node, edges
+        return node, []
 
     # --- Author (with ORCID matching) ---------------------------------
 
-    def _author_id(self, author: AuthorMention) -> str:
-        """Author ID: prefer ORCID, fallback to (name + affiliation).
+    def _author_id(self, author: AuthorMention, tenant_id: str) -> str:
+        """Author id: prefer ORCID, fallback to (name + affiliation).
 
-        This is the most critical matching logic for Independence-Detection:
-        - If ORCID is available → use it directly (most precise).
-        - Otherwise → sha256(normalized_name + "|" + normalized_affiliation).
+        The most critical matching logic for Independence-Detection:
+        - ORCID available → use it directly (most precise).
+        - Otherwise → name + affiliation (affiliation disambiguates namesakes).
         """
         if author.orcid:
-            return deterministic_id("author", canonicalize(author.orcid))
-        # Fallback: name + affiliation. Affiliation helps disambiguate
-        # "John Smith" from different institutions.
-        affiliation = (
-            canonicalize(author.affiliation.name) if author.affiliation else ""
-        )
-        return deterministic_id(
-            "author", canonicalize(author.name), affiliation
+            return node_id(tenant_id, GraphNodeType.AUTHOR, author.orcid)
+        affiliation = author.affiliation.name if author.affiliation else ""
+        return node_id(
+            tenant_id, GraphNodeType.AUTHOR, author.name, affiliation
         )
 
     def _write_author(
-        self, author: AuthorMention, paper_id: str
+        self, author: AuthorMention, paper_id: str, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
         edges: list[GraphEdge] = []
-
-        node_id = self._author_id(author)
+        aid = self._author_id(author, tenant_id)
 
         props: dict = {
             "extraction_confidence": author.extraction_confidence,
@@ -184,7 +168,7 @@ class ProvenanceWriter:
             props["author_position"] = author.position
 
         node = GraphNode(
-            node_id=node_id,
+            node_id=aid,
             type=GraphNodeType.AUTHOR,
             name=author.name,
             properties=props,
@@ -194,21 +178,17 @@ class ProvenanceWriter:
         edges.append(
             GraphEdge(
                 source_node_id=paper_id,
-                target_node_id=node_id,
+                target_node_id=aid,
                 type=GraphEdgeType.AUTHORED_BY,
                 extraction_confidence=author.extraction_confidence,
             )
         )
-
         return node, edges
 
     # --- Organization -----------------------------------------------
 
-    def _organization_id(self, org: OrganizationMention) -> str:
-        return deterministic_id("org", canonicalize(org.name))
-
     def _write_organization(
-        self, org: OrganizationMention
+        self, org: OrganizationMention, tenant_id: str
     ) -> GraphNode:
         props: dict = {
             "extraction_confidence": org.extraction_confidence,
@@ -216,7 +196,7 @@ class ProvenanceWriter:
         if org.org_type is not None:
             props["type"] = org.org_type.value
         return GraphNode(
-            node_id=self._organization_id(org),
+            node_id=node_id(tenant_id, GraphNodeType.ORGANIZATION, org.name),
             type=GraphNodeType.ORGANIZATION,
             name=org.name,
             properties=props,
@@ -224,12 +204,7 @@ class ProvenanceWriter:
 
     # --- Venue ----------------------------------------------------------
 
-    def _venue_id(self, venue: VenueMention) -> str:
-        return deterministic_id("venue", canonicalize(venue.name))
-
-    def _write_venue(
-        self, venue: VenueMention
-    ) -> GraphNode:
+    def _write_venue(self, venue: VenueMention, tenant_id: str) -> GraphNode:
         props: dict = {
             "extraction_confidence": venue.extraction_confidence,
         }
@@ -238,7 +213,7 @@ class ProvenanceWriter:
         if venue.peer_reviewed is not None:
             props["peer_reviewed"] = venue.peer_reviewed
         return GraphNode(
-            node_id=self._venue_id(venue),
+            node_id=node_id(tenant_id, GraphNodeType.VENUE, venue.name),
             type=GraphNodeType.VENUE,
             name=venue.name,
             properties=props,
@@ -246,11 +221,8 @@ class ProvenanceWriter:
 
     # --- FundingSource -----------------------------------------------
 
-    def _funding_id(self, fs: FundingSourceMention) -> str:
-        return deterministic_id("funding", canonicalize(fs.name))
-
     def _write_funding(
-        self, fs: FundingSourceMention
+        self, fs: FundingSourceMention, tenant_id: str
     ) -> GraphNode:
         props: dict = {
             "extraction_confidence": fs.extraction_confidence,
@@ -259,7 +231,7 @@ class ProvenanceWriter:
             props["type"] = fs.funding_type.value
         props["potential_coi"] = fs.potential_coi
         return GraphNode(
-            node_id=self._funding_id(fs),
+            node_id=node_id(tenant_id, GraphNodeType.FUNDING_SOURCE, fs.name),
             type=GraphNodeType.FUNDING_SOURCE,
             name=fs.name,
             properties=props,

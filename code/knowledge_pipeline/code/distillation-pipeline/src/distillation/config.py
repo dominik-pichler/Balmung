@@ -39,28 +39,29 @@ class Settings(BaseSettings):
     chunk_token_overlap: int = 100
 
     # LLM
-    llm_provider: Literal["fake", "anthropic", "ollama"] = "fake"
+    llm_provider: Literal["fake", "anthropic", "omlx"] = "fake"
     llm_model: str = "claude-sonnet-4-5"
     llm_max_concurrency: int = 4
 
-    # Ollama
-    ollama_base_url: str = "http://localhost:11434/v1"
+    # OMLX
+    omlx_base_url: str = "http://localhost:8000/v1"
 
     # Embeddings
-    embedder_provider: Literal["fake", "anthropic", "ollama"] = "fake"
-    embedder_model: str = "nomic-embed-text"
+    embedder_provider: Literal["fake", "anthropic", "omlx"] = "fake"
+    embedder_model: str = "Qwen3.6-35B-A3B-4bit"
 
     # Graph
     graph_backend: Literal["in_memory", "neo4j"] = "in_memory"
     neo4j_uri: str = "bolt://localhost:7687"
-    neo4j_user: str = "neo4j"
-    neo4j_password: str = ""
+    neo4j_user: str = Field(default="neo4j", validation_alias="NEO4J_USER")
+    neo4j_password: str = Field(default="", validation_alias="NEO4J_PASSWORD")
 
     # Dead letter
     dead_letter_dir: Path = Path("./dead_letter")
 
     # Secrets read without the DISTILL_ prefix
     anthropic_api_key: str = Field(default="", validation_alias="ANTHROPIC_API_KEY")
+    omlx_api_key: str = Field(default="", validation_alias="OMLX_API_KEY")
 
 
 def get_settings() -> Settings:

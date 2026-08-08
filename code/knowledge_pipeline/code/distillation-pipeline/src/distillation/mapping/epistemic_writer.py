@@ -17,6 +17,7 @@ from __future__ import annotations
 from typing import Iterable
 
 from ..domain.distillate import (
+    AssumptionMention,
     ClaimMention,
     EvidenceMention,
     ExperimentMention,
@@ -44,11 +45,26 @@ class EpistemicWriter:
         self,
         entities: Iterable[ClaimMention],
         paper_id: str,
+        assumptions: Iterable[AssumptionMention] = (),
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
+        # Within-document heuristic: the paper's claims rest on the paper's
+        # surfaced assumptions. Extraction does not map individual claims to
+        # individual assumptions, so we link each claim to every assumption
+        # in the same document.
+        assumption_ids = [self._domain._assumption_id(a) for a in assumptions]
         for claim in entities:
             n, e = self._write_claim(claim, paper_id)
+            for assumption_id in assumption_ids:
+                e.append(
+                    GraphEdge(
+                        source_node_id=n.node_id,
+                        target_node_id=assumption_id,
+                        type=GraphEdgeType.ASSUMES,
+                        extraction_confidence=claim.extraction_confidence,
+                    )
+                )
             nodes.append(n)
             edges.extend(e)
         return nodes, edges

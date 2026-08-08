@@ -28,14 +28,13 @@ from .adapters.parsers.plaintext import PlainTextParser
 from .adapters.sources.local_file import LocalFileSource
 from .config import Settings, get_settings
 from .logging_setup import configure_logging
-from .mapping.graph_mapper import GraphMapper
+from .mapping.domain_writer import DomainWriter
+from .mapping.epistemic_writer import EpistemicWriter
+from .mapping.provenance_writer import ProvenanceWriter
 from .pipeline.context import PipelineContext
 from .pipeline.lenses.assumption import AssumptionLens
 from .pipeline.lenses.author import AuthorLens
-from .pipeline.lenses.conclusion import ConclusionLens
-from .pipeline.lenses.methodology import MethodologyLens
-from .pipeline.lenses.theory import TheoryLens
-from .pipeline.lenses.topic import TopicLens
+from .pipeline.lenses.claim_lens import ClaimLens
 from .pipeline.orchestrator import IngestionPipeline
 from .pipeline.stages.distill import DistillStage
 from .pipeline.stages.persist import PersistStage
@@ -63,22 +62,25 @@ def _build_llm(settings: Settings) -> LLMClient:
         return AnthropicLLMClient(
             api_key=settings.anthropic_api_key, model=settings.llm_model
         )
-    if settings.llm_provider == "ollama":
-        from .adapters.llm.ollama import OllamaLLMClient
+    if settings.llm_provider == "omlx":
+        from .adapters.llm.omlx import OmlxLLMClient
 
-        return OllamaLLMClient(
-            model=settings.llm_model, base_url=settings.ollama_base_url
+        return OmlxLLMClient(
+            model=settings.llm_model,
+            base_url=settings.omlx_base_url,
+            api_key=settings.omlx_api_key,
         )
     return FakeLLMClient()
 
 
 def _build_embedder(settings: Settings) -> Embedder:
-    if settings.embedder_provider == "ollama":
-        from .adapters.embedders.ollama import OllamaEmbedder
+    if settings.embedder_provider == "omlx":
+        from .adapters.embedders.omlx import OmlxEmbedder
 
-        return OllamaEmbedder(
+        return OmlxEmbedder(
             model=settings.embedder_model,
-            base_url=settings.ollama_base_url,
+            base_url=settings.omlx_base_url,
+            api_key=settings.omlx_api_key,
         )
     return FakeEmbedder()
 
@@ -114,22 +116,21 @@ def _build_context(settings: Settings) -> PipelineContext:
         overlap_tokens=settings.chunk_token_overlap,
     )
     lenses = [
-        TopicLens(llm),
         AuthorLens(llm),
         AssumptionLens(llm),
-        TheoryLens(llm),
-        ConclusionLens(llm),
-        MethodologyLens(llm),
+        ClaimLens(llm),
     ]
     graph_repo = _build_graph_repo(settings)
-    mapper = GraphMapper(tenant_id=settings.tenant_id)
+    domain_writer = DomainWriter()
+    epistemic_writer = EpistemicWriter(domain_writer)
+    provenance_writer = ProvenanceWriter()
     dead_letter = FilesystemDeadLetterStore(settings.dead_letter_dir)
 
     return PipelineContext(
         preprocess=PreprocessStage(parsers, chunker),
         distill=DistillStage(lenses, max_concurrency=settings.llm_max_concurrency),
         synthesize=SynthesizeStage(),
-        persist=PersistStage(mapper, graph_repo),
+        persist=PersistStage(domain_writer, epistemic_writer, provenance_writer, graph_repo),
         graph_repository=graph_repo,
         dead_letter=dead_letter,
     )
@@ -174,12 +175,13 @@ knowledge graph. The subgraph below was retrieved by semantic similarity to \
 the user's question — it contains the most relevant nodes and their direct \
 neighbours (JSON format).
 
-Node types: Source, Author, Affiliation, Topic, Theme, Assumption, Theory, \
-Conclusion, Methodology.
+Node types: Technology, Problem, Capability, Metric, Dataset, Assumption, \
+Limitation, Claim, Evidence, Experiment, Scope, Paper, Author, Venue, \
+Organization, FundingSource.
 
-Edge types (Source → entity): AUTHORED_BY, DISCUSSES, USES, BUILDS, CONCLUDES, \
-ASSUMES. Edge types (cross-entity): IS_AT, HAS_INTEREST, BELONGS_TO, SUPPORTS, \
-CONTRADICTS, UNDERLIES, APPLIES_TO, CITES.
+Edge types: MAKES_CLAIM, ABOUT, ADDRESSES, CONCERNS, HOLDS_UNDER, \
+SUPPORTED_BY, REFUTED_BY, ASSUMES, PRODUCED_BY, EVALUATED_ON, MEASURED_BY, \
+COMPARED_TO, CITES, AUTHORED_BY, AFFILIATED_WITH, FUNDED_BY.
 
 Answer the user's question based solely on the subgraph data. Be concise. If \
 the subgraph does not contain enough information, say so.

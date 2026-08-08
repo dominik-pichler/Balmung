@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
 
 from .ontology import (
     AssumptionType,
@@ -25,6 +25,7 @@ from .ontology import (
     EvidenceDirection,
     EvidenceType,
     ExperimentType,
+    FundingType,
     LimitationSeverity,
     MetricDirection,
     OrganizationType,
@@ -50,16 +51,17 @@ class ExtractedEntity(BaseModel):
     """
 
     name: str
-    extraction_confidence: float = Field(ge=0.0, le=1.0)
+    extraction_confidence: float = Field(default=1.0, ge=0.0, le=1.0)
     """Parser's self-reported confidence in [0, 1]."""
     provenance_chunk_ids: list[str] = Field(default_factory=list)
 
-    def model_post_init(self, _ctx: object) -> None:
-        if not getattr(self, "canonical_name", None):
-            self.canonical_name = self.name.strip().lower()
+    @computed_field
+    @property
+    def canonical_name(self) -> str:
+        return self.name.strip().lower()
 
 
-# ====================================================================
+# ===
 # Level 1: Domain entities (persistent, MERGE'd across papers)
 # ====================================================================
 
@@ -191,9 +193,15 @@ class AuthorMention(ExtractedEntity):
     """An author of the source, with optional ORCID and affiliation."""
 
     orcid: Optional[str] = None
-    affiliation: Optional[str] = None
+    affiliation: Optional[AffiliationMention] = None
     interests: list[str] = Field(default_factory=list)
     position: Optional[int] = None  # Author position in the paper
+
+
+class AffiliationMention(ExtractedEntity):
+    """An organizational affiliation (e.g. university, company)."""
+
+    org_type: Optional[OrganizationType] = None
 
 
 class OrganizationMention(ExtractedEntity):
@@ -259,6 +267,7 @@ class Distillate(BaseModel):
     # Level 3: Provenanz
     papers: list[PaperMention] = Field(default_factory=list)
     authors: list[AuthorMention] = Field(default_factory=list)
+    affiliations: list[AffiliationMention] = Field(default_factory=list)
     organizations: list[OrganizationMention] = Field(default_factory=list)
     venues: list[VenueMention] = Field(default_factory=list)
     funding_sources: list[FundingSourceMention] = Field(default_factory=list)

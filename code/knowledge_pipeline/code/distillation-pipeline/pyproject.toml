@@ -25,10 +25,6 @@ dev = [
     "ruff>=0.3",
 ]
 
-[[tool.uv.index]]
-name = "brz"
-url = "https://centralrepo.apps.a3.cp.cna.at/artifactory/api/pypi/brz-pypi-mirror/simple"
-default = true
 
 [project.scripts]
 distill = "distillation.cli:app"

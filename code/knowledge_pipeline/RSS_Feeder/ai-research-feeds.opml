@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>AI Research Feeds (star sources)</title>
+    <dateCreated>Sat, 08 Aug 2026 00:00:00 +0000</dateCreated>
+  </head>
+  <body>
+
+    <outline text="1 - Preprints" title="1 - Preprints">
+      <outline type="rss" text="arXiv cs.CL (Computation &amp; Language)" title="arXiv cs.CL" xmlUrl="https://rss.arxiv.org/rss/cs.CL" htmlUrl="https://arxiv.org/list/cs.CL/new"/>
+      <outline type="rss" text="arXiv cs.LG (Machine Learning)" title="arXiv cs.LG" xmlUrl="https://rss.arxiv.org/rss/cs.LG" htmlUrl="https://arxiv.org/list/cs.LG/new"/>
+      <outline type="rss" text="arXiv cs.AI (Artificial Intelligence)" title="arXiv cs.AI" xmlUrl="https://rss.arxiv.org/rss/cs.AI" htmlUrl="https://arxiv.org/list/cs.AI/new"/>
+      <outline type="rss" text="arXiv cs.CR (Security / jailbreaks)" title="arXiv cs.CR" xmlUrl="https://rss.arxiv.org/rss/cs.CR" htmlUrl="https://arxiv.org/list/cs.CR/new"/>
+      <outline type="rss" text="arXiv stat.ML (Statistics - ML)" title="arXiv stat.ML" xmlUrl="https://rss.arxiv.org/rss/stat.ML" htmlUrl="https://arxiv.org/list/stat.ML/new"/>
+      <outline type="rss" text="Hugging Face Daily Papers (community mirror - VERIFY)" title="HF Daily Papers" xmlUrl="https://rsshub.app/huggingface/daily-papers" htmlUrl="https://huggingface.co/papers"/>
+    </outline>
+
+    <outline text="2 - Frontier lab blogs" title="2 - Frontier lab blogs">
+      <outline type="rss" text="Anthropic News (unofficial mirror - no official feed)" title="Anthropic News" xmlUrl="https://rsshub.bestblogs.dev/anthropic/news" htmlUrl="https://www.anthropic.com/news"/>
+      <outline type="rss" text="OpenAI News (official)" title="OpenAI News" xmlUrl="https://openai.com/news/rss.xml" htmlUrl="https://openai.com/news"/>
+      <outline type="rss" text="Google DeepMind Blog (official)" title="Google DeepMind" xmlUrl="https://deepmind.google/blog/feed/basic/" htmlUrl="https://deepmind.google/discover/blog/"/>
+      <outline type="rss" text="Hugging Face Blog (official)" title="Hugging Face Blog" xmlUrl="https://huggingface.co/blog/feed.xml" htmlUrl="https://huggingface.co/blog"/>
+      <outline type="rss" text="Qwen Blog (Hugo index - VERIFY)" title="Qwen Blog" xmlUrl="https://qwenlm.github.io/index.xml" htmlUrl="https://qwenlm.github.io/blog/"/>
+    </outline>
+
+    <outline text="7 - Security / red-teaming" title="7 - Security / red-teaming">
+      <outline type="rss" text="Simon Willison - prompt-injection tag" title="Simon Willison (prompt-injection)" xmlUrl="https://simonwillison.net/tags/prompt-injection.atom" htmlUrl="https://simonwillison.net/tags/prompt-injection/"/>
+      <outline type="rss" text="Simon Willison - everything" title="Simon Willison (all)" xmlUrl="https://simonwillison.net/atom/everything/" htmlUrl="https://simonwillison.net/"/>
+      <outline type="rss" text="Embrace The Red - Johann Rehberger (Hugo index - VERIFY)" title="Embrace The Red" xmlUrl="https://embracethered.com/blog/index.xml" htmlUrl="https://embracethered.com/blog/"/>
+    </outline>
+
+    <outline text="8 - Policy / regulatory" title="8 - Policy / regulatory">
+      <!-- Most EU/DACH regulatory bodies publish no native RSS. Track via newsletter (FLI AI Act) or a scraped mirror. Placeholders below - verify before relying. -->
+      <outline type="rss" text="ENISA Publications (VERIFY)" title="ENISA Publications" xmlUrl="https://www.enisa.europa.eu/publications/@@rss.xml" htmlUrl="https://www.enisa.europa.eu/publications"/>
+      <outline type="rss" text="BSI (German Fed. Office for Info Security) - RSS (VERIFY)" title="BSI News" xmlUrl="https://www.bsi.bund.de/SiteGlobals/Functions/RSSFeed/RSSNewsfeed/RSSNewsfeed.xml" htmlUrl="https://www.bsi.bund.de/"/>
+    </outline>
+
+  </body>
+</opml>

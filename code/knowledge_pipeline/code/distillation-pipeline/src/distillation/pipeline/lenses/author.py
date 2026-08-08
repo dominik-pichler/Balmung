@@ -41,14 +41,14 @@ class AuthorLens(Lens[AuthorResponse, AuthorMention]):
         out: list[AuthorMention] = []
         for a in response.authors:
             affiliation = (
-                AffiliationMention(name=a.affiliation) if a.affiliation else None
+                AffiliationMention(name=a.affiliation, extraction_confidence=1.0) if a.affiliation else None
             )
             out.append(
                 AuthorMention(
                     name=a.name,
                     affiliation=affiliation,
                     interests=a.interests,
-                    confidence=a.confidence,
+                    extraction_confidence=1.0,
                 )
             )
         return out

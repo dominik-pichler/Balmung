@@ -39,7 +39,9 @@ class AssumptionLens(Lens[AssumptionResponse, AssumptionMention]):
     ) -> list[AssumptionMention]:
         return [
             AssumptionMention(
-                name=a.name, statement=a.statement, confidence=a.confidence
+                name=a.name,
+                statement=a.statement,
+                extraction_confidence=a.confidence,
             )
             for a in response.assumptions
         ]

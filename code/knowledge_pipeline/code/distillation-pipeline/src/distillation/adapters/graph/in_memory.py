@@ -3,8 +3,8 @@
 Backed by two dicts: ``node_id → GraphNode`` and ``(src, type, tgt) → GraphEdge``.
 Useful for tests and for running the pipeline locally without Neo4j.
 
-Provenance chunk lists are merged on upsert so re-ingesting the same source
-augments rather than overwrites lineage.
+Properties are merged on upsert so re-ingesting the same source augments
+rather than overwrites node/edge state.
 """
 
 from __future__ import annotations
@@ -39,16 +39,16 @@ class InMemoryGraphRepository(GraphRepository):
             if existing is None:
                 self._edges[key] = edge
             else:
-                merged_provenance = list(
-                    dict.fromkeys(
-                        [*existing.provenance_chunk_ids, *edge.provenance_chunk_ids]
-                    )
-                )
                 merged_props = {**existing.properties, **edge.properties}
+                merged_confidence = (
+                    edge.extraction_confidence
+                    if edge.extraction_confidence is not None
+                    else existing.extraction_confidence
+                )
                 self._edges[key] = existing.model_copy(
                     update={
-                        "provenance_chunk_ids": merged_provenance,
                         "properties": merged_props,
+                        "extraction_confidence": merged_confidence,
                     }
                 )
 

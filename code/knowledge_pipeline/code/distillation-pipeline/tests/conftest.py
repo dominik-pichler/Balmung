@@ -20,14 +20,13 @@ from distillation.adapters.llm.fake import FakeLLMClient  # noqa: E402
 from distillation.adapters.parsers.markdown import MarkdownParser  # noqa: E402
 from distillation.adapters.parsers.plaintext import PlainTextParser  # noqa: E402
 from distillation.domain.document import DocumentFormat, DocumentMetadata, SourceDocument  # noqa: E402
-from distillation.mapping.graph_mapper import GraphMapper  # noqa: E402
+from distillation.mapping.domain_writer import DomainWriter  # noqa: E402
+from distillation.mapping.epistemic_writer import EpistemicWriter  # noqa: E402
+from distillation.mapping.provenance_writer import ProvenanceWriter  # noqa: E402
 from distillation.pipeline.context import PipelineContext  # noqa: E402
 from distillation.pipeline.lenses.assumption import AssumptionLens  # noqa: E402
 from distillation.pipeline.lenses.author import AuthorLens  # noqa: E402
-from distillation.pipeline.lenses.conclusion import ConclusionLens  # noqa: E402
-from distillation.pipeline.lenses.methodology import MethodologyLens  # noqa: E402
-from distillation.pipeline.lenses.theory import TheoryLens  # noqa: E402
-from distillation.pipeline.lenses.topic import TopicLens  # noqa: E402
+from distillation.pipeline.lenses.claim_lens import ClaimLens  # noqa: E402
 from distillation.pipeline.stages.distill import DistillStage  # noqa: E402
 from distillation.pipeline.stages.persist import PersistStage  # noqa: E402
 from distillation.pipeline.stages.preprocess import PreprocessStage  # noqa: E402
@@ -72,19 +71,18 @@ def pipeline_context(
     parsers = ParserRegistry([PlainTextParser(), MarkdownParser()])
     chunker = SlidingWindowChunker(max_tokens=200, overlap_tokens=20)
     lenses = [
-        TopicLens(fake_llm),
         AuthorLens(fake_llm),
         AssumptionLens(fake_llm),
-        TheoryLens(fake_llm),
-        ConclusionLens(fake_llm),
-        MethodologyLens(fake_llm),
+        ClaimLens(fake_llm),
     ]
-    mapper = GraphMapper(tenant_id="test")
+    domain_writer = DomainWriter()
+    epistemic_writer = EpistemicWriter(domain_writer)
+    provenance_writer = ProvenanceWriter()
     return PipelineContext(
         preprocess=PreprocessStage(parsers, chunker),
         distill=DistillStage(lenses),
         synthesize=SynthesizeStage(),
-        persist=PersistStage(mapper, in_memory_graph),
+        persist=PersistStage(domain_writer, epistemic_writer, provenance_writer, in_memory_graph),
         graph_repository=in_memory_graph,
         dead_letter=FilesystemDeadLetterStore(tmp_path / "dlq"),
     )

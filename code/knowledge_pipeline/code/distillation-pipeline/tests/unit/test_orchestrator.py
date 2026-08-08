@@ -14,6 +14,7 @@ async def test_ingest_one_produces_nodes_and_edges(
     assert result is not None
     assert result.document_id == sample_document.document_id
     assert result.nodes_written > 0
+    # A Paper anchor node plus AUTHORED_BY / MAKES_CLAIM / ASSUMES edges.
     assert result.edges_written > 0
 
 

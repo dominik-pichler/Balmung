@@ -6,10 +6,11 @@ Key changes from the legacy adapter:
      MERGE is slower and can create duplicates.
   2. **Transactions**: Each call wraps in ``async with session(...)`` so
      partial writes never corrupt the graph.
-  3. **Three-layer writes**: ``upsert_domain_nodes()`` uses MERGE with
-     explicit ``id`` fields; ``create_epistemic_nodes()`` uses CREATE for
-     paper-scoped nodes; ``upsert_provenance_nodes()`` uses MERGE for
-     cross-paper persistent nodes.
+  3. **Three-layer writes**: ``upsert_domain_nodes()`` and
+     ``upsert_provenance_nodes()`` MERGE persistent (cross-paper) nodes on their
+     ``id``; ``create_epistemic_nodes()`` MERGEs paper-scoped nodes on their
+     paper-scoped ``id`` — never merging across papers, yet idempotent when the
+     same paper is re-ingested.
   4. **``extraction_confidence``**: On every node write, the adapter
      writes this property so the assessment engine can later filter on
      extraction quality.
@@ -41,6 +42,11 @@ log = structlog.get_logger()
 # automatically (idempotently) on first write via ``ensure_constraints()``.
 
 # constraint name → node label
+#
+# Level 2 (Claim/Evidence/Experiment/Scope) is included: those nodes carry a
+# paper-scoped ``id`` (folds in paper_id), so a uniqueness constraint on ``id``
+# is safe — it never merges across papers (ids differ per paper) yet lets a
+# re-ingest of the *same* paper MERGE onto the same node (idempotent no-op).
 CONSTRAINT_LABELS: dict[str, str] = {
     "technology_id": "Technology",
     "problem_id": "Problem",
@@ -49,6 +55,10 @@ CONSTRAINT_LABELS: dict[str, str] = {
     "dataset_id": "Dataset",
     "assumption_id": "Assumption",
     "limitation_id": "Limitation",
+    "claim_id": "Claim",
+    "evidence_id": "Evidence",
+    "experiment_id": "Experiment",
+    "scope_id": "Scope",
     "paper_id": "Paper",
     "author_id": "Author",
     "organization_id": "Organization",
@@ -194,21 +204,26 @@ class Neo4jGraphRepository(GraphRepository):
     async def create_epistemic_nodes(
         self, nodes: Iterable[GraphNode]
     ) -> None:
-        """Create paper-scoped (CREATE) epistemik nodes.
+        """Write paper-scoped epistemik nodes (Claim, Evidence, Experiment, Scope).
 
-        These nodes (Claim, Evidence, Experiment, Scope) are created
-        fresh for each paper — they are NEVER merged across papers.
-        Uses CREATE to enforce this invariant.
+        These nodes are never merged *across papers*: their ``node_id`` folds in
+        the paper id, so two papers produce distinct nodes. We MERGE on that
+        paper-scoped ``id`` (not CREATE) so that re-ingesting the *same* paper is
+        an idempotent no-op instead of duplicating every claim — matching the
+        in-memory backend and the spec's re-ingest guarantee.
         """
         node_list = list(nodes)
         if not node_list:
             return
 
+        # Provision constraints (now including the L2 labels) before writing.
+        await self._ensure_constraints_once()
+
         async with self._driver.session(database=self._database) as session:
             for node in node_list:
                 label = _validate_node_label(node.type)
                 cypher = (
-                    f"CREATE (n:{label} {{id: $node_id}}) "
+                    f"MERGE (n:{label} {{id: $node_id}}) "
                     "SET n += $props"
                 )
                 await session.run(

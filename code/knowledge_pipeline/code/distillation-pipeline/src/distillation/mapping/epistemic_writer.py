@@ -117,7 +117,7 @@ class EpistemicWriter:
 
     # --- claim ----------------------------------------------------------
 
-    def _claim_id(self, mention: ClaimMention, paper_id: str, tenant_id: str) -> str:
+    def claim_id(self, mention: ClaimMention, paper_id: str, tenant_id: str) -> str:
         """Paper-scoped id: sha256(tenant || Claim || paper_id || text[:50])[:16]."""
         text_slice = mention.text.strip()[:50] if mention.text else ""
         return node_id(
@@ -128,7 +128,7 @@ class EpistemicWriter:
         self, claim: ClaimMention, paper_id: str, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
         edges: list[GraphEdge] = []
-        cid = self._claim_id(claim, paper_id, tenant_id)
+        cid = self.claim_id(claim, paper_id, tenant_id)
 
         props: dict = {
             "text": claim.text,
@@ -164,7 +164,7 @@ class EpistemicWriter:
 
     # --- evidence -------------------------------------------------------
 
-    def _evidence_id(
+    def evidence_id(
         self, mention: EvidenceMention, paper_id: str, tenant_id: str
     ) -> str:
         return node_id(
@@ -187,7 +187,7 @@ class EpistemicWriter:
             props["direction"] = evidence.direction.value
 
         node = GraphNode(
-            node_id=self._evidence_id(evidence, paper_id, tenant_id),
+            node_id=self.evidence_id(evidence, paper_id, tenant_id),
             type=GraphNodeType.EVIDENCE,
             name=evidence.name,
             properties=props,
@@ -196,7 +196,7 @@ class EpistemicWriter:
 
     # --- experiment -----------------------------------------------------
 
-    def _experiment_id(
+    def experiment_id(
         self, mention: ExperimentMention, paper_id: str, tenant_id: str
     ) -> str:
         return node_id(
@@ -222,7 +222,7 @@ class EpistemicWriter:
         props["preregistered"] = experiment.preregistered
 
         node = GraphNode(
-            node_id=self._experiment_id(experiment, paper_id, tenant_id),
+            node_id=self.experiment_id(experiment, paper_id, tenant_id),
             type=GraphNodeType.EXPERIMENT,
             name=experiment.name,
             properties=props,

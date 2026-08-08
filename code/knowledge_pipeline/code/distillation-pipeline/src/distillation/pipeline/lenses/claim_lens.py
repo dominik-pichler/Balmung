@@ -32,6 +32,7 @@ class _ClaimItem(BaseModel):
     stated_confidence: float | None = None  # Author's hedging 0.0–1.0
     prior_implausibility: float | None = None  # Base-rate 0.0–1.0
     decay_immune: bool = False  # Formal proofs are decay_immune
+    about: list[str] = Field(default_factory=list)  # Domain entities the claim is about
     extraction_confidence: float = 0.6  # Default parser confidence
 
 
@@ -99,6 +100,7 @@ class ClaimLens(
                 stated_confidence=c.stated_confidence,
                 prior_implausibility=c.prior_implausibility,
                 decay_immune=c.decay_immune,
+                about=c.about,
                 extraction_confidence=c.extraction_confidence,
             )
             for c in response.claims

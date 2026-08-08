@@ -45,6 +45,7 @@ class _CapabilityItem(BaseModel):
     name: str
     description: str = ""
     capability_type: str | None = None
+    addresses: str | None = None  # name of a Problem this capability addresses
     confidence: float = 0.6
 
 
@@ -67,6 +68,7 @@ class _LimitationItem(BaseModel):
     name: str
     statement: str = ""
     severity: str | None = None
+    concerns: str | None = None  # name of a Domain entity this limitation concerns
     confidence: float = 0.6
 
 
@@ -130,6 +132,7 @@ class DomainLens(Lens[DomainResponse, ExtractedEntity]):
                 name=c.name,
                 description=c.description,
                 capability_type=parse_enum(CapabilityType, c.capability_type),
+                addresses=c.addresses,
                 extraction_confidence=c.confidence,
             )
             for c in response.capabilities
@@ -160,6 +163,7 @@ class DomainLens(Lens[DomainResponse, ExtractedEntity]):
                 name=limitation.name,
                 statement=limitation.statement,
                 severity=parse_enum(LimitationSeverity, limitation.severity),
+                concerns=limitation.concerns,
                 extraction_confidence=limitation.confidence,
             )
             for limitation in response.limitations

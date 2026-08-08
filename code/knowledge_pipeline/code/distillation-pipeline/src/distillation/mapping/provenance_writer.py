@@ -135,7 +135,7 @@ class ProvenanceWriter:
 
     # --- Author (with ORCID matching) ---------------------------------
 
-    def _author_id(self, author: AuthorMention, tenant_id: str) -> str:
+    def author_id(self, author: AuthorMention, tenant_id: str) -> str:
         """Author id: prefer ORCID, fallback to (name + affiliation).
 
         The most critical matching logic for Independence-Detection:
@@ -153,7 +153,7 @@ class ProvenanceWriter:
         self, author: AuthorMention, paper_id: str, tenant_id: str
     ) -> tuple[GraphNode, list[GraphEdge]]:
         edges: list[GraphEdge] = []
-        aid = self._author_id(author, tenant_id)
+        aid = self.author_id(author, tenant_id)
 
         props: dict = {
             "extraction_confidence": author.extraction_confidence,

@@ -82,6 +82,7 @@ class CapabilityMention(ExtractedEntity):
 
     description: str = ""
     capability_type: CapabilityType | None = None
+    addresses: str | None = None  # name of a Problem this capability addresses
 
 
 class MetricMention(ExtractedEntity):
@@ -104,6 +105,7 @@ class AssumptionMention(ExtractedEntity):
 
     statement: str = ""
     assumption_type: AssumptionType | None = None
+    holds_under: str | None = None  # name of a Domain entity it holds under
 
 
 class LimitationMention(ExtractedEntity):
@@ -111,6 +113,7 @@ class LimitationMention(ExtractedEntity):
 
     statement: str = ""
     severity: LimitationSeverity | None = None
+    concerns: str | None = None  # name of a Domain entity this limitation concerns
 
 
 # ====================================================================
@@ -135,6 +138,7 @@ class ClaimMention(ExtractedEntity):
         default=None, ge=0.0, le=1.0
     )  # Base-rate: "X solves AGI" high, "X is 2% faster" low
     decay_immune: bool = False  # True for formal proofs
+    about: list[str] = Field(default_factory=list)  # names of Domain entities (ABOUT)
 
 
 class EvidenceMention(ExtractedEntity):
@@ -147,6 +151,7 @@ class EvidenceMention(ExtractedEntity):
     effect_size: float | None = None  # Nullable: not always reported
     significance: float | None = None  # Nullable: not always reported
     direction: EvidenceDirection | None = None
+    claim: str | None = None  # label of the Claim this evidence bears on
 
 
 class ExperimentMention(ExtractedEntity):
@@ -158,6 +163,10 @@ class ExperimentMention(ExtractedEntity):
     replication_status: ReplicationStatus | None = None
     leakage_risk: DatasetContaminationRisk | None = None
     preregistered: bool = False
+    # Relationship references (resolved to PRODUCED_BY / EVALUATED_ON / MEASURED_BY):
+    technologies: list[str] = Field(default_factory=list)  # Technology names
+    datasets: list[str] = Field(default_factory=list)  # Dataset names
+    metrics: list[str] = Field(default_factory=list)  # Metric names
 
 
 class ScopeMention(ExtractedEntity):

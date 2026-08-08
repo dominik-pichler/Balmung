@@ -12,6 +12,7 @@ from ...domain.distillate import Distillate
 from ...domain.document import SourceDocument
 from ...domain.graph import GraphEdge, GraphNode
 from ...mapping.domain_writer import DomainWriter
+from ...mapping.edges import EdgeLinker
 from ...mapping.epistemic_writer import EpistemicWriter
 from ...mapping.provenance_writer import ProvenanceWriter
 from ...ports.graph_repository import GraphRepository
@@ -31,6 +32,7 @@ class PersistStage:
         self._epistemic = epistemic_writer
         self._provenance = provenance_writer
         self._repository = repository
+        self._linker = EdgeLinker(epistemic_writer, provenance_writer)
 
     async def run(
         self, document: SourceDocument, distillate: Distillate
@@ -93,6 +95,14 @@ class PersistStage:
         nodes.extend(self._provenance.write_venues(distillate.venues, tenant_id))
         nodes.extend(
             self._provenance.write_funding_sources(distillate.funding_sources, tenant_id)
+        )
+
+        # Relationship + remaining structural edges, resolved once every node
+        # exists (endpoints filtered to emitted nodes → no dangling edges).
+        edges.extend(
+            self._linker.link(
+                nodes, distillate, tenant_id=tenant_id, paper_id=paper_id
+            )
         )
 
         await self._repository.upsert_nodes(nodes)

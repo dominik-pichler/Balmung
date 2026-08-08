@@ -31,6 +31,7 @@ class _EvidenceItem(BaseModel):
     effect_size: float | None = None
     significance: float | None = None
     direction: str | None = None  # positive | negative | neutral
+    claim: str | None = None  # label of the Claim this evidence bears on
     confidence: float = 0.6
 
 
@@ -41,6 +42,9 @@ class _ExperimentItem(BaseModel):
     has_baseline: bool | None = None
     replication_status: str | None = None
     leakage_risk: str | None = None
+    technologies: list[str] = Field(default_factory=list)  # PRODUCED_BY targets
+    datasets: list[str] = Field(default_factory=list)  # EVALUATED_ON targets
+    metrics: list[str] = Field(default_factory=list)  # MEASURED_BY targets
     confidence: float = 0.6
 
 
@@ -97,6 +101,7 @@ class EvidenceLens(Lens[EvidenceResponse, ExtractedEntity]):
                 effect_size=e.effect_size,
                 significance=e.significance,
                 direction=parse_enum(EvidenceDirection, e.direction),
+                claim=e.claim,
                 extraction_confidence=e.confidence,
             )
             for e in response.evidence
@@ -109,6 +114,9 @@ class EvidenceLens(Lens[EvidenceResponse, ExtractedEntity]):
                 has_baseline=x.has_baseline,
                 replication_status=parse_enum(ReplicationStatus, x.replication_status),
                 leakage_risk=parse_enum(DatasetContaminationRisk, x.leakage_risk),
+                technologies=x.technologies,
+                datasets=x.datasets,
+                metrics=x.metrics,
                 extraction_confidence=x.confidence,
             )
             for x in response.experiments

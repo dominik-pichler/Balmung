@@ -11,6 +11,7 @@ from .base import Lens
 class _AssumptionItem(BaseModel):
     name: str
     statement: str = ""
+    holds_under: str | None = None  # name of a Domain entity it holds under
     confidence: float = 1.0
 
 
@@ -41,6 +42,7 @@ class AssumptionLens(Lens[AssumptionResponse, AssumptionMention]):
             AssumptionMention(
                 name=a.name,
                 statement=a.statement,
+                holds_under=a.holds_under,
                 extraction_confidence=a.confidence,
             )
             for a in response.assumptions

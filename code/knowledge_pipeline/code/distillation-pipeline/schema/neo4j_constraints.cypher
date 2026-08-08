@@ -61,6 +61,26 @@ CREATE CONSTRAINT venue_id IF NOT EXISTS
   FOR (n:Venue) REQUIRE n.id IS UNIQUE;
 
 // ===================================================================
+// UNIQUE-CONSTRAINTS für paper-scoped Ebene-2-IDs (Epistemik)
+// ===================================================================
+// Ebene-2-Knoten (Claim/Evidence/Experiment/Scope) tragen eine
+// paper-scoped id (paper_id ist Teil der id). Eine Unique-Constraint auf
+// id merged NICHT über Papers hinweg (verschiedene Papers → verschiedene
+// ids), erlaubt aber die idempotente Re-Ingestion desselben Papers.
+
+CREATE CONSTRAINT claim_id IF NOT EXISTS
+  FOR (n:Claim) REQUIRE n.id IS UNIQUE;
+
+CREATE CONSTRAINT evidence_id IF NOT EXISTS
+  FOR (n:Evidence) REQUIRE n.id IS UNIQUE;
+
+CREATE CONSTRAINT experiment_id IF NOT EXISTS
+  FOR (n:Experiment) REQUIRE n.id IS UNIQUE;
+
+CREATE CONSTRAINT scope_id IF NOT EXISTS
+  FOR (n:Scope) REQUIRE n.id IS UNIQUE;
+
+// ===================================================================
 // INDEXE für häufig abgefragte Felder (Performance)
 // ===================================================================
 

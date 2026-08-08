@@ -15,6 +15,7 @@ prompt and the response shape.
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import Generic, TypeVar
 
 import structlog
@@ -26,8 +27,24 @@ from ...ports.llm_client import LLMClient, LLMError
 
 TResponse = TypeVar("TResponse", bound=BaseModel)
 TEntity = TypeVar("TEntity", bound=ExtractedEntity)
+_E = TypeVar("_E", bound=Enum)
 
 log = structlog.get_logger(__name__)
+
+
+def parse_enum(enum_cls: type[_E], value: str | None) -> _E | None:
+    """Best-effort parse of an LLM-supplied string into an enum member.
+
+    Returns ``None`` for a missing or unrecognised value rather than raising —
+    an unknown enum value should degrade to "no typed value", never crash the
+    lens (ontology over accuracy).
+    """
+    if value is None:
+        return None
+    try:
+        return enum_cls(value)
+    except ValueError:
+        return None
 
 
 class Lens(ABC, Generic[TResponse, TEntity]):

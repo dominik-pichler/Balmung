@@ -33,10 +33,15 @@ from .mapping.domain_writer import DomainWriter
 from .mapping.epistemic_writer import EpistemicWriter
 from .mapping.provenance_writer import ProvenanceWriter
 from .pipeline.context import PipelineContext
-from .pipeline.lenses.assumption import AssumptionLens
-from .pipeline.lenses.author import AuthorLens
-from .pipeline.lenses.base import Lens
-from .pipeline.lenses.claim_lens import ClaimLens
+from .pipeline.lenses import (
+    AssumptionLens,
+    AuthorLens,
+    ClaimLens,
+    DomainLens,
+    EvidenceLens,
+    Lens,
+    ProvenanceLens,
+)
 from .pipeline.orchestrator import IngestionPipeline
 from .pipeline.stages.distill import DistillStage
 from .pipeline.stages.persist import PersistStage
@@ -118,9 +123,15 @@ def _build_context(settings: Settings) -> PipelineContext:
         overlap_tokens=settings.chunk_token_overlap,
     )
     lenses: list[Lens[Any, Any]] = [
-        AuthorLens(llm),
+        # L1 domain
+        DomainLens(llm),
         AssumptionLens(llm),
+        # L2 epistemik
         ClaimLens(llm),
+        EvidenceLens(llm),
+        # L3 provenance
+        AuthorLens(llm),
+        ProvenanceLens(llm),
     ]
     graph_repo = _build_graph_repo(settings)
     domain_writer = DomainWriter()

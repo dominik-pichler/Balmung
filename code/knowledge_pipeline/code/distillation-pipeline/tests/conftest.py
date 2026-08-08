@@ -28,9 +28,14 @@ from distillation.mapping.domain_writer import DomainWriter
 from distillation.mapping.epistemic_writer import EpistemicWriter
 from distillation.mapping.provenance_writer import ProvenanceWriter
 from distillation.pipeline.context import PipelineContext
-from distillation.pipeline.lenses.assumption import AssumptionLens
-from distillation.pipeline.lenses.author import AuthorLens
-from distillation.pipeline.lenses.claim_lens import ClaimLens
+from distillation.pipeline.lenses import (
+    AssumptionLens,
+    AuthorLens,
+    ClaimLens,
+    DomainLens,
+    EvidenceLens,
+    ProvenanceLens,
+)
 from distillation.pipeline.stages.distill import DistillStage
 from distillation.pipeline.stages.persist import PersistStage
 from distillation.pipeline.stages.preprocess import PreprocessStage
@@ -75,9 +80,12 @@ def pipeline_context(
     parsers = ParserRegistry([PlainTextParser(), MarkdownParser()])
     chunker = SlidingWindowChunker(max_tokens=200, overlap_tokens=20)
     lenses = [
-        AuthorLens(fake_llm),
+        DomainLens(fake_llm),
         AssumptionLens(fake_llm),
         ClaimLens(fake_llm),
+        EvidenceLens(fake_llm),
+        AuthorLens(fake_llm),
+        ProvenanceLens(fake_llm),
     ]
     domain_writer = DomainWriter()
     epistemic_writer = EpistemicWriter(domain_writer)

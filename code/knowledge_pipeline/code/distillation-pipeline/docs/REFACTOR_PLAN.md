@@ -277,17 +277,42 @@ again at execution time before the diff lands.
 
 ## 7. Definition-of-Done tracking (from the task)
 
-| DoD item | Now | After plan |
-|---|---|---|
-| `REFACTOR_PLAN.md` reflects final state | ✅ (this file) | keep updated |
-| `distill ingest` runs on fake+in-memory, prints counts | ✅ (10/15) | ✅ (re-baselined) |
-| Re-ingest is a verified no-op | ✅ in-memory only | ✅ incl. Neo4j (C3) |
-| Node/Chunk/Document ID formulas match spec | ⚠️ Chunk/Doc ✅, **Node ✗** (C1/C2) | ✅ |
-| L1/L3 MERGE, L2 CREATE; every edge has `extraction_confidence∈[0,1]` | ⚠️ partial (C3, C5) | ✅ |
-| Concrete adapters imported only in `cli.py`; deps direction holds | ✅ | ✅ |
-| No cross-document edges during ingestion | ✅ (none produced) | ✅ (keep seam) |
-| `ruff`, `mypy`, `pytest` all pass | ✗ (92 ruff / 4 mypy) / ✅ pytest | ✅ |
-| Each phase its own commit | — | ✅ |
+Final state after Phases 1–6 (branch `refactor/distillation-pipeline`):
+
+| DoD item | Status |
+|---|---|
+| `REFACTOR_PLAN.md` reflects final state | ✅ (this file) |
+| `distill ingest` runs on fake+in-memory, prints counts | ✅ (49 nodes / 21 edges) |
+| Re-ingest is a verified no-op | ✅ in-memory (test) + Neo4j MERGE (fake-driver test, C3) |
+| Node/Chunk/Document ID formulas match spec | ✅ (node IDs via `ids.node_id`, C1/C2) |
+| L1/L3 MERGE, L2 paper-scoped; every edge has `extraction_confidence∈[0,1]` | ✅ (C3, C5) |
+| Concrete adapters imported only in `cli.py`; deps direction holds | ✅ |
+| No cross-document edges during ingestion | ✅ (linker is within-document only; seam noted) |
+| `ruff`, `mypy`, `pytest` all pass | ✅ (ruff clean / mypy clean / 41 passed) |
+| Each phase its own commit | ✅ |
+
+### What each phase delivered
+- **P1** quality-gate zero-out (ruff/mypy clean; deleted broken Neo4j legacy
+  methods; no behaviour change).
+- **P2** node-ID formula alignment (C1 + C2) — tenant/type partitioning,
+  paper-scoped L2 ids.
+- **P3** six multi-entity lenses (strategy b) + type-routed synthesis.
+- **P4** relationship + structural edges (`mapping/edges.py`), Neo4j L2
+  MERGE-idempotency (C3), edge `extraction_confidence` enforced (C5).
+- **P5** CLI/config/retrieval verified conformant; no source change required
+  (verification landed as the retrieval test in P6).
+- **P6** test suite (21 → 41): node-ID formula, writer MERGE/paper-scoping,
+  edge linking + dangling filter, one-hop retrieval, Neo4j MERGE semantics,
+  pipeline-level per-lens error capture.
+
+### Remaining seams / out of scope (by design)
+- Cross-document / corpus edges (APPLIES_TO, UNDERLIES, corpus
+  SUPPORTS/CONTRADICTS) — separate job over the persisted graph.
+- Relationship edges only materialise when extraction supplies the reference
+  fields; `FakeLLMClient` leaves them empty (verified via canned responses in
+  tests), so a fake ingest shows the structural edges only.
+- `AuthorLens`/`AffiliationMention` still stamp `extraction_confidence=1.0`
+  literally (pre-existing; not in this refactor's scope).
 
 ---
 

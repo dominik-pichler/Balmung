@@ -1,0 +1,190 @@
+node_id,label,property_name,property_value,optional,level
+tech_transformer,Technology,type,Model,no,1
+tech_transformer,Technology,canonical_name,transformer,yes,1
+tech_transformer,Technology,aliases,"[Transformer, transformers]",yes,1
+tech_transformer,Technology,first_described_in,arxiv:1706.03762,yes,1
+tech_bert,Technology,type,Model,no,1
+tech_bert,Technology,canonical_name,bert,yes,1
+tech_bert,Technology,aliases,"[BERT, BERT-base, BERT-large]",yes,1
+tech_gpt,Technology,type,Model,no,1
+tech_gpt,Technology,canonical_name,gpt,yes,1
+tech_gpt,Technology,aliases,"[GPT, GPT-2, GPT-3, GPT-4]",yes,1
+tech_roberta,Technology,type,Model,no,1
+tech_roberta,Technology,canonical_name,roberta,yes,1
+tech_deberta,Technology,type,Model,no,1
+node_problem_sota,Problem,domain,Machine Learning,no,1
+node_problem_sota,Problem,canonical_name,achieving_state_of_the_art_performance,no,1
+node_problem_few_shot,Problem,domain,Machine Learning,no,1
+node_problem_few_shot,Problem,canonical_name,improving_few_shot_learning,no,1
+node_problem_align,Problem,domain,Human-AI Interaction,no,1
+node_problem_align,Problem,canonical_name,improving_human_ai_alignment,no,1
+node_capability_accuracy,Capability,capability_type,functional,no,1
+node_capability_accuracy,Capability,canonical_name,classification_accuracy,no,1
+node_capability_accuracy,Capability,description,ability to correctly classify inputs,yes,1
+node_capability_speed,Capability,capability_type,performance,no,1
+node_capability_speed,Capability,canonical_name,inference_speed,no,1
+node_capability_speed,Capability,description,ability to generate outputs quickly,yes,1
+node_capability_robust,Capability,capability_type,robustness,no,1
+node_capability_robust,Capability,canonical_name,robustness_to_adversarial_attacks,no,1
+node_capability_robust,Capability,description,ability to resist adversarial perturbations,yes,1
+node_metric_accuracy,Metric,direction,higher_better,no,1
+node_metric_accuracy,Metric,canonical_name,accuracy,yes,1
+node_metric_accuracy,Metric,unit,percentage,yes,1
+node_metric_bleu,Metric,direction,higher_better,no,1
+node_metric_bleu,Metric,canonical_name,bleu_score,yes,1
+node_metric_bleu,Metric,unit,0-1,yes,1
+node_metric_latency,Metric,direction,lower_better,no,1
+node_metric_latency,Metric,canonical_name,latency,yes,1
+node_metric_latency,Metric,unit,milliseconds,yes,1
+node_metric_flops,Metric,direction,lower_better,no,1
+node_metric_flops,Metric,canonical_name,flops,yes,1
+node_metric_flops,Metric,unit,floating_point_operations,yes,1
+node_dataset_imdb,Dataset,domain,NLP,no,1
+node_dataset_imdb,Dataset,canonical_name,imdb,yes,1
+node_dataset_imdb,Dataset,size,50000,yes,1
+node_dataset_imdb,Dataset,contamination_risk,low,no,1
+node_dataset_wiki,Dataset,domain,NLP,no,1
+node_dataset_wiki,Dataset,canonical_name,wikipedia_2024,yes,1
+node_dataset_wiki,Dataset,size,20000000,no,1
+node_dataset_wiki,Dataset,contamination_risk,high,no,1
+node_dataset_glm,Dataset,domain,NLP,no,1
+node_dataset_glm,Dataset,canonical_name,glm_testset,yes,1
+node_dataset_glm,Dataset,size,1000,yes,1
+node_dataset_glm,Dataset,contamination_risk,unknown,no,1
+node_asst_training_data,Assumption,type,data,no,1
+node_asst_training_data,Assumption,statement,training data is representative of real-world distributions,no,1
+node_asst_universe,Assumption,type,theoretical,no,1
+node_asst_universe,Assumption,statement,the model universe includes all relevant classes,no,1
+node_asst_independent,Assumption,type,data,no,1
+node_asst_independent,Assumption,statement,samples in training and test sets are independent,no,1
+node_lim_bias,Limitation,severity,moderate,no,1
+node_lim_bias,Limitation,statement,bias in training data propagates to predictions,no,1
+node_lim_compute,Limitation,severity,severe,no,1
+node_lim_compute,Limitation,statement,training requires computationally expensive resources,no,1
+node_lim_scale,Limitation,severity,minor,no,1
+node_lim_scale,Limitation,statement,small improvements are not statistically significant at scale,no,1
+node_claim_gpt_outperforms,Claim,claim_type,capability,no,2
+node_claim_gpt_outperforms,Claim,polarity,positive,no,2
+node_claim_gpt_outperforms,Claim,stated_confidence,0.95,no,2
+node_claim_gpt_outperforms,Claim,prior_implausibility,0.3,yes,2
+node_claim_gpt_outperforms,Claim,decay_immune,false,no,2
+node_claim_gpt_outperforms,Claim,text,GPT-4 outperforms GPT-3.5 on all benchmarks,no,2
+node_claim_few_shot_robust,Claim,claim_type,causal,no,2
+node_claim_few_shot_robust,Claim,polarity,positive,no,2
+node_claim_few_shot_robust,Claim,stated_confidence,0.7,yes,2
+node_claim_few_shot_robust,Claim,prior_implausibility,0.5,yes,2
+node_claim_few_shot_robust,Claim,decay_immune,false,no,2
+node_claim_few_shot_robust,Claim,text,Few-shot learning improves robustness to distribution shift,no,2
+node_claim_adversarial_robust,Claim,claim_type,capability,no,2
+node_claim_adversarial_robust,Claim,polarity,positive,no,2
+node_claim_adversarial_robust,Claim,stated_confidence,0.8,no,2
+node_claim_adversarial_robust,Claim,prior_implausibility,0.4,yes,2
+node_claim_adversarial_robust,Claim,decay_immune,false,no,2
+node_claim_adversarial_robust,Claim,text,Adversarial training improves robustness,no,2
+node_evidence_gpt_benchmark,Evidence,type,supporting,no,2
+node_evidence_gpt_benchmark,Evidence,effect_size,0.12,yes,2
+node_evidence_gpt_benchmark,Evidence,significance,0.001,yes,2
+node_evidence_gpt_benchmark,Evidence,direction,positive,no,2
+node_evidence_fewshot_benchmark,Evidence,type,supporting,no,2
+node_evidence_fewshot_benchmark,Evidence,effect_size,0.08,yes,2
+node_evidence_fewshot_benchmark,Evidence,significance,0.05,yes,2
+node_evidence_fewshot_benchmark,Evidence,direction,positive,no,2
+node_evidence_adversarial_result,Evidence,type,refuting,no,2
+node_evidence_adversarial_result,Evidence,effect_size,-0.03,yes,2
+node_evidence_adversarial_result,Evidence,significance,0.3,yes,2
+node_evidence_adversarial_result,Evidence,direction,negative,no,2
+node_exp_gpt_comparison,Experiment,experiment_type,benchmark_with_baseline,no,2
+node_exp_gpt_comparison,Experiment,sample_size,10000,no,2
+node_exp_gpt_comparison,Experiment,has_baseline,true,no,2
+node_exp_gpt_comparison,Experiment,replication_status,independent,no,2
+node_exp_gpt_comparison,Experiment,leakage_risk,low,no,2
+node_exp_gpt_comparison,Experiment,preregistered,false,no,2
+node_exp_fewshot_study,Experiment,experiment_type,controlled,yes,2
+node_exp_fewshot_study,Experiment,sample_size,500,no,2
+node_exp_fewshot_study,Experiment,has_baseline,true,no,2
+node_exp_fewshot_study,Experiment,replication_status,internal,no,2
+node_exp_fewshot_study,Experiment,leakage_risk,medium,no,2
+node_exp_fewshot_study,Experiment,preregistered,false,no,2
+node_exp_adversarial_test,Experiment,experiment_type,controlled_ablation,no,2
+node_exp_adversarial_test,Experiment,sample_size,2000,no,2
+node_exp_adversarial_test,Experiment,has_baseline,true,no,2
+node_exp_adversarial_test,Experiment,replication_status,none,no,2
+node_exp_adversarial_test,Experiment,leakage_risk,high,no,2
+node_exp_adversarial_test,Experiment,preregistered,false,no,2
+node_scope_imdb,Scope,data_domain,NLP,no,2
+node_scope_imdb,Scope,language,English,no,2
+node_scope_imdb,Scope,scale,medium,no,2
+node_scope_imdb,Scope,data_regime,high_resource,no,2
+node_scope_imdb,Scope,hardware,A100,yes,2
+node_scope_wiki,Scope,data_domain,NLP,no,2
+node_scope_wiki,Scope,language,English,no,2
+node_scope_wiki,Scope,scale,large,no,2
+node_scope_wiki,Scope,data_regime,high_resource,no,2
+node_scope_wiki,Scope,hardware,A100,yes,2
+scope_medium_fewshot,Scope,data_domain,NLP,no,2
+scope_medium_fewshot,Scope,language,English,no,2
+scope_medium_fewshot,Scope,scale,medium,no,2
+scope_medium_fewshot,Scope,data_regime,high_resource,no,2
+scope_medium_fewshot,Scope,hardware,V100,no,2
+scope_small_adversarial,Scope,data_domain,NLP,no,2
+scope_small_adversarial,Scope,language,English,no,2
+scope_small_adversarial,Scope,scale,small,no,2
+scope_small_adversarial,Scope,data_regime,low_resource,no,2
+scope_small_adversarial,Scope,hardware,V100,no,2
+paper_gpt4_paper,Paper,is_preprint,false,no,3
+paper_gpt4_paper,Paper,title,GPT-4 Technical Report,no,3
+paper_gpt4_paper,Paper,year,2023,no,3
+paper_gpt4_paper,Paper,venue,OpenAI Blog,no,3
+paper_gpt4_paper,Paper,peer_reviewed,false,no,3
+paper_gpt4_paper,Paper,venue_tier,unknown,no,3
+paper_fewshot_paper,Paper,is_preprint,false,no,3
+paper_fewshot_paper,Paper,title,Few-Shot Learning with Transformers,no,3
+paper_fewshot_paper,Paper,year,2022,no,3
+paper_fewshot_paper,Paper,venue,NeurIPS,no,3
+paper_fewshot_paper,Paper,peer_reviewed,true,no,3
+paper_fewshot_paper,Paper,venue_tier,A,no,3
+paper_adversarial_paper,Paper,is_preprint,false,no,3
+paper_adversarial_paper,Paper,title,Adversarial Robustness of Language Models,no,3
+paper_adversarial_paper,Paper,year,2023,no,3
+paper_adversarial_paper,Paper,venue,ICLR,no,3
+paper_adversarial_paper,Paper,peer_reviewed,true,no,3
+paper_adversarial_paper,Paper,venue_tier,A,no,3
+author_openai_researcher_1,Author,name,Alice Chen,no,3
+author_openai_researcher_1,Author,orcid,0000-0001-2345-6789,no,3
+author_openai_researcher_1,Author,affiliation,OpenAI,no,3
+author_openai_researcher_2,Author,name,Bob Martinez,no,3
+author_openai_researcher_2,Author,orcid,0000-0002-3456-7890,no,3
+author_openai_researcher_2,Author,affiliation,OpenAI,no,3
+author_uni_researcher_1,Author,name,Carol Zhang,no,3
+author_uni_researcher_1,Author,orcid,0000-0003-4567-8901,no,3
+author_uni_researcher_1,Author,affiliation,MIT,no,3
+author_uni_researcher_2,Author,name,David Kim,no,3
+author_uni_researcher_2,Author,affiliation,Stanford,no,3
+author_uni_researcher_3,Author,name,Eve Johnson,no,3
+author_uni_researcher_3,Author,affiliation,ETH Zurich,no,3
+org_openai,Organization,type,industry,no,3
+org_openai,Organization,name,OpenAI,no,3
+org_mit,Organization,type,academic,no,3
+org_mit,Organization,name,MIT,no,3
+org_stanford,Organization,type,academic,no,3
+org_stanford,Organization,name,Stanford University,no,3
+org_eth,Organization,type,academic,no,3
+org_eth,Organization,name,ETH Zurich,no,3
+venue_openai_blog,Venue,name,OpenAI Blog,no,3
+venue_openai_blog,Venue,tier,unknown,no,3
+venue_openai_blog,Venue,peer_reviewed,false,no,3
+venue_neurips,Venue,name,NeurIPS,no,3
+venue_neurips,Venue,tier,A,no,3
+venue_neurips,Venue,peer_reviewed,true,no,3
+venue_iclr,Venue,name,ICLR,no,3
+venue_iclr,Venue,tier,A,no,3
+venue_iclr,Venue,peer_reviewed,true,no,3
+funding_darpa,FundingSource,name,DARPA,no,3
+funding_darpa,FundingSource,type,public,no,3
+funding_darpa,FundingSource,potential_coi,false,no,3
+funding_okr_venture,FundingSource,name,OpenCore Ventures,no,3
+funding_okr_venture,FundingSource,type,industry,no,3
+funding_okr_venture,FundingSource,potential_coi,true,no,3
+funding_eth_found,FundingSource,name,ETH Foundation,no,3
+funding_eth_found,FundingSource,type,mixed,no,3
+funding_eth_found,FundingSource,potential_coi,false,no,3

@@ -12,7 +12,6 @@ from __future__ import annotations
 import structlog
 
 from ...domain.distillate import (
-    AssumptionMention,
     AuthorMention,
     ClaimMention,
     Distillate,
@@ -28,12 +27,6 @@ log = structlog.get_logger(__name__)
 _LENS_TO_FIELD: dict[str, str] = {
     "author": "authors",
     "assumption": "assumptions",
-}
-
-_LENS_TO_TYPE: dict[str, type[ExtractedEntity]] = {
-    "author": AuthorMention,
-    "assumption": AssumptionMention,
-    "claim": ClaimMention,
 }
 
 

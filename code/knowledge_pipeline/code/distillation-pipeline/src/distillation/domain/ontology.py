@@ -13,10 +13,9 @@ interface (validation). It is pure data — no I/O lives here.
 from __future__ import annotations
 
 from enum import Enum
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
-
 
 # ====================================================================
 # Node types
@@ -106,7 +105,7 @@ class GraphNode(BaseModel):
     properties: dict[str, Any] = Field(default_factory=dict)
 
     @property
-    def extraction_confidence(self) -> Optional[float]:
+    def extraction_confidence(self) -> float | None:
         """Convenience accessor for the epistemik confidence field."""
         raw = self.properties.get("extraction_confidence")
         if raw is not None:
@@ -128,7 +127,7 @@ class GraphEdge(BaseModel):
     target_node_id: str
     type: GraphEdgeType
     properties: dict[str, Any] = Field(default_factory=dict)
-    extraction_confidence: Optional[float] = None
+    extraction_confidence: float | None = None
 
     @property
     def edge_key(self) -> tuple[str, str, str]:

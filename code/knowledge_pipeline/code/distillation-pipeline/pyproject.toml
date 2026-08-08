@@ -44,3 +44,17 @@ pythonpath = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+
+[tool.ruff.lint.flake8-bugbear]
+# Typer uses call expressions (Argument/Option) as parameter defaults by design.
+extend-immutable-calls = ["typer.Argument", "typer.Option"]
+
+[tool.ruff.lint.per-file-ignores]
+# The orchestrator deliberately catches every exception per stage so that a
+# single failing document is dead-lettered and the pipeline keeps going
+# (the "ontology over accuracy" failure philosophy).
+"src/distillation/pipeline/orchestrator.py" = ["BLE001"]
+
+[tool.mypy]
+python_version = "3.11"
+plugins = ["pydantic.mypy"]

@@ -9,7 +9,7 @@ These nodes are persistent across papers: same ``name`` (canonicalized)
 
 from __future__ import annotations
 
-from typing import Iterable
+from collections.abc import Iterable
 
 from ..domain.distillate import (
     AssumptionMention,
@@ -20,7 +20,7 @@ from ..domain.distillate import (
     ProblemMention,
     TechnologyMention,
 )
-from ..domain.graph import GraphEdge, GraphEdgeType, GraphNode, GraphNodeType
+from ..domain.graph import GraphNode, GraphNodeType
 from ..domain.ids import canonicalize, deterministic_id
 
 

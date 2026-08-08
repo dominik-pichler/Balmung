@@ -12,8 +12,9 @@ from __future__ import annotations
 
 import asyncio
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 import structlog
 import typer
@@ -34,6 +35,7 @@ from .mapping.provenance_writer import ProvenanceWriter
 from .pipeline.context import PipelineContext
 from .pipeline.lenses.assumption import AssumptionLens
 from .pipeline.lenses.author import AuthorLens
+from .pipeline.lenses.base import Lens
 from .pipeline.lenses.claim_lens import ClaimLens
 from .pipeline.orchestrator import IngestionPipeline
 from .pipeline.stages.distill import DistillStage
@@ -115,7 +117,7 @@ def _build_context(settings: Settings) -> PipelineContext:
         max_tokens=settings.chunk_token_size,
         overlap_tokens=settings.chunk_token_overlap,
     )
-    lenses = [
+    lenses: list[Lens[Any, Any]] = [
         AuthorLens(llm),
         AssumptionLens(llm),
         ClaimLens(llm),
@@ -270,7 +272,7 @@ def export(
 
         output.parent.mkdir(parents=True, exist_ok=True)
         snapshot = {
-            "exported_at": datetime.now(timezone.utc).isoformat(),
+            "exported_at": datetime.now(UTC).isoformat(),
             "nodes": [n.model_dump(mode="json") for n in nodes],
             "edges": [e.model_dump(mode="json") for e in edges],
         }
@@ -285,7 +287,8 @@ def export(
 @app.command()
 def version() -> None:
     """Print the package version."""
-    from importlib.metadata import PackageNotFoundError, version as _v
+    from importlib.metadata import PackageNotFoundError
+    from importlib.metadata import version as _v
 
     try:
         typer.echo(_v("distillation-pipeline"))

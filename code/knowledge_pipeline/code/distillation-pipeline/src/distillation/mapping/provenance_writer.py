@@ -16,7 +16,7 @@ breaks the entire bias analysis later.
 
 from __future__ import annotations
 
-from typing import Iterable
+from collections.abc import Iterable
 
 from ..domain.distillate import (
     AuthorMention,

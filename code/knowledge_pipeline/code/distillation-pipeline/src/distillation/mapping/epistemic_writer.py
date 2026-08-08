@@ -14,7 +14,7 @@ by Claim polarity + Evidence.type (supporting/refuting).
 
 from __future__ import annotations
 
-from typing import Iterable
+from collections.abc import Iterable
 
 from ..domain.distillate import (
     AssumptionMention,

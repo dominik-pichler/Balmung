@@ -22,7 +22,6 @@ methods to benefit from proper transaction handling and validation.
 from __future__ import annotations
 
 from collections.abc import Iterable
-from typing import Optional
 
 import structlog
 
@@ -290,58 +289,6 @@ class Neo4jGraphRepository(GraphRepository):
                     tgt_id=edge.target_node_id,
                     props=edge.properties,
                     extraction_conf=edge.extraction_confidence,
-                )
-
-    # --- Legacy compatibility (without explicit ``id`` on nodes) --------
-
-    async def legacy_upsert_nodes(
-        self, nodes: Iterable[GraphNode]
-    ) -> None:
-        """Legacy method — uses ``node_id`` as the merge key.
-
-        Deprecated: prefer ``upsert_domain_nodes()`` or
-        ``upsert_provenance_nodes()`` which use explicit ``id``.
-        """
-        node_list = list(nodes)
-        if not node_list:
-            return
-
-        async with self._driver.session(database=self._database) as session:
-            for node in node_list:
-                label = _validate_node_label(node.type)
-                cypher = (
-                    f"MERGE (n:{label} {{node_id: $node_id}}) "
-                    f"SET n += $props, n.name = $name"
-                )
-                await session.run(
-                    node_id=node.node_id,
-                    props=node.properties,
-                    name=node.name,
-                )
-
-    async def legacy_upsert_edges(
-        self, edges: Iterable[GraphEdge]
-    ) -> None:
-        """Legacy method — uses ``node_id`` for edge resolution.
-
-        Deprecated: prefer ``upsert_edges()`` which uses ``id``.
-        """
-        edge_list = list(edges)
-        if not edge_list:
-            return
-
-        async with self._driver.session(database=self._database) as session:
-            for edge in edge_list:
-                rel_type = _validate_edge_type(edge.type)
-                cypher = (
-                    "MATCH (s {node_id: $src}), (t {node_id: $tgt}) "
-                    f"MERGE (s)-[r:{rel_type}]->(t) "
-                    "SET r += $props"
-                )
-                await session.run(
-                    src=edge.source_node_id,
-                    tgt=edge.target_node_id,
-                    props=edge.properties,
                 )
 
     # --- Query helpers ------------------------------------------------

@@ -14,24 +14,28 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 
-from distillation.adapters.chunkers.sliding_window import SlidingWindowChunker  # noqa: E402
-from distillation.adapters.graph.in_memory import InMemoryGraphRepository  # noqa: E402
-from distillation.adapters.llm.fake import FakeLLMClient  # noqa: E402
-from distillation.adapters.parsers.markdown import MarkdownParser  # noqa: E402
-from distillation.adapters.parsers.plaintext import PlainTextParser  # noqa: E402
-from distillation.domain.document import DocumentFormat, DocumentMetadata, SourceDocument  # noqa: E402
-from distillation.mapping.domain_writer import DomainWriter  # noqa: E402
-from distillation.mapping.epistemic_writer import EpistemicWriter  # noqa: E402
-from distillation.mapping.provenance_writer import ProvenanceWriter  # noqa: E402
-from distillation.pipeline.context import PipelineContext  # noqa: E402
-from distillation.pipeline.lenses.assumption import AssumptionLens  # noqa: E402
-from distillation.pipeline.lenses.author import AuthorLens  # noqa: E402
-from distillation.pipeline.lenses.claim_lens import ClaimLens  # noqa: E402
-from distillation.pipeline.stages.distill import DistillStage  # noqa: E402
-from distillation.pipeline.stages.persist import PersistStage  # noqa: E402
-from distillation.pipeline.stages.preprocess import PreprocessStage  # noqa: E402
-from distillation.pipeline.stages.synthesize import SynthesizeStage  # noqa: E402
-from distillation.ports.document_parser import ParserRegistry  # noqa: E402
+from distillation.adapters.chunkers.sliding_window import SlidingWindowChunker
+from distillation.adapters.graph.in_memory import InMemoryGraphRepository
+from distillation.adapters.llm.fake import FakeLLMClient
+from distillation.adapters.parsers.markdown import MarkdownParser
+from distillation.adapters.parsers.plaintext import PlainTextParser
+from distillation.domain.document import (
+    DocumentFormat,
+    DocumentMetadata,
+    SourceDocument,
+)
+from distillation.mapping.domain_writer import DomainWriter
+from distillation.mapping.epistemic_writer import EpistemicWriter
+from distillation.mapping.provenance_writer import ProvenanceWriter
+from distillation.pipeline.context import PipelineContext
+from distillation.pipeline.lenses.assumption import AssumptionLens
+from distillation.pipeline.lenses.author import AuthorLens
+from distillation.pipeline.lenses.claim_lens import ClaimLens
+from distillation.pipeline.stages.distill import DistillStage
+from distillation.pipeline.stages.persist import PersistStage
+from distillation.pipeline.stages.preprocess import PreprocessStage
+from distillation.pipeline.stages.synthesize import SynthesizeStage
+from distillation.ports.document_parser import ParserRegistry
 
 
 @pytest.fixture
@@ -47,10 +51,10 @@ def in_memory_graph() -> InMemoryGraphRepository:
 @pytest.fixture
 def sample_document() -> SourceDocument:
     body = (
-        "By Alice Smith, MIT.\n\n"
-        "We propose the Lens Theory and conclude that distillation supports it. "
-        "Method: lens-based extraction.\n"
-    ).encode("utf-8")
+        b"By Alice Smith, MIT.\n\n"
+        b"We propose the Lens Theory and conclude that distillation supports it. "
+        b"Method: lens-based extraction.\n"
+    )
     return SourceDocument(
         metadata=DocumentMetadata(
             tenant_id="test", source_id="sample.txt", uri="file:///sample.txt"

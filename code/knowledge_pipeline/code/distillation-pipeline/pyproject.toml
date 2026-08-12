@@ -40,6 +40,9 @@ where = ["src"]
 testpaths = ["tests"]
 asyncio_mode = "auto"
 pythonpath = ["src"]
+markers = [
+    "eval: lens quality regression against a real LLM (skipped unless DISTILL_LLM_PROVIDER != fake)",
+]
 
 [tool.ruff]
 line-length = 100

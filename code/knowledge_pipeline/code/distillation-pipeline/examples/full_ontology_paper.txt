@@ -1,0 +1,83 @@
+SparseFormer: Efficient Long-Context Reasoning with Sparse Attention
+
+Authors: Alice Chen (DeepMind), Bob Martinez (DeepMind), Carol Zhang (MIT).
+Corresponding author: Alice Chen, ORCID 0000-0001-2345-6789.
+Published at NeurIPS 2024 (peer-reviewed conference, tier A).
+Funding: This work was funded by the NSF (public grant) and by DARPA (public grant).
+Citations: This paper builds on and cites "Attention Is All You Need" and "Dense Passage Retrieval".
+
+Abstract
+
+We introduce SparseFormer, a Transformer-based model that targets the problem of
+long-context reasoning, and FlashRetrieval, a retrieval algorithm that targets the
+problem of retrieval latency. SparseFormer provides the capability of long-context
+accuracy, which addresses the problem of long-context reasoning. FlashRetrieval
+provides the capability of low-latency retrieval, which addresses the problem of
+retrieval latency. We claim that SparseFormer outperforms baselines on long-context
+reasoning, and we claim that FlashRetrieval reduces retrieval latency without loss
+of quality. Both claims are supported by controlled benchmark experiments.
+
+1. Introduction
+
+Long-context reasoning remains a central problem in machine learning: models must
+integrate evidence spread across tens of thousands of tokens. A second problem,
+retrieval latency, limits interactive systems. This paper addresses both problems.
+SparseFormer is a Model; FlashRetrieval is an Algorithm.
+
+2. Methods and Technologies
+
+SparseFormer is built on sparse attention. FlashRetrieval is an approximate
+nearest-neighbor Algorithm used to fetch supporting passages.
+
+We make two explicit assumptions. First, we assume that documents fit in the
+context window; this assumption holds under SparseFormer. Second, we assume that
+the retrieval index is static; this assumption holds under FlashRetrieval.
+
+3. Experiments
+
+Experiment 1 — the LongBench evaluation — is a benchmark with a baseline. It
+evaluates SparseFormer on the LongBench dataset and measures performance by exact
+match. Sample size: 4000. The LongBench dataset is an NLP dataset with low
+contamination risk. This experiment was independently replicated.
+
+Experiment 2 — the latency benchmark — is a controlled experiment. It evaluates
+FlashRetrieval on the NaturalQuestions dataset and measures performance by p95
+latency. Sample size: 2000. The NaturalQuestions dataset is an NLP dataset with
+low contamination risk.
+
+The operational scope of both experiments is English long-document question
+answering, a high-resource regime, run on A100 hardware.
+
+4. Results and Evidence
+
+The LongBench benchmark result is supporting evidence for the claim that
+SparseFormer outperforms baselines on long-context reasoning (effect size 0.14,
+significance 0.001, positive direction).
+
+The latency ablation result is supporting evidence for the claim that
+FlashRetrieval reduces retrieval latency (effect size 0.20, significance 0.01,
+positive direction).
+
+We also report a refuting result: the cold-start latency result is refuting
+evidence for the claim that FlashRetrieval reduces retrieval latency, because on
+the first query the static index must be warmed (negative direction).
+
+5. Metrics
+
+We use two metrics. Exact match is a metric where higher is better, reported as a
+percentage. P95 latency is a metric where lower is better, reported in
+milliseconds.
+
+6. Limitations
+
+A key limitation of SparseFormer is quadratic memory at long context; this
+limitation concerns SparseFormer and is of severe severity. A limitation of
+FlashRetrieval is index staleness; this limitation concerns FlashRetrieval and is
+of moderate severity.
+
+7. Conclusion
+
+SparseFormer addresses long-context reasoning and FlashRetrieval addresses
+retrieval latency. Our claims about SparseFormer and FlashRetrieval are supported
+by the LongBench evaluation and the latency benchmark respectively, within the
+stated scope of English long-document question answering.

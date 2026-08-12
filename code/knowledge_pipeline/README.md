@@ -5,4 +5,4 @@
 
 
 # To build: 
-- [ ] Poll RSS via `feedparser` to auto integrate into pipeline
+- [ ] Poll RSS via `feedparser` to auto integrate into pipeline - But the question is, it manual would not be better

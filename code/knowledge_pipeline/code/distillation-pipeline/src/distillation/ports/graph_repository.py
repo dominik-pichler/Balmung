@@ -48,4 +48,4 @@ class GraphRepository(ABC):
 
     async def close(self) -> None:
         """Release any underlying connections. Default is a no-op."""
-        return None
+        return

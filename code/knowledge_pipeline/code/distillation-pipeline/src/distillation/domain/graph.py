@@ -20,7 +20,10 @@ from .ontology import (
     EvidenceDirection,
     EvidenceType,
     ExperimentType,
+    # Models
+    GraphEdge,
     GraphEdgeType,
+    GraphNode,
     GraphNodeType,
     LimitationSeverity,
     MetricDirection,
@@ -29,16 +32,9 @@ from .ontology import (
     ReplicationStatus,
     TechnologyType,
     VenueTier,
-    # Models
-    GraphEdge,
-    GraphNode,
 )
 
 __all__ = [
-    "GraphNodeType",
-    "GraphEdgeType",
-    "GraphNode",
-    "GraphEdge",
     "AssumptionType",
     "CapabilityType",
     "ClaimType",
@@ -47,6 +43,10 @@ __all__ = [
     "EvidenceDirection",
     "EvidenceType",
     "ExperimentType",
+    "GraphEdge",
+    "GraphEdgeType",
+    "GraphNode",
+    "GraphNodeType",
     "LimitationSeverity",
     "MetricDirection",
     "OrganizationType",

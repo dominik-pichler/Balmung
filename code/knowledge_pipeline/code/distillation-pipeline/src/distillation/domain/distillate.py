@@ -12,8 +12,6 @@ uncertainty rather than trusting hallucinated values with full confidence.
 
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import BaseModel, Field, computed_field
 
 from .ontology import (
@@ -35,7 +33,6 @@ from .ontology import (
     VenueTier,
 )
 
-
 # ====================================================================
 # Base extraction entity
 # ====================================================================
@@ -55,7 +52,7 @@ class ExtractedEntity(BaseModel):
     """Parser's self-reported confidence in [0, 1]."""
     provenance_chunk_ids: list[str] = Field(default_factory=list)
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]  # mypy can't stack computed_field over property
     @property
     def canonical_name(self) -> str:
         return self.name.strip().lower()
@@ -69,51 +66,54 @@ class ExtractedEntity(BaseModel):
 class TechnologyMention(ExtractedEntity):
     """A technology mentioned in a source."""
 
-    type: Optional[TechnologyType] = None
+    type: TechnologyType | None = None
     aliases: list[str] = Field(default_factory=list)
-    first_described_in: Optional[str] = None  # DOI of earliest known paper
+    first_described_in: str | None = None  # DOI of earliest known paper
 
 
 class ProblemMention(ExtractedEntity):
     """A research problem addressed by the source."""
 
-    domain: Optional[str] = None
+    domain: str | None = None
 
 
 class CapabilityMention(ExtractedEntity):
     """A capability claimed for a technology."""
 
     description: str = ""
-    capability_type: Optional[CapabilityType] = None
+    capability_type: CapabilityType | None = None
+    addresses: str | None = None  # name of a Problem this capability addresses
 
 
 class MetricMention(ExtractedEntity):
     """A metric by which performance is measured."""
 
-    unit: Optional[str] = None
-    direction: Optional[MetricDirection] = None
+    unit: str | None = None
+    direction: MetricDirection | None = None
 
 
 class DatasetMention(ExtractedEntity):
     """A dataset used in the source."""
 
-    domain: Optional[str] = None
-    size: Optional[int] = None  # Nullable: not always reported
-    contamination_risk: Optional[DatasetContaminationRisk] = None
+    domain: str | None = None
+    size: int | None = None  # Nullable: not always reported
+    contamination_risk: DatasetContaminationRisk | None = None
 
 
 class AssumptionMention(ExtractedEntity):
     """An implicit assumption surfaced from the source."""
 
     statement: str = ""
-    assumption_type: Optional[AssumptionType] = None
+    assumption_type: AssumptionType | None = None
+    holds_under: str | None = None  # name of a Domain entity it holds under
 
 
 class LimitationMention(ExtractedEntity):
     """A limitation on a technology or claim."""
 
     statement: str = ""
-    severity: Optional[LimitationSeverity] = None
+    severity: LimitationSeverity | None = None
+    concerns: str | None = None  # name of a Domain entity this limitation concerns
 
 
 # ====================================================================
@@ -129,15 +129,19 @@ class ClaimMention(ExtractedEntity):
     """
 
     text: str = ""  # Full statement, not just a label
-    claim_type: Optional[ClaimType] = None
-    polarity: Optional[Polarity] = None  # positive = supports, negative = refutes
-    stated_confidence: Optional[float] = Field(
+    claim_type: ClaimType | None = None
+    polarity: Polarity | None = None  # positive = supports, negative = refutes
+    stated_confidence: float | None = Field(
         default=None, ge=0.0, le=1.0
     )  # Author's hedging (e.g. "may" → 0.5)
-    prior_implausibility: Optional[float] = Field(
+    prior_implausibility: float | None = Field(
         default=None, ge=0.0, le=1.0
     )  # Base-rate: "X solves AGI" high, "X is 2% faster" low
     decay_immune: bool = False  # True for formal proofs
+    about: list[str] = Field(default_factory=list)  # names of Domain entities (ABOUT)
+    assumes: list[str] = Field(
+        default_factory=list
+    )  # names of Assumptions this claim rests on (ASSUMES)
 
 
 class EvidenceMention(ExtractedEntity):
@@ -146,32 +150,37 @@ class EvidenceMention(ExtractedEntity):
     Replaces ``confirmed``/``falsified`` as an edge-property.
     """
 
-    type: Optional[EvidenceType] = None
-    effect_size: Optional[float] = None  # Nullable: not always reported
-    significance: Optional[float] = None  # Nullable: not always reported
-    direction: Optional[EvidenceDirection] = None
+    type: EvidenceType | None = None
+    effect_size: float | None = None  # Nullable: not always reported
+    significance: float | None = None  # Nullable: not always reported
+    direction: EvidenceDirection | None = None
+    claim: str | None = None  # label of the Claim this evidence bears on
 
 
 class ExperimentMention(ExtractedEntity):
     """An experiment that produced evidence."""
 
-    experiment_type: Optional[ExperimentType] = None
-    sample_size: Optional[int] = None  # Nullable: not always reported
-    has_baseline: Optional[bool] = None  # Nullable
-    replication_status: Optional[ReplicationStatus] = None
-    leakage_risk: Optional[DatasetContaminationRisk] = None
+    experiment_type: ExperimentType | None = None
+    sample_size: int | None = None  # Nullable: not always reported
+    has_baseline: bool | None = None  # Nullable
+    replication_status: ReplicationStatus | None = None
+    leakage_risk: DatasetContaminationRisk | None = None
     preregistered: bool = False
+    # Relationship references (resolved to PRODUCED_BY / EVALUATED_ON / MEASURED_BY):
+    technologies: list[str] = Field(default_factory=list)  # Technology names
+    datasets: list[str] = Field(default_factory=list)  # Dataset names
+    metrics: list[str] = Field(default_factory=list)  # Metric names
 
 
 class ScopeMention(ExtractedEntity):
     """The operational scope of a claim/experiment."""
 
-    data_domain: Optional[str] = None
-    language: Optional[str] = None
-    scale: Optional[str] = None
-    data_regime: Optional[DataRegime] = None
-    hardware: Optional[str] = None
-    time_window: Optional[str] = None
+    data_domain: str | None = None
+    language: str | None = None
+    scale: str | None = None
+    data_regime: DataRegime | None = None
+    hardware: str | None = None
+    time_window: str | None = None
 
 
 # ====================================================================
@@ -182,45 +191,45 @@ class ScopeMention(ExtractedEntity):
 class PaperMention(ExtractedEntity):
     """A paper, identified by DOI where available."""
 
-    title: Optional[str] = None
-    year: Optional[int] = None
-    venue_tier: Optional[VenueTier] = None
-    peer_reviewed: Optional[bool] = None
+    title: str | None = None
+    year: int | None = None
+    venue_tier: VenueTier | None = None
+    peer_reviewed: bool | None = None
     is_preprint: bool = False
 
 
 class AuthorMention(ExtractedEntity):
     """An author of the source, with optional ORCID and affiliation."""
 
-    orcid: Optional[str] = None
-    affiliation: Optional[AffiliationMention] = None
+    orcid: str | None = None
+    affiliation: AffiliationMention | None = None
     interests: list[str] = Field(default_factory=list)
-    position: Optional[int] = None  # Author position in the paper
+    position: int | None = None  # Author position in the paper
 
 
 class AffiliationMention(ExtractedEntity):
     """An organizational affiliation (e.g. university, company)."""
 
-    org_type: Optional[OrganizationType] = None
+    org_type: OrganizationType | None = None
 
 
 class OrganizationMention(ExtractedEntity):
     """An organization."""
 
-    org_type: Optional[OrganizationType] = None
+    org_type: OrganizationType | None = None
 
 
 class VenueMention(ExtractedEntity):
     """A conference/journal venue."""
 
-    tier: Optional[VenueTier] = None
-    peer_reviewed: Optional[bool] = None
+    tier: VenueTier | None = None
+    peer_reviewed: bool | None = None
 
 
 class FundingSourceMention(ExtractedEntity):
     """A funding source for a paper."""
 
-    funding_type: Optional[FundingType] = None
+    funding_type: FundingType | None = None
     potential_coi: bool = False
 
 
@@ -234,7 +243,7 @@ class LensOutput(BaseModel):
 
     lens_name: str
     items: list[ExtractedEntity] = Field(default_factory=list)
-    error: Optional[str] = None
+    error: str | None = None
 
 
 class Distillate(BaseModel):

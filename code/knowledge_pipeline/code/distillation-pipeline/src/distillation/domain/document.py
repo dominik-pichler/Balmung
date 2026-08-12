@@ -7,9 +7,8 @@ here.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
-from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -43,7 +42,7 @@ class DocumentMetadata(BaseModel):
     source_id: str
     uri: str
     fetched_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc)
+        default_factory=lambda: datetime.now(UTC)
     )
     extra: dict[str, str] = Field(default_factory=dict)
 
@@ -95,4 +94,4 @@ class Chunk(BaseModel):
     text: str
     start_char: int
     end_char: int
-    token_estimate: Optional[int] = None
+    token_estimate: int | None = None

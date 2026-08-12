@@ -12,8 +12,9 @@ from __future__ import annotations
 
 import asyncio
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 import structlog
 import typer
@@ -32,9 +33,15 @@ from .mapping.domain_writer import DomainWriter
 from .mapping.epistemic_writer import EpistemicWriter
 from .mapping.provenance_writer import ProvenanceWriter
 from .pipeline.context import PipelineContext
-from .pipeline.lenses.assumption import AssumptionLens
-from .pipeline.lenses.author import AuthorLens
-from .pipeline.lenses.claim_lens import ClaimLens
+from .pipeline.lenses import (
+    AssumptionLens,
+    AuthorLens,
+    ClaimLens,
+    DomainLens,
+    EvidenceLens,
+    Lens,
+    ProvenanceLens,
+)
 from .pipeline.orchestrator import IngestionPipeline
 from .pipeline.stages.distill import DistillStage
 from .pipeline.stages.persist import PersistStage
@@ -115,10 +122,16 @@ def _build_context(settings: Settings) -> PipelineContext:
         max_tokens=settings.chunk_token_size,
         overlap_tokens=settings.chunk_token_overlap,
     )
-    lenses = [
-        AuthorLens(llm),
+    lenses: list[Lens[Any, Any]] = [
+        # L1 domain
+        DomainLens(llm),
         AssumptionLens(llm),
+        # L2 epistemik
         ClaimLens(llm),
+        EvidenceLens(llm),
+        # L3 provenance
+        AuthorLens(llm),
+        ProvenanceLens(llm),
     ]
     graph_repo = _build_graph_repo(settings)
     domain_writer = DomainWriter()
@@ -270,7 +283,7 @@ def export(
 
         output.parent.mkdir(parents=True, exist_ok=True)
         snapshot = {
-            "exported_at": datetime.now(timezone.utc).isoformat(),
+            "exported_at": datetime.now(UTC).isoformat(),
             "nodes": [n.model_dump(mode="json") for n in nodes],
             "edges": [e.model_dump(mode="json") for e in edges],
         }
@@ -285,7 +298,8 @@ def export(
 @app.command()
 def version() -> None:
     """Print the package version."""
-    from importlib.metadata import PackageNotFoundError, version as _v
+    from importlib.metadata import PackageNotFoundError
+    from importlib.metadata import version as _v
 
     try:
         typer.echo(_v("distillation-pipeline"))

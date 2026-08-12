@@ -11,6 +11,7 @@ from .base import Lens
 class _AssumptionItem(BaseModel):
     name: str
     statement: str = ""
+    holds_under: str | None = None  # name of a Domain entity it holds under
     confidence: float = 1.0
 
 
@@ -25,9 +26,13 @@ class AssumptionLens(Lens[AssumptionResponse, AssumptionMention]):
     def system_prompt(self) -> str:
         return (
             "You surface IMPLICIT assumptions made by the source — claims it "
-            "takes for granted but does not argue for. For each, give a "
-            "short name (3-7 words) and a one-sentence statement of the "
-            "assumption."
+            "takes for granted but does not argue for. For each, give:\n"
+            "- ``name``: a short label (3-7 words)\n"
+            "- ``statement``: a one-sentence statement of the assumption\n"
+            "- ``holds_under``: the exact name of the technology, problem, or "
+            "other domain entity the assumption holds under, when identifiable "
+            "(use the same short name that entity is given elsewhere in the "
+            "text); omit if it applies generally."
         )
 
     @property
@@ -41,6 +46,7 @@ class AssumptionLens(Lens[AssumptionResponse, AssumptionMention]):
             AssumptionMention(
                 name=a.name,
                 statement=a.statement,
+                holds_under=a.holds_under,
                 extraction_confidence=a.confidence,
             )
             for a in response.assumptions

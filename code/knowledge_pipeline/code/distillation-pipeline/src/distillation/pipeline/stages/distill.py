@@ -1,9 +1,9 @@
-"""Distillation stage — fans out to the six lenses in parallel.
+"""Distillation stage — fans out to the configured lenses in parallel.
 
-Each lens runs concurrently via ``asyncio.gather``. Per-lens failures are
-captured in ``LensOutput.error`` and do not abort the rest of the pipeline:
-this matches the ontology, where a missing dimension just produces fewer
-nodes/edges rather than a catastrophic failure.
+Each lens runs concurrently via ``asyncio.gather`` (bounded by a semaphore).
+Per-lens failures are captured in ``LensOutput.error`` and do not abort the
+rest of the pipeline: this matches the ontology, where a missing dimension just
+produces fewer nodes/edges rather than a catastrophic failure.
 """
 
 from __future__ import annotations

@@ -26,8 +26,9 @@ class _FakeResult:
 
 
 class _FakeSession:
-    def __init__(self, log: list[str]) -> None:
+    def __init__(self, log: list[str], params: list[dict]) -> None:
         self._log = log
+        self._params = params
 
     async def __aenter__(self) -> Self:
         return self
@@ -35,17 +36,19 @@ class _FakeSession:
     async def __aexit__(self, *exc: object) -> bool:
         return False
 
-    async def run(self, query: str, **_: object) -> _FakeResult:
+    async def run(self, query: str, **kwargs: object) -> _FakeResult:
         self._log.append(query)
+        self._params.append(kwargs)
         return _FakeResult()
 
 
 class _FakeDriver:
     def __init__(self) -> None:
         self.log: list[str] = []
+        self.params: list[dict] = []
 
     def session(self, database: str | None = None) -> _FakeSession:
-        return _FakeSession(self.log)
+        return _FakeSession(self.log, self.params)
 
     async def close(self) -> None:
         return None
@@ -67,6 +70,22 @@ async def test_domain_nodes_use_merge():
     )
     writes = [q for q in driver.log if ":Technology" in q]
     assert writes and all("MERGE" in q for q in writes)
+
+
+async def test_node_name_is_written_as_property():
+    """Regression: the adapter must persist GraphNode.name (it used to drop it,
+    leaving nodes with no readable identity in the graph)."""
+    repo, driver = _repo_with_fake_driver()
+    await repo.upsert_domain_nodes(
+        [GraphNode(node_id="x", type=GraphNodeType.TECHNOLOGY, name="BERT")]
+    )
+    writes = [
+        (q, p) for q, p in zip(driver.log, driver.params, strict=False) if ":Technology" in q
+    ]
+    assert writes
+    query, params = writes[0]
+    assert "n.name = $name" in query
+    assert params["name"] == "BERT"
 
 
 async def test_l2_nodes_use_merge_not_create():

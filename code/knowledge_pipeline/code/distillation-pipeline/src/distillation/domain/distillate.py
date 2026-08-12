@@ -139,6 +139,9 @@ class ClaimMention(ExtractedEntity):
     )  # Base-rate: "X solves AGI" high, "X is 2% faster" low
     decay_immune: bool = False  # True for formal proofs
     about: list[str] = Field(default_factory=list)  # names of Domain entities (ABOUT)
+    assumes: list[str] = Field(
+        default_factory=list
+    )  # names of Assumptions this claim rests on (ASSUMES)
 
 
 class EvidenceMention(ExtractedEntity):

@@ -142,6 +142,15 @@ class EdgeLinker:
                 tgt = domain_index.get(canonicalize(name))
                 if tgt:
                     add(cid, tgt, GraphEdgeType.ABOUT, claim.extraction_confidence)
+            # Claim → Assumption (ASSUMES): only the assumptions this claim
+            # actually rests on, matched by name to an emitted Assumption node.
+            for aname in claim.assumes:
+                add(
+                    cid,
+                    node_id(tenant_id, GraphNodeType.ASSUMPTION, aname),
+                    GraphEdgeType.ASSUMES,
+                    claim.extraction_confidence,
+                )
         for ev in distillate.evidence:
             target_claim = (
                 claim_by_label.get(canonicalize(ev.claim)) if ev.claim else None

@@ -71,24 +71,27 @@ But **edges** store confidence as **`extractionConfidence`** (camelCase).
 `claimType`/`peerReviewed` — those don't match the real snake_case node props;
 ignore them when hand-editing and use the names above.)
 
-### ⚠️ There is NO `name` property on Neo4j nodes (known adapter gap)
+### Matching nodes: `name`, `canonical_name`, `statement`, or `text`
 
-The Neo4j adapter writes only `id` + the `properties` dict, and `GraphNode.name`
-is **not** part of that dict — so **no node carries a `name`**. Match on these
-instead:
+Nodes now carry a **`name`** property (the human-readable label), as of the
+name-persistence fix in the Neo4j adapter. **Graphs ingested before that fix
+have no `name`** until re-ingested — so match defensively. Recommended match
+field per node group:
 
 | Node group | Match on | Example |
 |---|---|---|
-| L1 Domain (Technology, Problem, Capability, Metric, Dataset, Limitation) | `canonical_name` (lowercased) | `{canonical_name: 'sparseformer'}` |
-| Assumption | `canonical_name` if present, else `statement` | |
-| **Claim** | `text` (Claims have no `canonical_name`) | `WHERE toLower(c.text) CONTAINS 'outperforms'` |
-| Evidence / Experiment / Scope | check `keys(n)` first — usually `canonical_name` or `text` | |
-| Paper | `source_id` / `uri` / `title` | |
+| L1 Domain (Technology, Problem, Capability, Metric, Dataset) | `name` or `canonical_name` | `{canonical_name: 'sparseformer'}` |
+| Assumption / Limitation | `name`, else `statement` (their identity text) | |
+| **Claim** | `text` (Claims are keyed by their statement, not a canonical name) | `WHERE toLower(c.text) CONTAINS 'outperforms'` |
+| Evidence / Experiment / Scope | `name` (else check `keys(n)`) | |
+| Paper | `name` / `source_id` / `uri` / `title` | |
 
-So in the Browser, set node captions to `canonical_name` (or `text` for Claims)
-or they'll render blank. When in doubt: `MATCH (n {id:'…'}) RETURN keys(n);`
-This blank-`name` behavior also degrades `distill export`/`chat` retrieval on the
-Neo4j backend — see the "known issues" note from the maintainer.
+In the Browser, set node captions to `name` (or `text` for Claims). When in
+doubt about what a node carries: `MATCH (n {id:'…'}) RETURN keys(n);`
+
+> **Older data:** if `name` is null across your graph, it was written before the
+> fix. Re-ingest the affected papers (idempotent — same ids) to backfill names,
+> or match on `canonical_name`/`statement`/`text` as above.
 
 ---
 

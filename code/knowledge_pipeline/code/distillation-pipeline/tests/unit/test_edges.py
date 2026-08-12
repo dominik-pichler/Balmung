@@ -1,6 +1,7 @@
 """EdgeLinker: relationship + structural edges, with dangling-edge filtering."""
 
 from distillation.domain.distillate import (
+    AssumptionMention,
     CapabilityMention,
     ClaimMention,
     Distillate,
@@ -63,6 +64,43 @@ def test_supported_by_vs_refuted_by_from_evidence_type():
     kinds = {e.type for e in edges}
     assert GraphEdgeType.SUPPORTED_BY in kinds
     assert GraphEdgeType.REFUTED_BY in kinds
+
+
+def test_assumes_links_only_referenced_assumptions():
+    """Regression: a claim links to the assumptions in its ``assumes`` list only,
+    not to every assumption in the paper (the old cross-product bug)."""
+    dw = DomainWriter()
+    ew = EpistemicWriter(dw)
+    a1 = AssumptionMention(name="A1")
+    a2 = AssumptionMention(name="A2")
+    c1 = ClaimMention(name="c1", text="claim one", assumes=["A1"])
+    c2 = ClaimMention(name="c2", text="claim two")  # rests on no assumption
+
+    claim_nodes, _ = ew.write_claims([c1, c2], paper_id=PAPER, tenant_id=TENANT)
+    assum_nodes = dw.write_assumptions([a1, a2], TENANT)
+    dist = Distillate(
+        paper_id=PAPER, chunk_ids=[], claims=[c1, c2], assumptions=[a1, a2]
+    )
+
+    edges = _linker().link(
+        claim_nodes + assum_nodes, dist, tenant_id=TENANT, paper_id=PAPER
+    )
+    assumes = [e for e in edges if e.type is GraphEdgeType.ASSUMES]
+    assert len(assumes) == 1  # NOT 4 — no cross-product
+    assert assumes[0].source_node_id == ew.claim_id(c1, PAPER, TENANT)
+    assert assumes[0].target_node_id == dw.assumption_id(a1, TENANT)
+
+
+def test_write_claims_emits_no_assumes_edge():
+    """ASSUMES is now built by the EdgeLinker, not the claim writer."""
+    ew = EpistemicWriter(DomainWriter())
+    _, edges = ew.write_claims(
+        [ClaimMention(name="x", text="t", assumes=["A"])],
+        paper_id=PAPER,
+        tenant_id=TENANT,
+    )
+    assert all(e.type is not GraphEdgeType.ASSUMES for e in edges)
+    assert any(e.type is GraphEdgeType.MAKES_CLAIM for e in edges)
 
 
 def test_every_linked_edge_has_confidence_in_range():

@@ -190,12 +190,13 @@ class Neo4jGraphRepository(GraphRepository):
                 label = _validate_node_label(node.type)
                 cypher = (
                     f"MERGE (n:{label} {{id: $node_id}}) "
-                    "SET n += $props"
+                    "SET n += $props, n.name = $name"
                 )
                 # Add id explicitly so MERGE matches on it.
                 await session.run(
                     cypher,
                     node_id=node.node_id,
+                    name=node.name,
                     props=node.properties,
                 )
 
@@ -224,11 +225,12 @@ class Neo4jGraphRepository(GraphRepository):
                 label = _validate_node_label(node.type)
                 cypher = (
                     f"MERGE (n:{label} {{id: $node_id}}) "
-                    "SET n += $props"
+                    "SET n += $props, n.name = $name"
                 )
                 await session.run(
                     cypher,
                     node_id=node.node_id,
+                    name=node.name,
                     props=node.properties,
                 )
 
@@ -257,11 +259,12 @@ class Neo4jGraphRepository(GraphRepository):
                 label = _validate_node_label(node.type)
                 cypher = (
                     f"MERGE (n:{label} {{id: $node_id}}) "
-                    "SET n += $props"
+                    "SET n += $props, n.name = $name"
                 )
                 await session.run(
                     cypher,
                     node_id=node.node_id,
+                    name=node.name,
                     props=node.properties,
                 )
 

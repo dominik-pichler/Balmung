@@ -26,9 +26,13 @@ class AssumptionLens(Lens[AssumptionResponse, AssumptionMention]):
     def system_prompt(self) -> str:
         return (
             "You surface IMPLICIT assumptions made by the source — claims it "
-            "takes for granted but does not argue for. For each, give a "
-            "short name (3-7 words) and a one-sentence statement of the "
-            "assumption."
+            "takes for granted but does not argue for. For each, give:\n"
+            "- ``name``: a short label (3-7 words)\n"
+            "- ``statement``: a one-sentence statement of the assumption\n"
+            "- ``holds_under``: the exact name of the technology, problem, or "
+            "other domain entity the assumption holds under, when identifiable "
+            "(use the same short name that entity is given elsewhere in the "
+            "text); omit if it applies generally."
         )
 
     @property

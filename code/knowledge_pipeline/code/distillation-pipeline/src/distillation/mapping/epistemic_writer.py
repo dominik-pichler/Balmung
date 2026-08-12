@@ -18,7 +18,6 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from ..domain.distillate import (
-    AssumptionMention,
     ClaimMention,
     EvidenceMention,
     ExperimentMention,
@@ -47,28 +46,16 @@ class EpistemicWriter:
         entities: Iterable[ClaimMention],
         paper_id: str,
         tenant_id: str,
-        assumptions: Iterable[AssumptionMention] = (),
     ) -> tuple[list[GraphNode], list[GraphEdge]]:
+        # Only the structural Paper→Claim (MAKES_CLAIM) edge is emitted here.
+        # Claim→Assumption (ASSUMES) is a reference-driven edge built by the
+        # EdgeLinker from each claim's ``assumes`` field, so a claim links only
+        # to the assumptions it actually rests on (not every assumption in the
+        # paper — that was a cross-product bug).
         nodes: list[GraphNode] = []
         edges: list[GraphEdge] = []
-        # Within-document heuristic: the paper's claims rest on the paper's
-        # surfaced assumptions. Extraction does not map individual claims to
-        # individual assumptions, so we link each claim to every assumption
-        # in the same document.
-        assumption_ids = [
-            self._domain.assumption_id(a, tenant_id) for a in assumptions
-        ]
         for claim in entities:
             n, e = self._write_claim(claim, paper_id, tenant_id)
-            for assumption_id in assumption_ids:
-                e.append(
-                    GraphEdge(
-                        source_node_id=n.node_id,
-                        target_node_id=assumption_id,
-                        type=GraphEdgeType.ASSUMES,
-                        extraction_confidence=claim.extraction_confidence,
-                    )
-                )
             nodes.append(n)
             edges.extend(e)
         return nodes, edges

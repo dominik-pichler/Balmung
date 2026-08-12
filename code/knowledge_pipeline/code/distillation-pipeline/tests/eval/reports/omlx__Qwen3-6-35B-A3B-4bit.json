@@ -1,0 +1,146 @@
+{
+  "provider": "omlx",
+  "model": "Qwen3.6-35B-A3B-4bit",
+  "timestamp": "2026-08-12T21:43:29+00:00",
+  "lenses": {
+    "domain": {
+      "lens": "domain",
+      "error": null,
+      "recall": 1.0,
+      "recall_by_group": {
+        "technologies": 1.0,
+        "problems": 1.0,
+        "capabilities": 1.0,
+        "metrics": 1.0,
+        "datasets": 1.0,
+        "limitations": 1.0
+      },
+      "missed": {
+        "technologies": [],
+        "problems": [],
+        "capabilities": [],
+        "metrics": [],
+        "datasets": [],
+        "limitations": []
+      },
+      "ref_coverage": {
+        "capability.addresses": 0.0,
+        "limitation.concerns": 0.0
+      },
+      "counts": {
+        "technologies": 4,
+        "problems": 2,
+        "capabilities": 2,
+        "metrics": 2,
+        "datasets": 2,
+        "limitations": 2
+      }
+    },
+    "assumption": {
+      "lens": "assumption",
+      "error": null,
+      "recall": 0.5,
+      "recall_by_group": {
+        "assumptions": 0.5
+      },
+      "missed": {
+        "assumptions": [
+          "context window"
+        ]
+      },
+      "ref_coverage": {
+        "assumption.holds_under": 0.0
+      },
+      "counts": {
+        "assumptions": 4
+      }
+    },
+    "claim": {
+      "lens": "claim",
+      "error": null,
+      "recall": 1.0,
+      "recall_by_group": {
+        "claims": 1.0
+      },
+      "missed": {
+        "claims": []
+      },
+      "ref_coverage": {
+        "claim.about": 0.0
+      },
+      "counts": {
+        "claims": 8
+      }
+    },
+    "evidence": {
+      "lens": "evidence",
+      "error": null,
+      "recall": 0.833,
+      "recall_by_group": {
+        "evidence": 1.0,
+        "experiments": 1.0,
+        "scopes": 0.0
+      },
+      "missed": {
+        "evidence": [],
+        "experiments": [],
+        "scopes": [
+          "long-document"
+        ]
+      },
+      "ref_coverage": {
+        "experiment.technologies": 0.0,
+        "experiment.datasets": 1.0,
+        "experiment.metrics": 0.0,
+        "evidence.claim": 1.0,
+        "evidence.has_refuting": 1.0
+      },
+      "counts": {
+        "evidence": 3,
+        "experiments": 2,
+        "scopes": 1
+      }
+    },
+    "author": {
+      "lens": "author",
+      "error": null,
+      "recall": 1.0,
+      "recall_by_group": {
+        "authors": 1.0
+      },
+      "missed": {
+        "authors": []
+      },
+      "ref_coverage": {
+        "author.affiliation": 1.0
+      },
+      "counts": {
+        "authors": 3
+      }
+    },
+    "provenance": {
+      "lens": "provenance",
+      "error": null,
+      "recall": 1.0,
+      "recall_by_group": {
+        "papers": 1.0,
+        "organizations": 1.0,
+        "venues": 1.0,
+        "funding_sources": 1.0
+      },
+      "missed": {
+        "papers": [],
+        "organizations": [],
+        "venues": [],
+        "funding_sources": []
+      },
+      "ref_coverage": {},
+      "counts": {
+        "papers": 2,
+        "organizations": 2,
+        "venues": 1,
+        "funding_sources": 2
+      }
+    }
+  }
+}

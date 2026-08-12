@@ -58,7 +58,6 @@ class PersistStage:
                 distillate.claims,
                 paper_id=paper_id,
                 tenant_id=tenant_id,
-                assumptions=distillate.assumptions,
             ),
             self._epistemic.write_evidence(
                 distillate.evidence, paper_id=paper_id, tenant_id=tenant_id

@@ -33,6 +33,7 @@ class _ClaimItem(BaseModel):
     prior_implausibility: float | None = None  # Base-rate 0.0–1.0
     decay_immune: bool = False  # Formal proofs are decay_immune
     about: list[str] = Field(default_factory=list)  # Domain entities the claim is about
+    assumes: list[str] = Field(default_factory=list)  # Assumptions the claim rests on
     extraction_confidence: float = 0.6  # Default parser confidence
 
 
@@ -50,9 +51,14 @@ class ClaimLens(
     @property
     def system_prompt(self) -> str:
         return (
-            "You extract CLAIMS made by the source — specific assertions the "
-            "authors make about what a technology can do, what works, what is "
-            "faster, what fails, or what is limited. For each claim, provide:\n\n"
+            "You extract CLAIMS made by the source — the substantive, testable "
+            "assertions the authors argue for (a result, a comparison, a causal "
+            "effect). Extract each distinct claim ONCE. Do NOT manufacture a "
+            "separate claim for every sentence: a stand-alone capability, "
+            "limitation, or assumption is captured by other extractors, so only "
+            "emit it as a claim when the authors actually assert it as a finding. "
+            "Aim for the paper's handful of headline claims, not a claim per line. "
+            "For each claim, provide:\n\n"
             "1. ``name``: short label (3–7 words)\n"
             "2. ``text``: full claim statement\n"
             "3. ``claim_type``: one of {capability, comparative, causal, "
@@ -73,7 +79,16 @@ class ClaimLens(
             "theorems), false for everything else including empirical results.\n"
             "8. ``extraction_confidence``: YOUR confidence in the extraction, "
             "as a float 0.0–1.0. Use 0.8 for clear statements, 0.5 for "
-            "implications. NEVER use 1.0 unless the text is verbatim."
+            "implications. NEVER use 1.0 unless the text is verbatim.\n"
+            "9. ``about``: the list of Domain entities this claim is about — "
+            "the technologies, problems, capabilities, metrics, or datasets it "
+            "concerns. Use the SAME short names those entities are given "
+            "elsewhere in the text (e.g. 'SparseFormer', 'long-context "
+            "reasoning'), so the claim links to them. Return [] if none apply.\n"
+            "10. ``assumes``: the list of specific assumptions THIS claim rests "
+            "on, by their short name/statement as stated in the text. Only list "
+            "assumptions this particular claim actually depends on — do not list "
+            "every assumption in the paper. Return [] if none apply."
         )
 
     @property
@@ -101,6 +116,7 @@ class ClaimLens(
                 prior_implausibility=c.prior_implausibility,
                 decay_immune=c.decay_immune,
                 about=c.about,
+                assumes=c.assumes,
                 extraction_confidence=c.extraction_confidence,
             )
             for c in response.claims
